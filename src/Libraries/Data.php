@@ -11,6 +11,11 @@ namespace Angujo\OpenRosaPhp\Libraries;
 
 class Data
 {
+
+    /**
+     * @param null $search
+     * @return Language|array|null
+     */
     public static function languages($search = null)
     {
         $langs = array(
@@ -153,10 +158,10 @@ class Data
         );
         if (null !== $search) {
             $match = array_filter($langs, function ($v) use ($search) {
-                $repl=preg_replace('/[^a-z0-9]/i', '', $v);
-                return 0 === strcasecmp($search, $repl); });
-            if ($match) return $match;
-            return null;
+                $repl = preg_replace('/[^a-z0-9]/i', '', $v);
+                return 0 === strcasecmp($search, $repl);
+            });
+            return $match ? Language::init(array_keys($match)[0], array_values($match)[0]) : null;
         }
         return $langs;
     }

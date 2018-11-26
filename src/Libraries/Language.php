@@ -171,12 +171,18 @@ class Language
      */
     public static function __callStatic($method, $args)
     {
-        if (!($matches = Data::languages($method))) return null;
-        foreach ($matches as $abbr => $match) {
-            $name = $match;
-            break;
-        }
-        return self::add($abbr, $name);
+        if ($language = Data::languages($method)) self::$langs[$language->getIsoAbbreviation()] = $language;
+        return $language;
+    }
+
+    /**
+     * @param $abbreviation
+     * @param $name
+     * @return Language
+     */
+    public static function init($abbreviation, $name)
+    {
+        return (new self())->setIsoAbbreviation($abbreviation)->setName($name);
     }
 
     /**

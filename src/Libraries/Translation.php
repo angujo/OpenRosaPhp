@@ -28,12 +28,17 @@ class Translation
         $this->id=$id;
     }
 
+    /**
+     * @param Language|string $lang
+     * @param $translation
+     * @param $id
+     * @return Translation|null
+     */
     public static function set($lang, $translation,$id)
     {
         if (!\is_object($lang) && \is_string($lang)) {
             if (!($language = Language::get($lang))) {
-                if (!($set = Data::languages($lang))) return null;
-                $language = Language::add(array_keys($set)[0], array_values($set)[0]);
+                if (!($language = Data::languages($lang))) return null;
             }
             $lang = $language;
         }
