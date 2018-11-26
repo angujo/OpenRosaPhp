@@ -9,6 +9,7 @@
 namespace Angujo\OpenRosaPhp\Config;
 
 use Angujo\OpenRosaPhp\Libraries\Data;
+use Angujo\OpenRosaPhp\Libraries\Language;
 
 
 /**
@@ -170,4 +171,20 @@ abstract class MyLanguages
      * @var array
      */
     protected $_my_languages = [];
+
+    /**
+     * @param $search
+     * @return Language|null
+     */
+    protected function _get_my_language($search): ?Language
+    {
+        if (null !== $search) {
+            $match = array_filter($this->_my_languages, function ($v) use ($search) {
+                $repl = preg_replace('/[^a-z0-9]/i', '', $v);
+                return 0 === strcasecmp($search, $repl);
+            });
+            return $match ? Language::init(array_keys($match)[0], array_values($match)[0]) : null;
+        }
+        return null;
+    }
 }

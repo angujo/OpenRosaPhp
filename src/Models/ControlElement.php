@@ -27,7 +27,7 @@ class ControlElement extends BodyElement
     protected function __construct($name, $path)
     {
         parent::__construct($name, $path);
-       if (Config::isOdk()) Binds::add(Bind::create($this->getPath()),$this->id);
+        if (Config::isOdk()) Binds::add(Bind::create($this->getPath(), $this->registered), $this->id);
     }
 
     /**
@@ -44,7 +44,7 @@ class ControlElement extends BodyElement
      */
     public function label($value)
     {
-        if ($tag=$this->getUniqueTag(Elmt::LABEL)) return $tag->setValue($value);
+        if ($tag = $this->getUniqueTag(Elmt::LABEL)) return $tag->setValue($value);
         return $this->setTag(Label::create($value)->setIdPath($this->getPath()));
     }
 

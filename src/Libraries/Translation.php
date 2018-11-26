@@ -26,22 +26,17 @@ class Translation
         $this->language = $language;
         $this->translation = $translation;
         $this->id=$id;
+      if(Config::isOdk() && $this->path)  Itext::addTranslation($this, $this->id);
     }
 
     /**
-     * @param Language|string $lang
+     * @param Language $lang
      * @param $translation
      * @param $id
      * @return Translation|null
      */
-    public static function set($lang, $translation,$id)
+    public static function set(Language $lang, $translation,$id)
     {
-        if (!\is_object($lang) && \is_string($lang)) {
-            if (!($language = Language::get($lang))) {
-                if (!($language = Data::languages($lang))) return null;
-            }
-            $lang = $language;
-        }
         return new self($lang, $translation,$id);
     }
 

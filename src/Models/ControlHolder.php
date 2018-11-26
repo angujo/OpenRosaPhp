@@ -22,9 +22,15 @@ class ControlHolder extends BodyElement
 
     public function addElement(BodyElement $tag)
     {
-        $tag->parentPath($this->getXpath());
-        $this->setTag($tag);
-        return $tag;
+        return $this->silenceElement($tag);
+    }
+
+    private function silenceElement(BodyElement $element)
+    {
+        $element->parentPath($this->getXpath());
+        $this->setTag($element);
+        $element->register();
+        return $element;
     }
 
     /**
@@ -33,7 +39,7 @@ class ControlHolder extends BodyElement
      */
     public function group($name)
     {
-        return $this->addElement(Group::create($name));
+        return $this->silenceElement(Group::create($name));
     }
 
     /**
@@ -42,7 +48,7 @@ class ControlHolder extends BodyElement
      */
     public function repeat($name)
     {
-        $gr = $this->addElement(Repeat::create($name));
+        $gr = $this->silenceElement(Repeat::create($name));
         return $gr->getUniqueTag(Elmt::REPEAT);
     }
 
@@ -52,7 +58,7 @@ class ControlHolder extends BodyElement
      */
     public function inputText($name)
     {
-        return $this->addElement(InputText::text($name));
+        return $this->silenceElement(InputText::text($name));
     }
 
     /**
@@ -61,7 +67,7 @@ class ControlHolder extends BodyElement
      */
     public function inputMultiline($name)
     {
-        return $this->addElement(InputText::multiline($name));
+        return $this->silenceElement(InputText::multiline($name));
     }
 
     /**
@@ -70,7 +76,7 @@ class ControlHolder extends BodyElement
      */
     public function uploadImage($name)
     {
-        return $this->addElement(Upload::image($name));
+        return $this->silenceElement(Upload::image($name));
     }
 
     /**
@@ -79,7 +85,7 @@ class ControlHolder extends BodyElement
      */
     public function uploadVideo($name)
     {
-        return $this->addElement(Upload::video($name));
+        return $this->silenceElement(Upload::video($name));
     }
 
     /**
@@ -88,7 +94,7 @@ class ControlHolder extends BodyElement
      */
     public function uploadAudio($name)
     {
-        return $this->addElement(Upload::audio($name));
+        return $this->silenceElement(Upload::audio($name));
     }
 
     /**
@@ -97,7 +103,7 @@ class ControlHolder extends BodyElement
      */
     public function uploadFile($name)
     {
-        return $this->addElement(Upload::file($name));
+        return $this->silenceElement(Upload::file($name));
     }
 
     /**
@@ -106,7 +112,7 @@ class ControlHolder extends BodyElement
      */
     public function barcode($name)
     {
-        return $this->addElement(Upload::barcode($name));
+        return $this->silenceElement(Upload::barcode($name));
     }
 
     /**
@@ -116,7 +122,7 @@ class ControlHolder extends BodyElement
      */
     public function uploadCustom($name, array $mimes)
     {
-        return $this->addElement(Upload::custom($name, $mimes));
+        return $this->silenceElement(Upload::custom($name, $mimes));
     }
 
     /**
@@ -125,7 +131,7 @@ class ControlHolder extends BodyElement
      */
     public function dateYearMonth($name)
     {
-        return $this->addElement(InputDateTime::yearMonth($name));
+        return $this->silenceElement(InputDateTime::yearMonth($name));
     }
 
     /**
@@ -134,7 +140,7 @@ class ControlHolder extends BodyElement
      */
     public function dateYear($name)
     {
-        return $this->addElement(InputDateTime::year($name));
+        return $this->silenceElement(InputDateTime::year($name));
     }
 
     /**
@@ -143,7 +149,7 @@ class ControlHolder extends BodyElement
      */
     public function dateFull($name)
     {
-        return $this->addElement(InputDateTime::fullDate($name));
+        return $this->silenceElement(InputDateTime::fullDate($name));
     }
 
     /**
@@ -152,7 +158,7 @@ class ControlHolder extends BodyElement
      */
     public function time($name)
     {
-        return $this->addElement(InputDateTime::time($name));
+        return $this->silenceElement(InputDateTime::time($name));
     }
 
     /**
@@ -161,7 +167,7 @@ class ControlHolder extends BodyElement
      */
     public function selectOne($name)
     {
-        return $this->addElement(Select1::create($name));
+        return $this->silenceElement(Select1::create($name));
     }
 
     /**
@@ -170,7 +176,7 @@ class ControlHolder extends BodyElement
      */
     public function selectOneLikert($name)
     {
-        return $this->addElement(Select1::likert($name));
+        return $this->silenceElement(Select1::likert($name));
     }
 
     /**
@@ -179,7 +185,7 @@ class ControlHolder extends BodyElement
      */
     public function selectOneQuick($name)
     {
-        return $this->addElement(Select1::quick($name));
+        return $this->silenceElement(Select1::quick($name));
     }
 
     /**
@@ -188,6 +194,6 @@ class ControlHolder extends BodyElement
      */
     public function selectMultiple($name)
     {
-        return $this->addElement(Select::create($name));
+        return $this->silenceElement(Select::create($name));
     }
 }

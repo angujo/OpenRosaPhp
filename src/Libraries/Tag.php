@@ -9,10 +9,10 @@
 namespace Angujo\OpenRosaPhp\Libraries;
 
 
+use Angujo\OpenRosaPhp\Models\BodyElement;
 use Angujo\OpenRosaPhp\Models\ControlElement;
 use Angujo\OpenRosaPhp\Models\ControlHolder;
 use Angujo\OpenRosaPhp\Models\Elements\Translatable;
-use Angujo\OpenRosaPhp\Models\Head\Model;
 
 
 /**
@@ -302,7 +302,8 @@ class Tag
             if ($this->value) {
                 if (is_a($this, Translatable::class) && method_exists($this, 'getIdPath')) {
                     $writer->writeAttribute('ref', 'jr:itext(\'' . $this->getIdPath() . '\')');
-                } $writer->text($this->value);
+                }
+                $writer->text($this->value);
             }
         } else {
             foreach ($this->tags as $tag) {
@@ -337,6 +338,9 @@ class Tag
     {
         /** @var ControlElement|ControlHolder|Translatable $tag */
         foreach ($this->tags as $tag) {
+            if (!is_a($tag, BodyElement::class) || !$tag->isRegistered()){
+                continue;
+            }
             if (is_a($tag, ControlHolder::class)) {
                 $tag->collector($tagger->addUniqueTag($tag->getBasePath(), null));
             } elseif (is_a($tag, ControlElement::class)) {

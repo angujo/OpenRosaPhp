@@ -15,12 +15,32 @@ use Angujo\OpenRosaPhp\Libraries\Tag;
 class Bind extends Tag
 {
     private $nodeset;
+    private $registered;
 
-    protected function __construct($nodeset)
+    protected function __construct($nodeset, $reg = true)
     {
         parent::__construct(Elmt::BIND, null);
         $this->nodeset = $nodeset;
+        $this->registered = $reg;
         $this->nodeset($nodeset);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRegistered(): bool
+    {
+        return $this->registered;
+    }
+
+    /**
+     * @param bool $registered
+     * @return Bind
+     */
+    public function setRegistered(bool $registered): Bind
+    {
+        $this->registered = $registered;
+        return $this;
     }
 
     /**
@@ -33,11 +53,12 @@ class Bind extends Tag
 
     /**
      * @param $nodeset
+     * @param bool $reg
      * @return Bind
      */
-    public static function create($nodeset)
+    public static function create($nodeset, $reg = true)
     {
-        return new self($nodeset);
+        return new self($nodeset, $reg);
     }
 
     public function nodeset($value)

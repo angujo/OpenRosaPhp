@@ -14,7 +14,6 @@ use Angujo\OpenRosaPhp\Libraries\Elmt;
 use Angujo\OpenRosaPhp\Libraries\Tag;
 use Angujo\OpenRosaPhp\Models\Config;
 use Angujo\OpenRosaPhp\Models\Elements\Bind;
-use Angujo\OpenRosaPhp\Models\Elements\TraitBinding;
 
 
 /**
@@ -23,7 +22,6 @@ use Angujo\OpenRosaPhp\Models\Elements\TraitBinding;
  */
 class Meta extends Tag
 {
-    use TraitBinding;
 
     /** @var Meta Only me */
     private static $me;

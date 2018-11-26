@@ -66,6 +66,6 @@ class Binds
      */
     public static function all()
     {
-        return self::init()->binds;
+        return array_filter(self::init()->binds, function (Bind $bind) { return $bind->isRegistered(); });
     }
 }

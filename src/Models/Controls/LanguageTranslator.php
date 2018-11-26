@@ -9,6 +9,8 @@
 namespace Angujo\OpenRosaPhp\Models\Controls;
 
 use Angujo\OpenRosaPhp\Config\MyLanguages;
+use Angujo\OpenRosaPhp\Libraries\Data;
+use Angujo\OpenRosaPhp\Libraries\Language;
 use Angujo\OpenRosaPhp\Libraries\Translation;
 
 
@@ -45,9 +47,22 @@ class LanguageTranslator extends MyLanguages
     public function __call($method, $args)
     {
         if (empty($args) || !\is_string($args[0])) throw new \Exception('Invalid translation!');
-        if (!($trans = Translation::set($method, $args[0],$this->id))) return null;
+        if (!($language = $this->validLanguage($method))) {
+            if (!isset($args[1]) || !\is_string($args[1])) throw new \Exception("$method is not a valid language. To add own language pass second parameter with ISO abbreviation of the language!");
+            $language = Language::add($args[1], $method);
+        }
+        if (!($trans = Translation::set($language, $args[0], $this->id))) return null;
         $this->translatables[$trans->getLanguage()->getIsoAbbreviation()] = $trans;
         return $this;
+    }
+
+    private function validLanguage($name, $abbr = null)
+    {
+        if (($language = Data::languages($name)) || ($language = $this->_get_my_language($name)) || ($language = Language::get($abbr))) {
+            Language::set($language);
+            return $language;
+        }
+        return null;
     }
 
     /**

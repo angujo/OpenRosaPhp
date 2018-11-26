@@ -44,7 +44,7 @@ class BodyTest
         $label->language(function (\Angujo\OpenRosaPhp\Models\Controls\LanguageTranslator $translator) { $translator->kiswahili('Jina La Kwanza'); });
         $fname->defaultValue('JohnDoe');
         $fname->hint('Should be in alphabets!')->language(function (\Angujo\OpenRosaPhp\Models\Controls\LanguageTranslator $translator) {
-            $translator->kiswahili('Onyesha kwa herufi kubwa!');
+            $translator->kiswahili('Onyesha kwa herufi kubwa!')->chinese('Chiwawa!');
         });
 
         $address = \Angujo\OpenRosaPhp\Models\Controls\InputText::multiline('address');
@@ -55,7 +55,7 @@ class BodyTest
         $gender->addOption('Male', 'm');
         $gender->addOption('Female', 'f');
 
-        //$group->addElement($fname);
+        $group->addElement($fname);
         $body->addElement($address);
         $body->addElement($gender);
 

@@ -9,9 +9,7 @@
 namespace Angujo\OpenRosaPhp\Models\Elements;
 
 
-use Angujo\OpenRosaPhp\Libraries\Itext;
 use Angujo\OpenRosaPhp\Libraries\Tag;
-use Angujo\OpenRosaPhp\Models\Config;
 use Angujo\OpenRosaPhp\Models\Controls\LanguageTranslator;
 
 class Translatable extends Tag
@@ -24,14 +22,12 @@ class Translatable extends Tag
     protected function __construct($name, $value)
     {
         parent::__construct($name, $value);
-        $this->language = LanguageTranslator::default($value);
     }
 
     public function setValue($value)
     {
-        parent::setValue($value);
-        if (!$this->language) $this->language = LanguageTranslator::default($value);
-        else $this->language->english($value);
+        $this->value=$value;
+        $this->initLanguage();
     }
 
     /**
@@ -85,5 +81,15 @@ class Translatable extends Tag
     {
         if (\is_callable($closure)) $closure($this->language);
         return $this;
+    }
+
+    private function initLanguage()
+    {
+        if (!$this->getIdPath()) return;
+        if($this->language){
+            $this->language->english($this->getValue());
+            return;
+        }
+        $this->language=LanguageTranslator::default($this->getValue());
     }
 }

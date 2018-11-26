@@ -11,7 +11,6 @@ namespace Angujo\OpenRosaPhp\Models;
 
 use Angujo\OpenRosaPhp\Libraries\Binds;
 use Angujo\OpenRosaPhp\Libraries\Tag;
-use Angujo\OpenRosaPhp\Models\Elements\Bind;
 use Angujo\OpenRosaPhp\Models\Elements\Translatable;
 
 class BodyElement extends Tag
@@ -22,8 +21,8 @@ class BodyElement extends Tag
     private $xpath = [];
     /** @var string */
     protected $id;
-    /** @var Bind */
-    public $binding;
+
+    protected $registered = false;
 
     protected function __construct($name, $path)
     {
@@ -31,6 +30,17 @@ class BodyElement extends Tag
         $this->path = $path;
         $this->id = uniqid('elm', true);
         $this->setPath();
+    }
+
+    public function isRegistered()
+    {
+        return $this->registered;
+    }
+
+    public function register()
+    {
+        $this->registered = true;
+        if (Binds::get($this->id)) Binds::get($this->id)->setRegistered(true);
     }
 
     private function setBind()

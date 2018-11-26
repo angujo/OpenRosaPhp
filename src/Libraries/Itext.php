@@ -49,7 +49,7 @@ class Itext extends Tag
             $translation = $this->identifiedTag(Tag::raw(Elmt::TRANSLATION, null), $abbr);
             $translation->setAttribute('lang', $lang->getName());
         }
-        $id = $id ?: uniqid('trns', true);
+        $id = $id ?: uniqid('cstmtrns', true);
         if (!($text_ = $translation->getUniqueTag( $id))) {
             $text_ = $translation->identifiedTag(Tag::raw(Elmt::TEXT, null), $id);
         }

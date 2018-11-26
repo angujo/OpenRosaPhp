@@ -206,6 +206,12 @@ class Language
         return self::create($abbreviation, $name);
     }
 
+    public static function set(Language $language)
+    {
+        self::$langs[$language->getIsoAbbreviation()] = $language;
+        return $language;
+    }
+
     /**
      * @param string $abbreviation
      * @return Language|null
