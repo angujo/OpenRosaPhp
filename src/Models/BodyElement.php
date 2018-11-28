@@ -22,6 +22,8 @@ class BodyElement extends Tag
     /** @var string */
     protected $id;
 
+    protected $bind;
+
     protected $registered = false;
 
     protected function __construct($name, $path)

@@ -8,7 +8,6 @@
 
 namespace Angujo\OpenRosaPhp\Libraries;
 
-
 use Angujo\OpenRosaPhp\Models\Elements\Bind;
 
 class Binds
@@ -29,9 +28,14 @@ class Binds
      * @param Bind $bind
      * @param $id
      */
-    public static function add(Bind $bind, $id)
+    public static function &add(Bind $bind, $id)
     {
-        self::init()->set($bind, $id);
+        return self::init()->binds[$id] = $bind;
+    }
+
+    public static function &create($nodeset, $id)
+    {
+        return self::add(Bind::create($nodeset), $id);
     }
 
     /**
@@ -40,7 +44,7 @@ class Binds
      */
     public static function get($id)
     {
-        return self::init()->retrieve($id);
+        return self::init()->binds[$id] ?? null;
     }
 
     /**
@@ -66,6 +70,6 @@ class Binds
      */
     public static function all()
     {
-        return array_filter(self::init()->binds, function (Bind $bind) { return $bind->isRegistered(); });
+        return array_filter(self::init()->binds, function (Bind $bind) {return $bind->isRegistered();});
     }
 }

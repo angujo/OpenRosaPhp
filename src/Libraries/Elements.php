@@ -19,6 +19,8 @@ class Elements
     private static $me;
     /** @var Tag[] */
     private $elements = [];
+    /** @var array */
+    private static $levels=[];
 
     private function __construct()
     {
@@ -28,6 +30,20 @@ class Elements
     protected static function init()
     {
         return self::$me = self::$me ?: new self();
+    }
+
+    public static function isElementSet($id)
+    {
+        return self::idSet($id);
+    }
+
+    private static function idSet($id, $lst=null)
+    {
+       if(null===$lst || !is_array($lst)) $lst=self::$levels;
+       foreach ($lst as $_id => $children) {
+           if(0===strcasecmp($id, $_id) || true===self::idSet($id,$children)) return true;
+       }
+       return false;
     }
 
     public static function add($name, $id, $pid, $value = null)
@@ -60,7 +76,7 @@ class Elements
      *
      * @return Element
      */
-    private function franticSearch($id, $tag = null)
+    private function &franticSearch($id, $tag = null)
     {
         $list = null === $tag ? $this->elements : $tag->getChildren();
         if (array_key_exists($id, $list)) {
