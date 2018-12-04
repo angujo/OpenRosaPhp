@@ -17,11 +17,11 @@ class Bind extends Tag
     private $nodeset;
     private $registered;
 
-    protected function __construct($nodeset, $reg = true)
+    protected function __construct($nodeset, &$reg = true)
     {
         parent::__construct(Elmt::BIND, null);
         $this->nodeset = $nodeset;
-        $this->registered = $reg;
+        $this->registered = &$reg;
         $this->nodeset($nodeset);
     }
 
@@ -37,9 +37,9 @@ class Bind extends Tag
      * @param bool $registered
      * @return Bind
      */
-    public function setRegistered(bool $registered): Bind
+    public function setRegistered(bool &$registered): Bind
     {
-        $this->registered = $registered;
+        $this->registered = &$registered;
         return $this;
     }
 
@@ -56,7 +56,7 @@ class Bind extends Tag
      * @param bool $reg
      * @return Bind
      */
-    public static function create($nodeset, $reg = true)
+    public static function create($nodeset, &$reg = true)
     {
         return new self($nodeset, $reg);
     }

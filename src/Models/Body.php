@@ -12,11 +12,16 @@ namespace Angujo\OpenRosaPhp\Models;
 use Angujo\OpenRosaPhp\Libraries\Elmt;
 use Angujo\OpenRosaPhp\Libraries\Tag;
 
+
+/**
+ * Class Body
+ * @package Angujo\OpenRosaPhp\Models
+ */
 class Body extends ControlHolder
 {
     private static $me;
     protected      $no_ref;
-    protected $no_bind;
+    protected      $no_bind;
 
     /**
      * @return Body|Tag
@@ -27,8 +32,20 @@ class Body extends ControlHolder
         return self::$me = (new self(Elmt::BODY, null))->setNamespace('h');
     }
 
-    public function elements(Tag $root)
+    public function setRootElement($root)
+    {
+        $this->parentPath([$root]);
+        return $this;
+    }
+
+    /*public function setElements(Tag $root)
+    {
+        $root->appendTags(Elements::asTags());
+        return $this;
+    }*/
+
+    /*public function elements(Tag $root)
     {
         $this->collector($root);
-    }
+    }*/
 }

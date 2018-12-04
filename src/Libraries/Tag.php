@@ -9,9 +9,6 @@
 namespace Angujo\OpenRosaPhp\Libraries;
 
 
-use Angujo\OpenRosaPhp\Models\BodyElement;
-use Angujo\OpenRosaPhp\Models\ControlElement;
-use Angujo\OpenRosaPhp\Models\ControlHolder;
 use Angujo\OpenRosaPhp\Models\Elements\Translatable;
 
 
@@ -334,9 +331,9 @@ class Tag
         return array_unique($nsCollector);
     }
 
-    public function collector(Tag $tagger)
+    /*public function collector(Tag $tagger)
     {
-        /** @var ControlElement|ControlHolder|Translatable $tag */
+        /** @var ControlElement|ControlHolder|Translatable $tag
         foreach ($this->tags as $tag) {
             if (!is_a($tag, BodyElement::class) || !$tag->isRegistered()){
                 continue;
@@ -347,6 +344,6 @@ class Tag
                 $tagger->addUniqueTag($tag->getBasePath(), $tag->getDefaultValue());
             }
         }
-    }
+    }*/
 
 }

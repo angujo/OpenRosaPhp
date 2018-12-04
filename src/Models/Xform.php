@@ -9,9 +9,7 @@
 namespace Angujo\OpenRosaPhp\Models;
 
 
-use Angujo\OpenRosaPhp\Libraries\Binds;
 use Angujo\OpenRosaPhp\Libraries\Elmt;
-use Angujo\OpenRosaPhp\Libraries\Itext;
 use Angujo\OpenRosaPhp\Libraries\Tag;
 
 class Xform extends Tag
@@ -52,18 +50,18 @@ class Xform extends Tag
 
     public function version($title)
     {
-        return $this->head->version($title);
+        return $this->head->setVersion($title);
     }
 
     public function id($title)
     {
-        return $this->head->id($title);
+        return $this->head->setId($title);
     }
 
     public function dataElement($element)
     {
         $this->head->rootElement($element);
-        $this->body->parentPath([$element]);
+        $this->body->setRootElement($element);
         return $this;
     }
 
@@ -80,13 +78,18 @@ class Xform extends Tag
      */
     public function getMeta()
     {
-        return $this->head->getModel()->primaryInstance()->getMeta();
+        return $this->head->getModel()->getPrimaryInstance()->getMeta();
     }
 
     public function generate()
     {
-        $this->body->elements($this->head->getModel()->primaryInstance()->getRootTag());
-        $this->head->getModel()->setUniqueTag(Itext::create());
-        $this->head->getModel()->appendTags(Binds::all());
+        $this->head->setElements();
+        $this->head->setItext();
+        $this->head->setBinds();
+        //$this->body->elements($this->head->getModel()->primaryInstance()->getRootTag());
+        //$this->body->setElements($this->head->getModel()->getPrimaryInstance()->getRootTag());
+        //$this->head->getModel()->setUniqueTag(Itext::create());
+        //$this->head->getModel()->appendTags(Binds::all());
+
     }
 }

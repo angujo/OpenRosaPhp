@@ -9,6 +9,7 @@
 namespace Angujo\OpenRosaPhp\Models;
 
 use Angujo\OpenRosaPhp\Libraries\Binds;
+use Angujo\OpenRosaPhp\Libraries\Elements;
 use Angujo\OpenRosaPhp\Libraries\Elmt;
 use Angujo\OpenRosaPhp\Libraries\Tag;
 use Angujo\OpenRosaPhp\Models\Elements\Bind;
@@ -27,7 +28,10 @@ class ControlElement extends BodyElement
     protected function __construct($name, $path)
     {
         parent::__construct($name, $path);
-        if (Config::isOdk()) Binds::add(Bind::create($this->getPath(), $this->registered), $this->id);
+        if (Config::isOdk()) {
+            $this->bind = Binds::add(Bind::create($this->getPath(), $this->registered), $this->id);
+            if ($this->getPath()) Elements::create($this->getPath(), $this->getDefaultValue());
+        }
     }
 
     /**
@@ -63,12 +67,13 @@ class ControlElement extends BodyElement
     public function defaultValue($value)
     {
         $this->defaultValue = $value;
+        if (Config::isOdk()) Elements::changeName($this->old_path, $this->getPath(), $this->defaultValue);
         return $this;
     }
 
     protected function setType($type)
     {
-        if (Config::isOdk()) Binds::get($this->id)->addAttribute('type', $type);
+        if ($this->bind && Config::isOdk()) $this->bind->addAttribute('type', $type);// Binds::get($this->id)->addAttribute('type', $type);
         else $this->setAttribute('type', $type);
         return $this;
     }

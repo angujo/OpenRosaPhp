@@ -7,6 +7,7 @@
  */
 
 require '../autoload.php';
+require '../vendor/autoload.php';
 require 'BodyTest.php';
 
 $btest = new BodyTest();

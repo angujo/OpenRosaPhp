@@ -5,7 +5,8 @@
     "license": "MIT",
     "minimum-stability": "beta",
     "require": {
-        "php":"^7.1"
+        "php":"^7.1",
+        "adbario/php-dot-notation": "^2.1"
     },
     "autoload": {
         "psr-4": {

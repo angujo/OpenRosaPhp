@@ -9,6 +9,8 @@
 namespace Angujo\OpenRosaPhp\Models\Head;
 
 
+use Angujo\OpenRosaPhp\Libraries\Elements;
+
 class PrimaryInstance extends InstanceAbstract
 {
     /** @var PrimaryInstance|null */
@@ -24,9 +26,9 @@ class PrimaryInstance extends InstanceAbstract
         $this->meta = $this->getRootTag()->setUniqueTag(Meta::create($this->rootTag));
     }
 
-    public static function create($id, $root)
+    public static function create()
     {
-        return new self();
+        return self::$me = self::$me ?:new self();
     }
 
     public function setId($id)
@@ -35,10 +37,23 @@ class PrimaryInstance extends InstanceAbstract
         return $this;
     }
 
+    public function setElements()
+    {
+        self::$me->getRootTag()->appendTags(Elements::asTags($this->getRootTag()->getName()));
+        return $this;
+    }
+
     public static function setElement($name, $default = null)
     {
         if (!self::$me) return null;
         return self::$me->getRootTag()->addUniqueTag($name, $default);
+    }
+
+    public function rootElement($tag)
+    {
+        $this->getRootTag()->changeName($tag);
+        $this->getMeta()->changeRoot($tag);
+        return $this;
     }
 
     /**

@@ -9,12 +9,25 @@
 namespace Angujo\OpenRosaPhp\Models\Head;
 
 
+use Angujo\OpenRosaPhp\Libraries\Binds;
 use Angujo\OpenRosaPhp\Libraries\Elmt;
+use Angujo\OpenRosaPhp\Libraries\Itext;
 use Angujo\OpenRosaPhp\Libraries\Tag;
-use Angujo\OpenRosaPhp\Models\Elements\Bind;
 
+
+/**
+ * Class Model
+ * @package Angujo\OpenRosaPhp\Models\Head
+ *
+ * @method $this setId(string $id);
+ * @method $this rootElement(string $tag_name);
+ * @method $this setVersion(string $version);
+ * @method $this setElements();
+ * @method $this setElement(string $name, string | null $default = null);
+ */
 class Model extends Tag
 {
+    /** @var Model Only one of me */
     private static $me;
     /** @var Tag|PrimaryInstance */
     private $primaryInstance;
@@ -33,41 +46,51 @@ class Model extends Tag
         return self::$me = self::$me ?: new self();
     }
 
-    public static function addBind(Tag $bind)
+    /**
+     * @return Tag|PrimaryInstance
+     */
+    public function getPrimaryInstance()
     {
-        return self::create()->_bind($bind);
+        return $this->primaryInstance;
     }
 
-    private function _bind(Tag $bind)
+    /**
+     * @return Model
+     */
+    public function setTranslations()
     {
-        $this->setTag($bind);
-        return $bind;
+        return $this->setItext();
     }
 
-    public function setId($id)
+    /**
+     * @return $this
+     */
+    public function setItext()
     {
-        $this->primaryInstance->getRootTag()->setAttribute('id', $id);
-        return $this;
-    }
-
-    public function setVersion($id)
-    {
-        $this->primaryInstance->getRootTag()->setNSAttribute('orx', 'version', $id);
-        return $this;
-    }
-
-    public function rootElement($tag)
-    {
-        $this->primaryInstance->getRootTag()->changeName($tag);
-        $this->primaryInstance->getMeta()->changeRoot($tag);
+        $this->setUniqueTag(Itext::create());
         return $this;
     }
 
     /**
-     * @return Tag|PrimaryInstance
+     * @return $this
      */
-    public function primaryInstance()
+    public function setBinds()
     {
-        return $this->primaryInstance;
+        return $this->appendTags(Binds::all());
+    }
+
+    /**
+     * @param $method
+     * @param $args
+     * @return $this
+     * @throws \Exception
+     */
+    public function __call($method, $args)
+    {
+        if (method_exists($this->primaryInstance, $method)) {
+            \call_user_func_array([$this->primaryInstance, $method], $args);
+            return $this;
+        }
+        throw new \BadMethodCallException('Invalid method "' . $method . '" called!');
     }
 }

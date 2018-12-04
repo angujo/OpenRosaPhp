@@ -27,10 +27,12 @@ class Binds
     /**
      * @param Bind $bind
      * @param $id
+     * @return Bind
      */
     public static function &add(Bind $bind, $id)
     {
-        return self::init()->binds[$id] = $bind;
+        self::init()->binds[$id] = $bind;
+        return self::init()->binds[$id];
     }
 
     public static function &create($nodeset, $id)
@@ -70,6 +72,6 @@ class Binds
      */
     public static function all()
     {
-        return array_filter(self::init()->binds, function (Bind $bind) {return $bind->isRegistered();});
+        return array_filter(self::init()->binds, function (Bind $bind) { return $bind->isRegistered(); });
     }
 }

@@ -37,7 +37,7 @@ class BodyTest
        // $xform->getMeta()->deviceID()->timeStart()->timeEnd()->userID();
         $body = $xform->getBody();
         $group = $body->group('grouped');
-        $repeat = $group->repeat('repeats');//->count(2);
+        //$repeat = $group->repeat('repeats');//->count(2);
 
         $fname = \Angujo\OpenRosaPhp\Models\Controls\InputText::text('fname');
         $label = $fname->label('First Name');
