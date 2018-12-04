@@ -37,7 +37,6 @@ class ODKForm extends Tag
         $this->setNamespace('h');
         $this->head = $this->setUniqueTag(Head::set($title));
         $this->body = $this->setUniqueTag(Body::create());
-        self::$me = $this;
     }
 
     /**
