@@ -11,4 +11,5 @@ require '../vendor/autoload.php';
 require 'BodyTest.php';
 
 $btest = new BodyTest();
-$btest->odkform();
+//$btest->odkform();
+$btest->odkformlist();
