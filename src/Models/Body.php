@@ -37,15 +37,4 @@ class Body extends ControlHolder
         $this->parentPath([$root]);
         return $this;
     }
-
-    /*public function setElements(Tag $root)
-    {
-        $root->appendTags(Elements::asTags());
-        return $this;
-    }*/
-
-    /*public function elements(Tag $root)
-    {
-        $this->collector($root);
-    }*/
 }

@@ -8,11 +8,17 @@
 
 namespace Angujo\OpenRosaPhp;
 
-
 use Angujo\OpenRosaPhp\Libraries\Elmt;
 use Angujo\OpenRosaPhp\Libraries\Tag;
 use Angujo\OpenRosaPhp\Models\Body;
+use Angujo\OpenRosaPhp\Models\Controls\InputDateTime;
+use Angujo\OpenRosaPhp\Models\Controls\InputText;
+use Angujo\OpenRosaPhp\Models\Controls\Select1;
+use Angujo\OpenRosaPhp\Models\Controls\Select;
+use Angujo\OpenRosaPhp\Models\Controls\Upload;
+use Angujo\OpenRosaPhp\Models\Group;
 use Angujo\OpenRosaPhp\Models\Head;
+use Angujo\OpenRosaPhp\Models\Repeat;
 
 /**
  * Class ODKForm
@@ -21,6 +27,24 @@ use Angujo\OpenRosaPhp\Models\Head;
  * @method $this setTitle(string $title)
  * @method $this setVersion(string $version)
  * @method $this setId(string $id)
+ * @method Group group(string $name)
+ * @method Repeat repeat(string $name)
+ * @method InputText inputText(string $name)
+ * @method InputText inputMultiline(string $name)
+ * @method Upload uploadImage(string $name)
+ * @method Upload uploadVideo(string $name)
+ * @method Upload uploadAudio(string $name)
+ * @method Upload uploadFile(string $name)
+ * @method Upload barcode(string $name)
+ * @method Upload uploadCustom(string $name, array $mimes)
+ * @method InputDateTime dateYearMonth(string $name)
+ * @method InputDateTime dateYear(string $name)
+ * @method InputDateTime dateFull(string $name)
+ * @method InputDateTime time(string $name)
+ * @method Select1 selectOne(string $name)
+ * @method Select1 selectOneLikert(string $name)
+ * @method Select1 selectOneQuick(string $name)
+ * @method Select selectMultiple(string $name)
  */
 class ODKForm extends Tag
 {
@@ -45,7 +69,10 @@ class ODKForm extends Tag
      */
     public static function create($title)
     {
-        if (!self::$me) self::$me = new self();
+        if (!self::$me) {
+            self::$me = new self();
+        }
+
         return self::$me->setTitle($title);
     }
 
@@ -94,17 +121,14 @@ class ODKForm extends Tag
 
     public function __call($method, $args)
     {
+        if (method_exists($this->body, $method)) {
+            return \call_user_func_array([$this->body, $method], $args);
+        }
         try {
             \call_user_func_array([$this->head, $method], $args);
             return $this;
         } catch (\BadMethodCallException $exception) {
-
-            try {
-                \call_user_func_array([$this->body, $method], $args);
-                return $this;
-            } catch (\BadMethodCallException $exception) {
-                throw new \BadMethodCallException($exception->getMessage());
-            }
+            throw new \BadMethodCallException($exception->getMessage());
         }
     }
 }

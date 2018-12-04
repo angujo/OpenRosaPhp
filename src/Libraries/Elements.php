@@ -78,8 +78,7 @@ class Elements
     {
         if (null !== $root) {
             if (!self::init()->dot->has($root) || !\is_array(self::init()->dot->get($root))) return [];
-            $got=self::init()->dot->get($root);
-            return self::tagMe($got);
+            return self::tagMe(self::init()->dot->get($root));
         }
         return self::tagMe(self::all());
     }

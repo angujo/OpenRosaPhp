@@ -1,4 +1,6 @@
 <?php
+
+use Angujo\OpenRosaPhp\ODKForm;
 /**
  * Created for openrosaphp.
  * User: Angujo Barrack
@@ -26,6 +28,21 @@ class BodyTest
 
         $xform->generate();
         echo $xform->XMLify();
+    }
+
+    public function odkform()
+    {
+        $form=new ODKForm();
+        $form->setTitle('build_'.mt_rand(3,999));
+        $form->dataElement('data');
+
+        $gender=$form->selectOne('sex');
+        $gender->addOption('Male','m');
+
+        $fname=$form->inputText('fname')->label('First Name');
+        $sname=$form->inputText('sname')->label('Second Name');
+        
+        echo $form->asXML();
     }
 
     public function testXForm()
