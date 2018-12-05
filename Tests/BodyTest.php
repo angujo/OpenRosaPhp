@@ -1,8 +1,8 @@
 <?php
 
+use Angujo\OpenRosaPhp\Authentication\Access;
 use Angujo\OpenRosaPhp\FormList;
 use Angujo\OpenRosaPhp\ODKForm;
-use Angujo\OpenRosaPhp\Authentication\Access;
 
 /**
  * Created for openrosaphp.
@@ -15,11 +15,56 @@ class BodyTest
 {
     public function __construct()
     {
-        Access::authenticateByHA1(function(){
-            return md5('john:'.Access::getRealm().':does');
+        Access::authenticateByHA1(function () {
+            return md5('john:' . Access::getRealm() . ':does');
         });
         header('X-OpenRosa-Version:1.0');
         header('Content-Type:text/xml');
+    }
+
+    public static function byteconvert($input)
+    {
+        preg_match('/(\d+)(\w+)/', $input, $matches);
+        $type = strtolower($matches[2]);
+        switch ($type) {
+            case "b":
+                $output = $matches[1];
+                break;
+            case "k":
+            case "kb":
+                $output = $matches[1] * 1024;
+                break;
+            case "m":
+            case "mb":
+                $output = $matches[1] * 1024 * 1024;
+                break;
+            case "g":
+            case "gb":
+                $output = $matches[1] * 1024 * 1024 * 1024;
+                break;
+            case "t":
+            case "tb":
+                $output = $matches[1] * 1024 * 1024 * 1024;
+                break;
+        }
+        return $output;
+    }
+
+    public static function getBaseUrl($url = '/')
+    {
+        // output: /myproject/index.php
+        $currentPath = $_SERVER['PHP_SELF'];
+        // output: Array ( [dirname] => /myproject [basename] => index.php [extension] => php [filename] => index )
+        $pathInfo = pathinfo($currentPath);
+        // output: localhost
+        $hostName = $_SERVER['HTTP_HOST'];
+        // output: http://
+        $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"], 0, 5)) == 'https' ? 'https' : 'http';
+        // return: http://localhost/myproject/
+        $base = $protocol . '://' . $hostName . $pathInfo['dirname'] . "/";
+
+        $url = trim(str_ireplace('\\', '/', $url), " \/");
+        return $base . $url;
     }
     public function testXml()
     {
@@ -44,24 +89,35 @@ class BodyTest
     public function odkformlist()
     {
         $formList = new FormList();
-        $form1 = $formList->addForm('kemri-wellcome.org:form101', 'First form ever!');
-        $form1->setVersion('1.1');
-        $form1->setHash('md5:' . md5('abcd1.1'));
+        $form1 = $formList->addForm('kemri-wellcome.org:form101', 'another 101 form ever!');
+        $form1->setVersion('1.2');
+        $form1->setHash('md5:' . md5('abcd1.2'));
         $form1->setDescriptionText('This is a description of this form!');
-        $form1->setDownloadUrl('http://localhost/and-there-it-is');
-        $form1->setManifestUrl('http://myhost.com/url');
+        $form1->setDownloadUrl(self::getBaseUrl('/?form=yes'));
+        //$form1->setManifestUrl('http://myhost.com/url');
 
         echo $formList->XMLify();
+    }
+
+    public static function log($content)
+    {
+        $fp = fopen(__DIR__ . '/log/odkin' . date('dmY') . '.log', 'a+');
+        fwrite($fp, date('Y-m-d H:i:s') . ': ' . $content);
+        fwrite($fp, "\r\n");
+        fclose($fp);
     }
 
     public function odkform()
     {
         $form = new ODKForm();
-        $form->setTitle('build_' . mt_rand(3, 999));
+        $form->setTitle('build_999911');
         $form->dataElement('data');
+        $form->setId('build_Untitled-Form_154402011');
 
         $gender = $form->selectOne('sex');
+        $gender->label('Sex');
         $gender->addOption('Male', 'm');
+        $gender->addOption('Female', 'f');
 
         $fname = $form->inputText('fname')->label('First Name');
         $sname = $form->inputText('sname')->label('Second Name');

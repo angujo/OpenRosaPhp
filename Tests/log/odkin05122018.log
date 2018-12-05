@@ -1,0 +1,9 @@
+2018-12-05 17:46:51: [METHOD] --------------------------------------HEAD--------------------------------------
+2018-12-05 17:46:51: [METHOD] --------------------------------------HEAD--------------------------------------
+2018-12-05 17:46:51: [NO_CONTENT] 
+2018-12-05 17:46:51: [METHOD] --------------------------------------POST--------------------------------------
+2018-12-05 17:46:51: [HEADERS] {"User-Agent":"Dalvik\/2.1.0 (Linux; U; Android 8.0.0; SM-C5010 Build\/R16NW) org.odk.collect.android\/v1.18.0","X-OpenRosa-Version":"1.0","Date":"Wed, 05 Dec 2018 02:46:51 GMT+00:00","Content-Length":"517","Content-Type":"multipart\/form-data; boundary=Jszq8TjSW0E9SiEbYPBDbe50KeLNaZ85Nl","Host":"192.168.100.147","Connection":"Keep-Alive","Accept-Encoding":"gzip,deflate","Authorization":"Digest username=\"john\", realm=\"AngujoBarrack-PhpRosa:Auth\", nonce=\"95a3999dcda72c6fe341b9cd7d870445\", uri=\"\/openrosaphp\/tests\/receive.php?deviceID=imei%3A355085082334543\", response=\"93f3732f165f10e3e6a8b53a40d4e4f6\", algorithm=MD5, opaque=\"4e374a3ed15a566972d90de09d990826\""}
+2018-12-05 17:46:51: [POST] []
+2018-12-05 17:46:51: [GET] {"deviceID":"imei:355085082334543"}
+2018-12-05 17:46:51: [INPUT] 
+2018-12-05 17:46:51: [FILE] {"xml_submission_file":{"name":"another 101 form ever_2018-12-05_17-46-39.xml","type":"text\/xml","tmp_name":"C:\\Windows\\Temp\\php4CA.tmp","error":0,"size":238}}
