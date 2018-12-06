@@ -14,6 +14,7 @@ use Angujo\OpenRosaPhp\Libraries\Elements;
 use Angujo\OpenRosaPhp\Libraries\Tag;
 use Angujo\OpenRosaPhp\Models\Elements\Bind;
 use Angujo\OpenRosaPhp\Models\Elements\Translatable;
+use Angujo\OpenRosaPhp\Utils\Helper;
 
 class BodyElement extends Tag
 {
@@ -35,7 +36,7 @@ class BodyElement extends Tag
     protected function __construct($name, $path)
     {
         parent::__construct($name, null);
-        $this->path = $this->old_path = $path;
+        $this->path = $this->old_path = Helper::xmlName($path);
         $this->id = uniqid('elm', true);
         $this->setPath();
     }

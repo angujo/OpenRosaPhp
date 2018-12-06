@@ -5,7 +5,6 @@ namespace Angujo\OpenRosaPhp\Forms;
 use Angujo\OpenRosaPhp\Libraries\Elmt;
 
 
-
 /**
  * 
  * 
@@ -18,8 +17,8 @@ class XFormGroup extends FormHolder {
     
     protected function __construct($id, $name)
     {
-        parent::__construct(Elmt::XFORMGROUP,null);
-        $this->setID($id)->setName($name);
+        parent::__construct(Elmt::XFORMGROUP,$id);
+        $this->setID($id)->setFormName($name);
     }
 
     public static function create($id, $name)

@@ -17,8 +17,8 @@ class XForm extends FormHolder
 
     protected function __construct($id, $name)
     {
-        parent::__construct(Elmt::XFORM,null);
-        $this->setID($id)->setName($name);
+        parent::__construct(Elmt::XFORM,$id);
+        $this->setID($id)->setFormName($name);
     }
 
     public static function create($id, $name)
@@ -29,12 +29,6 @@ class XForm extends FormHolder
     public function setID($id)
     {
         $this->addUniqueTag('formID', $id);
-        return $this;
-    }
-
-    public function setName($name)
-    {
-        $this->addUniqueTag('name', $name);
         return $this;
     }
 

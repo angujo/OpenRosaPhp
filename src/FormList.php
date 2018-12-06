@@ -5,20 +5,17 @@ namespace Angujo\OpenRosaPhp;
 use Angujo\OpenRosaPhp\Forms\XForm;
 use Angujo\OpenRosaPhp\Forms\XFormGroup;
 use Angujo\OpenRosaPhp\Libraries\Elmt;
-use Angujo\OpenRosaPhp\Libraries\Tag;
 use Angujo\OpenRosaPhp\Libraries\Ns;
+use Angujo\OpenRosaPhp\Libraries\Tag;
 
 /**
- *
- *
- * @authors Your Name (you@example.org)
- * @date    2018-12-04 17:20:32
- * @version 1.0.0
+ * Class FormList
+ * @package Angujo\OpenRosaPhp
  */
-
 class FormList extends Tag
 {
 
+    /** @var FormList */
     private static $me;
 
     public function __construct()
@@ -26,34 +23,68 @@ class FormList extends Tag
         parent::__construct(Elmt::XFORMS, null);
     }
 
+    /**
+     * @return FormList
+     */
     public function create()
     {
         return self::$me = self::$me ?: new self();
     }
 
     /**
-     * @return XForm
+     * @param string|XForm $idForm
+     * @param string|null $name
+     * @return Tag|XForm
      */
-    public function addForm($id, $name)
+    public function addForm($idForm, $name = null)
     {
-        return $this->identifiedTag(XForm::create($id, $name), $id);
-    }
-
-    public function addGroup($id, $name)
-    {
-        return $this->identifiedTag(XFormGroup::create($id, $name), $id);
+        if (\is_object($idForm)) return $this->setForm($idForm);
+        return $this->identifiedTag(XForm::create($idForm, $name), $idForm);
     }
 
     /**
-     * @param \XMLWriter|null $xmlwriter
-     * @return string|\XMLWriter
+     * @param XForm $XForm
+     * @return Tag|XForm
      */
-    public function XMLify($xmlwriter = null)
+    public function setForm(XForm $XForm)
+    {
+        return $this->identifiedTag($XForm, $XForm->getId());
+    }
+
+    /**
+     * @param XFormGroup $XFormXFormGroup
+     * @return Tag|XFormGroup
+     */
+    public function setGroup(XFormGroup $XFormXFormGroup)
+    {
+        return $this->identifiedTag($XFormXFormGroup, $XFormXFormGroup->getId());
+    }
+
+    /**
+     * @param string|XFormGroup $idGroup
+     * @param string $name
+     * @return Tag|XFormGroup
+     */
+    public function addGroup($idGroup, $name = null)
+    {
+        if (\is_object($idGroup)) return $this->setGroup($idGroup);
+        return $this->identifiedTag(XFormGroup::create($idGroup, $name), $idGroup);
+    }
+
+    /**
+     * @return string
+     */
+    public function XMLify($w = null)
+    {
+        return $w;
+    }
+
+    public function asXML()
     {
         /** @var \XMLWriter $writer */
         $writer = new \XMLWriter();
         $writer->openMemory();
-        $writer->startDocument('1.0','UTF-8');
+        $writer->startDocument('1.0', 'UTF-8');
         $writer->startElement($this->getName());
 
         $writer->writeAttribute('xmlns', Ns::XFORMSLIST);

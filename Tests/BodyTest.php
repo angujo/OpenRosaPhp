@@ -15,7 +15,7 @@ class BodyTest
 {
     public function __construct()
     {
-        Access::authenticateByHA1(function () {
+        Access::authenticateByHA1(function ($username) {
             return md5('john:' . Access::getRealm() . ':does');
         });
         header('X-OpenRosa-Version:1.0');
@@ -96,7 +96,7 @@ class BodyTest
         $form1->setDownloadUrl(self::getBaseUrl('/?form=yes'));
         //$form1->setManifestUrl('http://myhost.com/url');
 
-        echo $formList->XMLify();
+        echo $formList->asXML();
     }
 
     public static function log($content)

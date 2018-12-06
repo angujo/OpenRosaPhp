@@ -13,8 +13,8 @@ use Angujo\OpenRosaPhp\Libraries\Tag;
 use Angujo\OpenRosaPhp\Models\Body;
 use Angujo\OpenRosaPhp\Models\Controls\InputDateTime;
 use Angujo\OpenRosaPhp\Models\Controls\InputText;
-use Angujo\OpenRosaPhp\Models\Controls\Select1;
 use Angujo\OpenRosaPhp\Models\Controls\Select;
+use Angujo\OpenRosaPhp\Models\Controls\Select1;
 use Angujo\OpenRosaPhp\Models\Controls\Upload;
 use Angujo\OpenRosaPhp\Models\Group;
 use Angujo\OpenRosaPhp\Models\Head;
@@ -110,13 +110,18 @@ class ODKForm extends Tag
         $this->head->setBinds();
     }
 
+    public function XMLify($w = null)
+    {
+        return $w;
+    }
+
     /**
      * @return string|\XMLWriter
      */
     public function asXML()
     {
         $this->generate();
-        return $this->XMLify();
+        return parent::XMLify();
     }
 
     public function __call($method, $args)
