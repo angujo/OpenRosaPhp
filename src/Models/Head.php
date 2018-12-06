@@ -8,12 +8,10 @@
 
 namespace Angujo\OpenRosaPhp\Models;
 
-
 use Angujo\OpenRosaPhp\Libraries\Elmt;
 use Angujo\OpenRosaPhp\Libraries\Tag;
 use Angujo\OpenRosaPhp\Models\Head\Model;
 use Angujo\OpenRosaPhp\Models\Head\PrimaryInstance;
-
 
 /**
  * Class Head
@@ -63,6 +61,11 @@ class Head extends Tag
     {
         $this->addNSUniqueTag('h', 'title', $title);
         return $this;
+    }
+
+    public function submission($url, $encryption_key = null)
+    {
+        return $this->model->submission($url, $encryption_key);
     }
 
     /**

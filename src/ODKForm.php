@@ -110,6 +110,11 @@ class ODKForm extends Tag
         $this->head->setBinds();
     }
 
+    public function submission($url,$encryption_key=null)
+    {
+        return $this->head->submission($url,$encryption_key);
+    }
+
     public function XMLify($w = null)
     {
         return $w;

@@ -33,6 +33,7 @@ class Elmt
     public const ITEXT            = 'itext';
     public const TEXT             = 'text';
     public const XFORM            = 'xform';
+    public const SUBMISSION            = 'submission';
     public const XFORMS           = 'xforms';
     public const XFORMGROUP       = 'xform-group';
     public const TRANSLATION      = 'translation';

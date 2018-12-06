@@ -13,6 +13,7 @@ use Angujo\OpenRosaPhp\Libraries\Binds;
 use Angujo\OpenRosaPhp\Libraries\Elmt;
 use Angujo\OpenRosaPhp\Libraries\Itext;
 use Angujo\OpenRosaPhp\Libraries\Tag;
+use Angujo\OpenRosaPhp\Models\Elements\Submission;
 
 
 /**
@@ -77,6 +78,11 @@ class Model extends Tag
     public function setBinds()
     {
         return $this->appendTags(Binds::all());
+    }
+
+    public function submission($url,$encryption=null)
+    {
+        return $this->setUniqueTag(Submission::post($url,$encryption));
     }
 
     /**

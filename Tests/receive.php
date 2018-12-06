@@ -15,7 +15,7 @@ header('Content-Type:text/xml:charset=utf-8');
 if(0===strcasecmp($_SERVER['REQUEST_METHOD'],'head')){
 BodyTest::log('[NO_CONTENT] ');
 header('HTTP/1.1 204 No Content');
-die();    
+die();
 }
 BodyTest::log('[HEADERS] '.json_encode(getallheaders()));
 BodyTest::log('[POST] '.json_encode($_POST));
