@@ -1,0 +1,42 @@
+2018-12-06 11:53:46: [REQUEST RECEIVED] HEAD
+2018-12-06 11:53:46: [REQUEST RECEIVED] HEAD
+2018-12-06 11:53:46: [REQUEST RECEIVED] POST
+2018-12-06 11:53:46: 2018-12-06 11:12:46 [INFO] UPLOAD: <?xml version='1.0' ?><data id="build_Untitled-Form_154402011" xmlns:h="http://www.w3.org/1999/xhtml"><meta><instanceID>uuid:618a3bca-5824-4c0e-abbb-3438eac57a3d</instanceID></meta><sex>f</sex><fname>fname</fname><sname>sname</sname></data>
+2018-12-06 11:53:46: {"data":{"@id":"build_Untitled-Form_154402011","meta":{"instanceID":"uuid:618a3bca-5824-4c0e-abbb-3438eac57a3d"},"sex":"f","fname":"fname","sname":"sname"}}
+2018-12-06 11:54:58: [REQUEST RECEIVED] HEAD
+2018-12-06 11:54:58: [REQUEST RECEIVED] HEAD
+2018-12-06 11:54:58: [REQUEST RECEIVED] POST
+2018-12-06 11:54:58: 2018-12-06 11:12:58 [INFO] UPLOAD: <?xml version='1.0' ?><data id="build_Untitled-Form_154402011" xmlns:h="http://www.w3.org/1999/xhtml"><meta><instanceID>uuid:618a3bca-5824-4c0e-abbb-3438eac57a3d</instanceID></meta><sex>f</sex><fname>fname</fname><sname>sname</sname></data>
+2018-12-06 11:54:58: {"data":{"@id":"build_Untitled-Form_154402011","meta":{"instanceID":"uuid:618a3bca-5824-4c0e-abbb-3438eac57a3d"},"sex":"f","fname":"fname","sname":"sname"}}
+2018-12-06 11:56:34: [REQUEST RECEIVED] HEAD
+2018-12-06 11:56:35: [REQUEST RECEIVED] HEAD
+2018-12-06 11:56:35: [REQUEST RECEIVED] POST
+2018-12-06 11:56:35: 2018-12-06 11:12:35 [INFO] UPLOAD: <?xml version='1.0' ?><data id="build_Untitled-Form_154402011" xmlns:h="http://www.w3.org/1999/xhtml"><meta><instanceID>uuid:618a3bca-5824-4c0e-abbb-3438eac57a3d</instanceID></meta><sex>f</sex><fname>fname</fname><sname>sname</sname></data>
+2018-12-06 11:56:35: {"data":{"@id":"build_Untitled-Form_154402011","meta":{"instanceID":"uuid:618a3bca-5824-4c0e-abbb-3438eac57a3d"},"sex":"f","fname":"fname","sname":"sname"}}
+2018-12-06 11:57:03: [REQUEST RECEIVED] HEAD
+2018-12-06 11:57:03: [REQUEST RECEIVED] HEAD
+2018-12-06 11:57:03: [REQUEST RECEIVED] POST
+2018-12-06 11:57:03: 2018-12-06 11:12:03 [INFO] UPLOAD: <?xml version='1.0' ?><data id="build_Untitled-Form_154402011" xmlns:h="http://www.w3.org/1999/xhtml"><meta><instanceID>uuid:618a3bca-5824-4c0e-abbb-3438eac57a3d</instanceID></meta><sex>f</sex><fname>fname</fname><sname>sname</sname></data>
+2018-12-06 11:57:03: {"data":{"@id":"build_Untitled-Form_154402011","meta":{"instanceID":"uuid:618a3bca-5824-4c0e-abbb-3438eac57a3d"},"sex":"f","fname":"fname","sname":"sname"}}
+2018-12-06 11:58:21: [METHOD] --------------------------------------POST--------------------------------------
+2018-12-06 11:58:21: [METHOD] --------------------------------------POST--------------------------------------
+2018-12-06 11:58:21: [HEADERS] {"Host":"localhost","Authorization":"Digest username=\"john\",realm=\"AngujoBarrack-PhpRosa:Auth\",nonce=\"2c261bc0df7af47b0015a4faa4ab64b8\",uri=\"\/openrosaphp\/tests\/receive.php\",response=\"bb286c1d3c1b5669eba5811a5c053e6d\",opaque=\"c8daae9fa147feeef0dcdbd58e4b1136\"","User-Agent":"insomnia\/6.2.3","Cookie":"PHPSESSID=eb0qbkv4ja6n45jtd9d20ljtq8; _csrf=7cf56ae17e4faefad7536917084bfd95236572422dcc3b65cbece7d8f6047178a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22uhOWRMloosbfczg2AAidxP_Q5aOenA38%22%3B%7D","Content-Type":"multipart\/form-data; boundary=X-INSOMNIA-BOUNDARY","Accept":"*\/*","Content-Length":"334"}
+2018-12-06 11:58:21: [POST] []
+2018-12-06 11:58:21: [GET] []
+2018-12-06 11:58:21: [INPUT] 
+2018-12-06 11:58:21: [FILE] {"xml_submission_file":{"name":"note.xml","type":"application\/xml","tmp_name":"C:\\Windows\\Temp\\php4CAA.tmp","error":0,"size":170}}
+2018-12-06 11:59:25: [REQUEST RECEIVED] POST
+2018-12-06 11:59:25: [REQUEST RECEIVED] POST
+2018-12-06 11:59:25: 2018-12-06 11:12:25 [INFO] UPLOAD: <?xml version="1.0" encoding="UTF-8"?>
+<note>
+  <to>Tove</to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body>
+</note>
+2018-12-06 11:59:25: {"note":{"to":"Tove","from":"Jani","heading":"Reminder","body":"Don't forget me this weekend!"}}
+2018-12-06 12:01:06: [REQUEST RECEIVED] HEAD
+2018-12-06 12:01:06: [REQUEST RECEIVED] HEAD
+2018-12-06 12:01:06: [REQUEST RECEIVED] POST
+2018-12-06 12:01:06: 2018-12-06 12:12:06 [INFO] UPLOAD: <?xml version='1.0' ?><data id="build_Untitled-Form_154402011" xmlns:h="http://www.w3.org/1999/xhtml"><meta><instanceID>uuid:618a3bca-5824-4c0e-abbb-3438eac57a3d</instanceID></meta><sex>f</sex><fname>fname</fname><sname>sname</sname></data>
+2018-12-06 12:01:06: {"data":{"@id":"build_Untitled-Form_154402011","meta":{"instanceID":"uuid:618a3bca-5824-4c0e-abbb-3438eac57a3d"},"sex":"f","fname":"fname","sname":"sname"}}

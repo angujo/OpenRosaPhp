@@ -8,9 +8,10 @@
 
 namespace Angujo\OpenRosaPhp;
 
-
 use Angujo\OpenRosaPhp\Access\Authenticate;
+use Angujo\OpenRosaPhp\Access\Response;
 use Angujo\OpenRosaPhp\Utils\Helper;
+use Angujo\OpenRosaPhp\Utils\Log;
 
 /**
  * Class Access
@@ -21,23 +22,35 @@ class Http extends Authenticate
 
     public static function formListing(FormList $formList)
     {
-        if (!self::$valid) self::validateUser(function () { return ''; });
+        if (!self::$valid) {
+            self::validateUser(function () {return '';});
+        }
+
         echo $formList->asXML();
         exit;
     }
 
     public static function formOutput(ODKForm $form)
     {
-        if (!self::$valid) self::validateUser(function () { return ''; });
+        if (!self::$valid) {
+            self::validateUser(function () {return '';});
+        }
+
         echo $form->asXML();
         exit;
     }
 
     public static function submission(\Closure $getData, $file_name = 'xml_submission_file')
     {
-        if (!self::$valid) self::validateUser(function () { return ''; });
+        if (!self::$valid) {
+            self::validateUser(function () {return '';});
+        }
+
         self::submissionHeaders();
-        if (self::isHeadRequest()) self::inHead();
+        if (self::isHeadRequest()) {
+            self::inHead();
+        }
+
         self::posted($getData, $file_name);
     }
 
@@ -54,7 +67,17 @@ class Http extends Authenticate
             exit;
         }
         $content = self::fileContent($file_name);
-        $data(Helper::xmlToArray(simplexml_load_string($content)));
+        Log::info('UPLOAD: ' . $content);
+        try {
+            $data(Helper::xmlToArray(simplexml_load_string($content)));
+            header('HTTP/1.1 201 Received');
+            echo Response::success('Submission successfully received!')->asXML();
+        } catch (\Throwable $th) {
+            echo Response::error($th->getCode() . ': ' . $th->getMessage())->asXML();
+            Log::error($th->getTraceAsString());
+        } finally {
+            exit;
+        }
     }
 
 }

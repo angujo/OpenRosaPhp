@@ -15,6 +15,7 @@ class Ns
     public const H          = 'http://www.w3.org/1999/xhtml';
     public const JR         = 'http://openrosa.org/javarosa';
     public const XSD        = 'http://www.w3.org/2001/XMLSchema';
+    public const RESPONSE   = 'http://openrosa.org/http/response';
     public const ORX        = 'http://openrosa.org/xforms';
     public const ODK        = 'http://www.opendatakit.org/xforms';
     public const XMLNS      = 'http://www.w3.org/2002/xforms';

@@ -118,6 +118,9 @@ class Tag
         return $tag;
     }
 
+    /**
+     * @return Tag
+     */
     public function getUniqueTag($name)
     {
         return $this->tags[$name] ?? null;

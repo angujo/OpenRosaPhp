@@ -27,5 +27,5 @@ BodyTest::log('[FILE] '.json_encode($_FILES));
 ?>
 <?xml version="1.0"?>
 <OpenRosaResponse xmlns="http://openrosa.org/http/response">
-    <message nature="submit_success">Form successfully uploaded!</message>
+    <message nature="submit_success"><?=date('H:m:s') ?> Form successfully uploaded!</message>
 </OpenRosaResponse>
