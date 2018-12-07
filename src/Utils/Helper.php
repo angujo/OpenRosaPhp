@@ -18,6 +18,7 @@ class Helper
      */
     public static function xmlName($name)
     {
+        if (null===$name) return null;
         if (!\is_string($name) || !trim($name) || 1 !== preg_match('/([a-zA-Z])/', $name)) throw new \InvalidArgumentException("$name is an invalid name!");
         return trim(preg_replace(['/^([^a-z]+)/i', '/([^a-z0-9_]+)/i'], '_', $name), ' _');
     }
@@ -26,24 +27,25 @@ class Helper
     {
         preg_match('/(\d+)(\w+)/i', $input, $matches);
         $type = strtolower($matches[2]);
+        $output = 0;
         switch ($type) {
-            case "b":
+            case 'b':
                 $output = $matches[1];
                 break;
-            case "k":
-            case "kb":
+            case 'k':
+            case 'kb':
                 $output = $matches[1] * 1024;
                 break;
-            case "m":
-            case "mb":
+            case 'm':
+            case 'mb':
                 $output = $matches[1] * 1024 * 1024;
                 break;
-            case "g":
-            case "gb":
+            case 'g':
+            case 'gb':
                 $output = $matches[1] * 1024 * 1024 * 1024;
                 break;
-            case "t":
-            case "tb":
+            case 't':
+            case 'tb':
                 $output = $matches[1] * 1024 * 1024 * 1024;
                 break;
         }

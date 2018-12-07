@@ -1,6 +1,5 @@
 <?php
 
-use Angujo\OpenRosaPhp\Authentication\Access;
 use Angujo\OpenRosaPhp\FormList;
 use Angujo\OpenRosaPhp\ODKForm;
 
@@ -15,9 +14,9 @@ class BodyTest
 {
     public function __construct()
     {
-        Access::authenticateByHA1(function ($username) {
+        /*Access::authenticateByHA1(function ($username) {
             return md5('john:' . Access::getRealm() . ':does');
-        });
+        });*/
         header('X-OpenRosa-Version:1.0');
         header('Content-Type:text/xml');
     }
