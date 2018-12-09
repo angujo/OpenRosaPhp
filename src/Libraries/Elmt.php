@@ -33,12 +33,14 @@ class Elmt
     public const ITEXT            = 'itext';
     public const TEXT             = 'text';
     public const XFORM            = 'xform';
-    public const SUBMISSION            = 'submission';
+    public const SUBMISSION       = 'submission';
     public const XFORMS           = 'xforms';
     public const XFORMGROUP       = 'xform-group';
     public const TRANSLATION      = 'translation';
     public const OPENROSARESPONSE = 'OpenRosaResponse';
-    public const MESSAGE      = 'message';
+    public const MESSAGE          = 'message';
+    public const MEDIAFILE        = 'mediafile';
+    public const MANIFEST         = 'manifest';
 
     public static $DATA_TYPES = ['string', 'int', 'boolean', 'decimal', 'date', 'time', 'dateTime', 'geopoint', 'geotrace', 'geoshape', 'binary', 'barcode', 'intent'];
 }

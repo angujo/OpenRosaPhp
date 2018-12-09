@@ -14,7 +14,7 @@ use Angujo\OpenRosaPhp\Models\ControlElement;
 
 class InputNumber extends ControlElement
 {
-    use TraitMinMax;
+    use TraitNumber;
 
     /**
      * @param $name

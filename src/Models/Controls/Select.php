@@ -10,10 +10,11 @@ namespace Angujo\OpenRosaPhp\Models\Controls;
 
 
 use Angujo\OpenRosaPhp\Libraries\Elmt;
-use Angujo\OpenRosaPhp\Models\ControlElement;
 
 class Select extends OptionBased
 {
+    use TraitSelect;
+
     protected function __construct($name)
     {
         parent::__construct(Elmt::SELECT, $name);

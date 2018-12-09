@@ -23,17 +23,26 @@ class Http extends Authenticate
     public static function formListing(FormList $formList)
     {
         if (!self::$valid) {
-            self::validateUser(function () {return '';});
+            self::validateUser(function () { return ''; });
         }
 
         echo $formList->asXML();
         exit;
     }
 
+    public function manifest(Manifest $manifest)
+    {
+        if (!self::$valid) {
+            self::validateUser(function () { return ''; });
+        }
+        echo $manifest->asXML();
+        exit;
+    }
+
     public static function formOutput(ODKForm $form)
     {
         if (!self::$valid) {
-            self::validateUser(function () {return '';});
+            self::validateUser(function () { return ''; });
         }
 
         echo $form->asXML();
@@ -43,7 +52,7 @@ class Http extends Authenticate
     public static function submission(\Closure $getData, $file_name = 'xml_submission_file')
     {
         if (!self::$valid) {
-            self::validateUser(function () {return '';});
+            self::validateUser(function () { return ''; });
         }
 
         self::submissionHeaders();

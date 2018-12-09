@@ -12,6 +12,7 @@ namespace Angujo\OpenRosaPhp\Models;
 use Angujo\OpenRosaPhp\Libraries\Elmt;
 use Angujo\OpenRosaPhp\Libraries\Tag;
 use Angujo\OpenRosaPhp\Models\Controls\InputDateTime;
+use Angujo\OpenRosaPhp\Models\Controls\InputNumber;
 use Angujo\OpenRosaPhp\Models\Controls\InputText;
 use Angujo\OpenRosaPhp\Models\Controls\Select;
 use Angujo\OpenRosaPhp\Models\Controls\Select1;
@@ -68,6 +69,24 @@ class ControlHolder extends BodyElement
     public function inputMultiline($name)
     {
         return $this->silenceElement(InputText::multiline($name));
+    }
+
+    /**
+     * @param $name
+     * @return InputNumber
+     */
+    public function inputDecimal($name)
+    {
+        return $this->silenceElement(InputNumber::decimal($name));
+    }
+
+    /**
+     * @param $name
+     * @return InputNumber
+     */
+    public function inputInteger($name)
+    {
+        return $this->silenceElement(InputNumber::integer($name));
     }
 
     /**

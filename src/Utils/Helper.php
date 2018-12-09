@@ -18,7 +18,7 @@ class Helper
      */
     public static function xmlName($name)
     {
-        if (null===$name) return null;
+        if (null === $name) return null;
         if (!\is_string($name) || !trim($name) || 1 !== preg_match('/([a-zA-Z])/', $name)) throw new \InvalidArgumentException("$name is an invalid name!");
         return trim(preg_replace(['/^([^a-z]+)/i', '/([^a-z0-9_]+)/i'], '_', $name), ' _');
     }
@@ -138,5 +138,30 @@ class Helper
         return array(
             $xml->getName() => $propertiesArray
         );
+    }
+
+    public static function camelCaseToUnderscore($input)
+    {
+        return strtolower(preg_replace(['/([a-z\d])([A-Z])/', '/([^_])([A-Z][a-z])/'], '$1_$2', $input));
+    }
+
+    public static function validDate($text)
+    {
+        $format = 'Y-m-d';
+        return ($d = \DateTime::createFromFormat($format, $text)) && $d->format($format) == $text;
+    }
+
+    public static function validDateTime($text)
+    {
+        $format = 'Y-m-d H:i';
+        $format2 = 'Y-m-d H:i:s';
+        return (($d = \DateTime::createFromFormat($format, $text)) && $d->format($format) == $text) || (($d2 = \DateTime::createFromFormat($format2, $text)) && $d2->format($format2) == $text);
+    }
+
+    public static function validTime($text)
+    {
+        $format = 'H:i';
+        $format2 = 'H:i:s';
+        return (($d = \DateTime::createFromFormat($format, $text)) && $d->format($format) == $text) || (($d2 = \DateTime::createFromFormat($format2, $text)) && $d2->format($format2) == $text);
     }
 }

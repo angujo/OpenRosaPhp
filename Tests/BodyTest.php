@@ -9,7 +9,6 @@ use Angujo\OpenRosaPhp\ODKForm;
  * Date: 2018-11-24
  * Time: 1:15 PM
  */
-
 class BodyTest
 {
     public function __construct()
@@ -65,6 +64,7 @@ class BodyTest
         $url = trim(str_ireplace('\\', '/', $url), " \/");
         return $base . $url;
     }
+
     public function testXml()
     {
         $body = \Angujo\OpenRosaPhp\Models\Body::create();
@@ -118,8 +118,24 @@ class BodyTest
         $gender->addOption('Male', 'm');
         $gender->addOption('Female', 'f');
 
-        $fname = $form->inputText('fname')->label('First Name');
-        $sname = $form->inputText('sname')->label('Second Name');
+        $fname = $form->inputText('fname');
+        $fname->label('First Name');
+        $fname->lengthRange(2, 45);
+        $sname = $form->inputText('sname');
+        $sname->label('Second Name');
+
+        $age = $form->inputInteger('age');
+        $age->label('Age');
+        $age->range(18, 45, true, 'Should be a youth!');
+
+        $cities = $form->selectMultiple('cities');
+        $cities->label('Cities');
+        $cities->addOption('Nakuru', 'nx');
+        $cities->addOption('Kisumu', 'ks');
+        $cities->addOption('Nairobi', 'nr');
+        $cities->addOption('Mombasa', 'mb');
+        $cities->addOption('Malindi', 'ml');
+        $cities->selectionRange(1, 3)->required()->readOnly();
 
         echo $form->asXML();
     }
@@ -137,7 +153,7 @@ class BodyTest
 
         $fname = \Angujo\OpenRosaPhp\Models\Controls\InputText::text('fname');
         $label = $fname->label('First Name');
-        $label->language(function (\Angujo\OpenRosaPhp\Models\Controls\LanguageTranslator $translator) {$translator->kiswahili('Jina La Kwanza');});
+        $label->language(function (\Angujo\OpenRosaPhp\Models\Controls\LanguageTranslator $translator) { $translator->kiswahili('Jina La Kwanza'); });
         $fname->defaultValue('JohnDoe');
         $fname->hint('Should be in alphabets!')->language(function (\Angujo\OpenRosaPhp\Models\Controls\LanguageTranslator $translator) {
             $translator->kiswahili('Onyesha kwa herufi kubwa!')->chinese('Chiwawa!');

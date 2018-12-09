@@ -12,6 +12,7 @@ use Angujo\OpenRosaPhp\Libraries\Elmt;
 use Angujo\OpenRosaPhp\Libraries\Tag;
 use Angujo\OpenRosaPhp\Models\Body;
 use Angujo\OpenRosaPhp\Models\Controls\InputDateTime;
+use Angujo\OpenRosaPhp\Models\Controls\InputNumber;
 use Angujo\OpenRosaPhp\Models\Controls\InputText;
 use Angujo\OpenRosaPhp\Models\Controls\Select;
 use Angujo\OpenRosaPhp\Models\Controls\Select1;
@@ -30,6 +31,8 @@ use Angujo\OpenRosaPhp\Models\Repeat;
  * @method Group group(string $name)
  * @method Repeat repeat(string $name)
  * @method InputText inputText(string $name)
+ * @method InputNumber inputDecimal(string $name)
+ * @method InputNumber inputInteger(string $name)
  * @method InputText inputMultiline(string $name)
  * @method Upload uploadImage(string $name)
  * @method Upload uploadVideo(string $name)

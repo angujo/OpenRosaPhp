@@ -14,7 +14,7 @@ use Angujo\OpenRosaPhp\Models\ControlElement;
 
 class InputDateTime extends ControlElement
 {
-    use TraitMinMax;
+    use TraitDatetime;
     protected const YM = 'month-year';
     protected const Y  = 'year';
 

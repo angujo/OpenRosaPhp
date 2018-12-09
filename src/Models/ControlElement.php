@@ -12,6 +12,7 @@ use Angujo\OpenRosaPhp\Libraries\Binds;
 use Angujo\OpenRosaPhp\Libraries\Elements;
 use Angujo\OpenRosaPhp\Libraries\Elmt;
 use Angujo\OpenRosaPhp\Libraries\Tag;
+use Angujo\OpenRosaPhp\Models\Controls\TraitConstraint;
 use Angujo\OpenRosaPhp\Models\Elements\Bind;
 use Angujo\OpenRosaPhp\Models\Elements\Label;
 use Angujo\OpenRosaPhp\Models\Elements\Translatable;
@@ -22,8 +23,12 @@ use Angujo\OpenRosaPhp\Models\Elements\Translatable;
  */
 class ControlElement extends BodyElement
 {
+
+    use TraitConstraint;
+
     /** @var string|int|null */
     protected $defaultValue;
+    protected $type;
 
     protected function __construct($name, $path)
     {
@@ -75,6 +80,7 @@ class ControlElement extends BodyElement
     {
         if ($this->bind && Config::isOdk()) $this->bind->addAttribute('type', $type);// Binds::get($this->id)->addAttribute('type', $type);
         else $this->setAttribute('type', $type);
+        $this->type = $type;
         return $this;
     }
 

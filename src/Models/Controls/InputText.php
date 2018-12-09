@@ -14,7 +14,7 @@ use Angujo\OpenRosaPhp\Models\ControlElement;
 
 class InputText extends ControlElement
 {
-    use TraitMinMax;
+    use TraitString;
 
     protected function __construct($name)
     {

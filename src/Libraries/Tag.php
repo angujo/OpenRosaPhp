@@ -9,6 +9,7 @@
 namespace Angujo\OpenRosaPhp\Libraries;
 
 
+use Angujo\OpenRosaPhp\Models\Config;
 use Angujo\OpenRosaPhp\Models\Elements\Translatable;
 
 
@@ -31,7 +32,7 @@ class Tag
     protected $tags = [];
 
 
-    protected function __construct($name, $value)
+    protected function __construct($name, $value=null)
     {
         $this->setName($name);
         $this->setValue($value);
@@ -52,6 +53,7 @@ class Tag
     protected function setNamespace(string $namespace): Tag
     {
         $this->namespace = $namespace;
+        if (Config::isOdk()) Ns::collect($this->namespace);
         return $this;
     }
 
@@ -293,9 +295,13 @@ class Tag
             }
         }
         if (!$continue) {
-            if ($nspaces = $this->collectNameSpaces()) $writer->writeAttribute('xmlns', Ns::XMLNS);
-            foreach ($nspaces as $ns) {
+            //if ($nspaces = $this->collectNameSpaces()) $writer->writeAttribute('xmlns', Ns::XMLNS);
+            /*foreach ($nspaces as $ns) {
                 if ($uri = Ns::uri($ns)) $writer->writeAttributeNS('xmlns', $ns, null, $uri);
+            }*/
+            if (Ns::getCollection()) $writer->writeAttribute('xmlns', Ns::XMLNS);
+            foreach (Ns::getCollection() as $ns=>$uri) {
+                $writer->writeAttributeNS('xmlns', $ns, null, $uri);
             }
         }
         if (!$this->tags) {
@@ -318,10 +324,7 @@ class Tag
         return $writer;
     }
 
-    /**
-     * @return string|null
-     */
-    public function collectNameSpaces()
+    /*public function collectNameSpaces()
     {
         $nsCollector = [];
         if ($this->namespace) $nsCollector[] = $this->namespace;
@@ -329,12 +332,12 @@ class Tag
             if ($attribute->getNamespace()) $nsCollector[] = $attribute->getNamespace();
         }
         foreach ($this->tags as $tag) {
-            $nsCollector = array_merge($nsCollector, $tag->collectNameSpaces());
+           // $nsCollector = array_merge($nsCollector, $tag->collectNameSpaces());
         }
         return array_unique($nsCollector);
     }
 
-    /*public function collector(Tag $tagger)
+    public function collector(Tag $tagger)
     {
         /** @var ControlElement|ControlHolder|Translatable $tag
         foreach ($this->tags as $tag) {

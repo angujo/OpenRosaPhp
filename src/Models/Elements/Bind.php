@@ -9,6 +9,7 @@
 namespace Angujo\OpenRosaPhp\Models\Elements;
 
 
+use Angujo\OpenRosaPhp\Libraries\Constraint;
 use Angujo\OpenRosaPhp\Libraries\Elmt;
 use Angujo\OpenRosaPhp\Libraries\Tag;
 
@@ -16,6 +17,8 @@ class Bind extends Tag
 {
     private $nodeset;
     private $registered;
+    /** @var Constraint */
+    private $constraint;
 
     protected function __construct($nodeset, &$reg = true)
     {
@@ -23,6 +26,24 @@ class Bind extends Tag
         $this->nodeset = $nodeset;
         $this->registered = &$reg;
         $this->nodeset($nodeset);
+    }
+
+    /**
+     * @return Constraint|null
+     */
+    public function getConstraint()
+    {
+        return $this->constraint;
+    }
+
+    /**
+     * @param Constraint $constraint
+     * @return Bind
+     */
+    public function setConstraint(Constraint $constraint): Bind
+    {
+        $this->constraint = &$constraint;
+        return $this;
     }
 
     /**
@@ -82,19 +103,19 @@ class Bind extends Tag
 
     public function required($req = true)
     {
-        $this->addAttribute('readonly', $req ? 'true()' : 'false()');
+        $this->addAttribute('required', $req ? 'true()' : 'false()');
         return $this;
     }
 
     public function relevant($rel = true)
     {
-        $this->addAttribute('readonly', $rel ? 'true()' : 'false()');
+        $this->addAttribute('relevant', $rel ? 'true()' : 'false()');
         return $this;
     }
 
     public function constraint($cnst)
     {
-        $this->addAttribute('constraint', htmlspecialchars($cnst));
+        $this->addAttribute('constraint',$cnst);
         return $this;
     }
 
@@ -138,5 +159,28 @@ class Bind extends Tag
     {
         $this->addNSAttribute('orx', 'max-pixels', $mxpls);
         return $this;
+    }
+
+    /**
+     * @param null|\XMLWriter $writer
+     * @return \XMLWriter|null
+     */
+    public function XMLify($writer = null)
+    {
+        if (!$writer) return null;
+        if ($this->constraint) {
+            $this->constraint($this->constraint->getConstraint());
+            $this->constraintMsg($this->constraint->getMessage());
+        }
+        $writer->startElement($this->getName());
+        foreach ($this->attributes as $attribute) {
+            if ($attribute->getNamespace()) {
+                $writer->writeAttributeNS($attribute->getNamespace(), $attribute->getName(), null, $attribute->getValue());
+            } else {
+                $writer->writeAttribute($attribute->getName(), $attribute->getValue());
+            }
+        }
+        $writer->endElement();
+        return $writer;
     }
 }

@@ -77,6 +77,7 @@ class Attribute
     public function setNamespace($namespace)
     {
         $this->namespace = $namespace;
+        Ns::collect($this->namespace);
         return $this;
     }
 
