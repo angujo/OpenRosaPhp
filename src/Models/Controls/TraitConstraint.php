@@ -36,6 +36,15 @@ trait TraitConstraint
         if (!$this->bind) return $this;
         $this->bind->required(true)->requiredMsg($message);
         return $this;
+    }    
+
+    public function constraint($constraint, $message = 'Constraint should be adhered!')
+    {
+        if (!$this->bind) return $this;
+        $cnst=new Constraint();
+        $cnst->setConstraint($constraint)->setMessage($message);
+        $this->bind->setConstraint($cnst);
+        return $this;
     }
 
     public function readOnly()
