@@ -39,9 +39,21 @@ class LanguageTranslator extends MyLanguages
     }
 
     /**
+     * @param $abbreviation
+     * @param $translation
+     * @return LanguageTranslator|null
+     * @throws \Exception
+     */
+    public function custom($abbreviation, $translation)
+    {
+        if (!($language = Language::get($abbreviation))) throw new \Exception("Invalid language abbreviation '$abbreviation'. Ensure language set!");
+        return $this->translate($language, $translation);
+    }
+
+    /**
      * @param $method
      * @param $args
-     * @return null
+     * @return LanguageTranslator|null
      * @throws \Exception
      */
     public function __call($method, $args)
@@ -51,7 +63,17 @@ class LanguageTranslator extends MyLanguages
             if (!isset($args[1]) || !\is_string($args[1])) throw new \Exception("$method is not a valid language. To add own language pass second parameter with ISO abbreviation of the language!");
             $language = Language::add($args[1], $method);
         }
-        if (!($trans = Translation::set($language, $args[0], $this->id))) return null;
+        return $this->translate($language, $args[0]);
+    }
+
+    /**
+     * @param Language $language
+     * @param $translation
+     * @return $this|null
+     */
+    private function translate(Language $language, $translation)
+    {
+        if (!($trans = Translation::set($language, $translation, $this->id))) return null;
         $this->translatables[$trans->getLanguage()->getIsoAbbreviation()] = $trans;
         return $this;
     }
