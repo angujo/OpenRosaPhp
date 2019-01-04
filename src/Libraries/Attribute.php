@@ -67,9 +67,13 @@ class Attribute
         return $this;
     }
     
-    public function ignore($yesno = NULL)
+    public function isIgnored()
     {
-        if (NULL === $this->ignored) return $this->ignored;
+        return $this->ignored;
+    }
+    
+    public function ignore($yesno )
+    {
         $this->ignored = (bool)$yesno;
         return $this;
     }

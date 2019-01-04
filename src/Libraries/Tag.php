@@ -334,7 +334,7 @@ class Tag
             $writer->startElement($this->name);
         }
         foreach ($this->attributes as $attribute) {
-            if ($attribute->ignore()) continue;
+            if ($attribute->isIgnored()) continue;
             if ($attribute->getNamespace()) {
                 $writer->writeAttributeNS($attribute->getNamespace(), $attribute->getName(), NULL, $attribute->getValue());
             } else {
