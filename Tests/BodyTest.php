@@ -128,8 +128,12 @@ class BodyTest
         $age->label('Age');
         $age->range(18, 45, true, 'Should be a youth!');
 
-        $salary=$form->inputDecimal('salary');
+        $salary = $form->inputDecimal('salary');
         $salary->label('Salary');
+
+        /** @var \Angujo\OpenRosaPhp\Models\Controls\InputText $job */
+        $job = $form->addElement(\Angujo\OpenRosaPhp\Models\Controls\InputText::text('job'));
+        $job->label('Job');
 
         $cities = $form->selectMultiple('cities');
         $cities->label('Cities');

@@ -11,6 +11,7 @@ namespace Angujo\OpenRosaPhp;
 use Angujo\OpenRosaPhp\Libraries\Elmt;
 use Angujo\OpenRosaPhp\Libraries\Tag;
 use Angujo\OpenRosaPhp\Models\Body;
+use Angujo\OpenRosaPhp\Models\BodyElement;
 use Angujo\OpenRosaPhp\Models\Controls\InputDateTime;
 use Angujo\OpenRosaPhp\Models\Controls\InputNumber;
 use Angujo\OpenRosaPhp\Models\Controls\InputText;
@@ -48,6 +49,7 @@ use Angujo\OpenRosaPhp\Models\Repeat;
  * @method Select1 selectOneLikert(string $name)
  * @method Select1 selectOneQuick(string $name)
  * @method Select selectMultiple(string $name)
+ * @method BodyElement addElement(BodyElement $element)
  */
 class ODKForm extends Tag
 {
