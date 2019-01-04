@@ -15,24 +15,46 @@ use Angujo\OpenRosaPhp\Models\Elements\Bind;
 class Repeat extends ControlHolder
 {
     protected $no_ref;
-
-    protected function __construct($name = null)
+    /** @var \Angujo\OpenRosaPhp\Models\Group */
+    protected $group;
+    private   $rpt_xpath;
+    private   $lbl_rpt;
+    
+    protected function __construct($name = NULL)
     {
-        $name = $name ?: uniqid('ch', false);
-        parent::__construct(Elmt::REPEAT, $name);
+        $this->rpt_xpath = $name ?: uniqid('ch', FALSE);
+        parent::__construct(Elmt::REPEAT, $this->rpt_xpath);
     }
-
+    
+    public function &getGroup()
+    {
+        if ($this->group) return $this->group;
+        $this->group = Group::forRepeat($this->rpt_xpath);
+        if ($this->lbl_rpt) $this->group->setLabel($this->lbl_rpt);
+        $this->group->addElement($this);
+        return $this->group;
+    }
+    
+    public function setLabel($label)
+    {
+        $this->lbl_rpt = $label;
+        $this->getGroup()->setLabel($label);
+        return $this;
+    }
+    
     /**
      * @param null|string $name
+     *
      * @return Repeat
      */
-    public static function create($name = null)
+    public static function create($name = NULL)
     {
         return new self($name);
     }
-
+    
     /**
      * @param int $times
+     *
      * @return $this
      */
     public function count($times)

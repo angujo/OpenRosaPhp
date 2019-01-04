@@ -19,7 +19,7 @@ abstract class OptionBased extends ControlElement
 {
     /** @var Item[] */
     protected $options = [];
-
+    
     /**
      * @return Item[]
      */
@@ -27,7 +27,7 @@ abstract class OptionBased extends ControlElement
     {
         return $this->getTags(Item::class);
     }
-
+    
     /**
      * @return Item[]
      */
@@ -35,33 +35,37 @@ abstract class OptionBased extends ControlElement
     {
         return $this->getOptions();
     }
-
+    
     /**
      * @param string $label
      * @param string $value
+     *
      * @return Label
      */
     public function setItem($label, $value)
     {
         return $this->addOption($label, $value);
     }
-
+    
     /**
      * @param string $label
      * @param string $value
+     *
      * @return Label
      */
     public function addOption($label, $value)
     {
+        if (NULL === $value || '' === trim($value)) return NULL;
         /** @var Item $option */
         if (!($option = $this->getUniqueTag($value))) {
             $option = $this->identifiedTag(Item::asOption($this->getPath(), $label, $value), $value);
         }
-        if(null===$option->getLabel()->getIndex()){
+        if (NULL === $option->getLabel()->getIndex()) {
             $option->getLabel()->setIndex(\count($this->getOptions()));
         }
         return $option->getLabel();
     }
+    
     public function parentPath(array $xpath)
     {
         parent::parentPath($xpath);

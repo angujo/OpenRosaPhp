@@ -30,7 +30,7 @@ use Angujo\OpenRosaPhp\Models\Repeat;
  * @method $this setVersion(string $version)
  * @method $this setId(string $id)
  * @method Group group(string $name)
- * @method Repeat repeat(string $name,string $label)
+ * @method Repeat repeat(string $name,string $label=null)
  * @method InputText inputText(string $name)
  * @method InputNumber inputDecimal(string $name)
  * @method InputNumber inputInteger(string $name)

@@ -9,7 +9,6 @@
 namespace Angujo\OpenRosaPhp\Models;
 
 
-use Angujo\OpenRosaPhp\Libraries\Elmt;
 use Angujo\OpenRosaPhp\Libraries\Tag;
 use Angujo\OpenRosaPhp\Models\Controls\InputDateTime;
 use Angujo\OpenRosaPhp\Models\Controls\InputNumber;
@@ -28,6 +27,11 @@ class ControlHolder extends BodyElement
     
     private function silenceElement(BodyElement $element)
     {
+        if (is_a($element, Repeat::class) && !(is_a($this, Group::class) && TRUE === $this->hold_repeat)) {
+            /** @var \Angujo\OpenRosaPhp\Models\Repeat $element */
+            $this->silenceElement($element->getGroup());
+            return $element;
+        }
         $element->parentPath($this->getXpath());
         $this->setTag($element);
         $element->register();
@@ -54,11 +58,8 @@ class ControlHolder extends BodyElement
     public function repeat($name, $label = NULL)
     {
         $rpt = Repeat::create($name);
-        /** @var \Angujo\OpenRosaPhp\Models\Group $grp */
-        $grp = Group::forRepeat($name);
-        if ($label) $grp->setLabel($label);
-        $this->silenceElement($grp);
-        $grp->addElement($rpt);
+        if ($label) $rpt->setLabel($label);
+        $this->silenceElement($rpt->getGroup());
         return $rpt;
     }
     
