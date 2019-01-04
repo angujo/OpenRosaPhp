@@ -28,9 +28,7 @@ class Repeat extends ControlHolder
      */
     public static function create($name = null)
     {
-        $group = Group::create();
-        $group->setUniqueTag(new self($name));
-        return $group;
+        return new self($name);
     }
 
     /**

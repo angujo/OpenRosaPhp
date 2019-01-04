@@ -30,14 +30,14 @@ class Tag
     protected $value;
     /** @var Tag[] */
     protected $tags = [];
-
-
-    protected function __construct($name, $value=null)
+    
+    
+    protected function __construct($name, $value = NULL)
     {
         $this->setName($name);
         $this->setValue($value);
     }
-
+    
     /**
      * @return string
      */
@@ -45,9 +45,10 @@ class Tag
     {
         return $this->namespace;
     }
-
+    
     /**
      * @param string $namespace
+     *
      * @return Tag
      */
     protected function setNamespace(string $namespace): Tag
@@ -56,20 +57,27 @@ class Tag
         if (Config::isOdk()) Ns::collect($this->namespace);
         return $this;
     }
-
+    
     /**
      * @param null|string $className
+     *
      * @return Tag[]
      */
-    public function getTags($className = null): array
+    public function getTags($className = NULL): array
     {
-        return $className && \is_string($className) && class_exists($className, false) ? array_filter(
-            array_map(function ($tag) use ($className) { return is_a($tag, $className) ? $tag : null; }, $this->tags)
+        return $className && \is_string($className) && class_exists($className, FALSE) ? array_filter(
+            array_map(function ($tag) use ($className) { return is_a($tag, $className) ? $tag : NULL; }, $this->tags)
         ) : $this->tags;
     }
-
+    
+    public function setGetTag(Tag $tag)
+    {
+       return $this->tags[$tag->getName()] ?? $this->setTag($tag);
+    }
+    
     /**
      * @param Tag[] $tags
+     *
      * @return Tag
      */
     public function setTags(array $tags): Tag
@@ -77,9 +85,10 @@ class Tag
         $this->tags = [];
         return $this->appendTags($tags);
     }
-
+    
     /**
      * @param array $tags
+     *
      * @return $this
      */
     public function appendTags(array $tags)
@@ -90,10 +99,11 @@ class Tag
         }
         return $this;
     }
-
+    
     /**
      * @param string $name
      * @param string $value
+     *
      * @return Tag
      */
     public function addTag($name, $value)
@@ -101,35 +111,36 @@ class Tag
         $this->tags[] = $tag = self::raw($name, $value);
         return $tag;
     }
-
+    
     public function identifiedTag(Tag $tag, $id)
     {
         $this->tags[$id] = $tag;
         return $tag;
     }
-
+    
     public function addUniqueTag($name, $value)
     {
         $this->tags[$name] = $tag = self::raw($name, $value);
         return $tag;
     }
-
+    
     public function addNSUniqueTag($namespace, $name, $value)
     {
         $this->tags[$namespace . $name] = $tag = self::raw($name, $value)->setNamespace($namespace);
         return $tag;
     }
-
+    
     /**
      * @return Tag
      */
     public function getUniqueTag($name)
     {
-        return $this->tags[$name] ?? null;
+        return $this->tags[$name] ?? NULL;
     }
-
+    
     /**
      * @param Tag $tag
+     *
      * @return Tag
      */
     public function setTag(Tag $tag)
@@ -137,9 +148,10 @@ class Tag
         $this->tags[] = $tag;
         return $tag;
     }
-
+    
     /**
      * @param Tag $tag
+     *
      * @return Tag
      */
     public function setUniqueTag(Tag $tag)
@@ -147,22 +159,23 @@ class Tag
         $this->tags[$tag->getName()] = $tag;
         return $tag;
     }
-
+    
     /**
      * @param $name
      * @param $value
+     *
      * @return Tag
      */
     public static function raw($name, $value)
     {
         return new self($name, $value);
     }
-
+    
     public static function empty($name)
     {
-        return new self($name, null);
+        return new self($name, NULL);
     }
-
+    
     /**
      * @return mixed
      */
@@ -170,9 +183,10 @@ class Tag
     {
         return $this->name;
     }
-
+    
     /**
      * @param mixed $name
+     *
      * @return Tag
      */
     private function setName($name)
@@ -180,12 +194,12 @@ class Tag
         $this->name = $name;
         return $this;
     }
-
+    
     public function changeName($name)
     {
         return $this->setName($name);
     }
-
+    
     /**
      * @return Attribute[]
      */
@@ -193,9 +207,10 @@ class Tag
     {
         return $this->attributes;
     }
-
+    
     /**
      * @param Attribute[] $attributes
+     *
      * @return Tag
      */
     public function setAttributes(array $attributes)
@@ -206,31 +221,34 @@ class Tag
         }
         return $this;
     }
-
+    
     /**
      * @param $name
      * @param $value
+     *
      * @return $this
      */
     public function setAttribute($name, $value)
     {
         return $this->addAttribute($name, $value);
     }
-
+    
     /**
      * @param $namespace
      * @param $name
      * @param $value
+     *
      * @return $this
      */
     public function setNSAttribute($namespace, $name, $value)
     {
         return $this->addNSAttribute($namespace, $name, $value);
     }
-
+    
     /**
      * @param $name
      * @param $value
+     *
      * @return $this
      */
     public function addAttribute($name, $value)
@@ -238,11 +256,12 @@ class Tag
         $this->attributes[$name] = Attribute::create($name, $value);
         return $this;
     }
-
+    
     /**
      * @param $namespace
      * @param $name
      * @param $value
+     *
      * @return $this
      */
     public function addNSAttribute($namespace, $name, $value)
@@ -250,7 +269,7 @@ class Tag
         $this->attributes[$namespace . $name] = Attribute::namespaced($namespace, $name, $value);
         return $this;
     }
-
+    
     /**
      * @return mixed
      */
@@ -258,9 +277,10 @@ class Tag
     {
         return $this->value;
     }
-
+    
     /**
      * @param mixed $value
+     *
      * @return Tag
      */
     public function setValue($value)
@@ -268,12 +288,13 @@ class Tag
         $this->value = $value;
         return $this;
     }
-
+    
     /**
      * @param \XMLWriter|null $xmlwriter
+     *
      * @return string|\XMLWriter
      */
-    public function XMLify($xmlwriter = null)
+    public function XMLify($xmlwriter = NULL)
     {
         $continue = $xmlwriter && \is_object($xmlwriter) && is_a($xmlwriter, \XMLWriter::class);
         /** @var \XMLWriter $writer */
@@ -283,13 +304,13 @@ class Tag
             $writer->startDocument();
         }
         if ($this->namespace) {
-            $writer->startElementNS($this->namespace, $this->name, null);
+            $writer->startElementNS($this->namespace, $this->name, NULL);
         } else {
             $writer->startElement($this->name);
         }
         foreach ($this->attributes as $attribute) {
             if ($attribute->getNamespace()) {
-                $writer->writeAttributeNS($attribute->getNamespace(), $attribute->getName(), null, $attribute->getValue());
+                $writer->writeAttributeNS($attribute->getNamespace(), $attribute->getName(), NULL, $attribute->getValue());
             } else {
                 $writer->writeAttribute($attribute->getName(), $attribute->getValue());
             }
@@ -300,8 +321,8 @@ class Tag
                 if ($uri = Ns::uri($ns)) $writer->writeAttributeNS('xmlns', $ns, null, $uri);
             }*/
             if (Ns::getCollection()) $writer->writeAttribute('xmlns', Ns::XMLNS);
-            foreach (Ns::getCollection() as $ns=>$uri) {
-                $writer->writeAttributeNS('xmlns', $ns, null, $uri);
+            foreach (Ns::getCollection() as $ns => $uri) {
+                $writer->writeAttributeNS('xmlns', $ns, NULL, $uri);
             }
         }
         if (!$this->tags) {
@@ -323,7 +344,7 @@ class Tag
         }
         return $writer;
     }
-
+    
     /*public function collectNameSpaces()
     {
         $nsCollector = [];
@@ -351,5 +372,5 @@ class Tag
             }
         }
     }*/
-
+    
 }

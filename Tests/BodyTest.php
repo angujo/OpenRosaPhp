@@ -134,6 +134,11 @@ class BodyTest
         /** @var \Angujo\OpenRosaPhp\Models\Controls\InputText $job */
         $job = $form->addElement(\Angujo\OpenRosaPhp\Models\Controls\InputText::text('job'));
         $job->label('Job');
+        
+        $repeat=$form->repeat('siblings','Siblings');
+       // var_dump(get_class($repeat));die;
+        $repeat->inputText('name')->label('Names');
+        $repeat->inputText('aged')->label('Age in Years');
 
         $cities = $form->selectMultiple('cities');
         $cities->label('Cities');
@@ -205,7 +210,7 @@ class BodyTest
         /** @var \Angujo\OpenRosaPhp\Models\Body $body */
         $body = \Angujo\OpenRosaPhp\Models\Body::create();
         $group1 = $body->group('group1');
-        $group1->repeat('repeater')->count(2);
+        $group1->repeat('repeater','OK')->count(2);
         $group1->inputText('fname')->label('First Name');
         echo $body->XMLify();
     }

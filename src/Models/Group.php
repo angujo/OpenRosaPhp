@@ -16,20 +16,34 @@ use Angujo\OpenRosaPhp\Models\Elements\Label;
 class Group extends ControlHolder
 {
     protected $no_ref;
-
-    protected function __construct($name = null)
+    public $hold_repeat = FALSE;
+    
+    protected function __construct($name = NULL)
     {
-        $name = $name ?: uniqid('ch', false);
+        $name = $name ?: uniqid('ch', FALSE);
         parent::__construct(Elmt::GROUP, $name);
     }
-
-    public static function create($name = null)
+    
+    public static function create($name = NULL)
     {
         return new self($name);
     }
-
+    
+    /**
+     * @param $name
+     *
+     * @return \Angujo\OpenRosaPhp\Libraries\Tag|\Angujo\OpenRosaPhp\Models\Repeat
+     */
+    public static function forRepeat($name)
+    {
+        $me              = self::create($name);
+        $me->hold_repeat = TRUE;
+       return $me;//->setUniqueTag(Repeat::create($name));
+    }
+    
     /**
      * @param $value
+     *
      * @return Label|Tag
      */
     public function setLabel($value)

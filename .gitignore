@@ -1,2 +1,6 @@
 vendor/
 .vscode/
+Tests/log
+.ignore
+.idea/
+log/

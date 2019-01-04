@@ -20,12 +20,12 @@ use Angujo\OpenRosaPhp\Models\Controls\Upload;
 
 class ControlHolder extends BodyElement
 {
-
+    
     public function addElement(BodyElement $tag)
     {
         return $this->silenceElement($tag);
     }
-
+    
     private function silenceElement(BodyElement $element)
     {
         $element->parentPath($this->getXpath());
@@ -33,182 +33,209 @@ class ControlHolder extends BodyElement
         $element->register();
         return $element;
     }
-
+    
     /**
      * @param $name
+     *
      * @return Tag|Group
      */
     public function group($name)
     {
         return $this->silenceElement(Group::create($name));
     }
-
+    
     /**
      * @param $name
+     *
+     * @param $label
+     *
      * @return Tag|Repeat
      */
-    public function repeat($name)
+    public function repeat($name, $label = NULL)
     {
-        $gr = $this->silenceElement(Repeat::create($name));
-        return $gr->getUniqueTag(Elmt::REPEAT);
+        $rpt = Repeat::create($name);
+        /** @var \Angujo\OpenRosaPhp\Models\Group $grp */
+        $grp = Group::forRepeat($name);
+        if ($label) $grp->setLabel($label);
+        $this->silenceElement($grp);
+        $grp->addElement($rpt);
+        return $rpt;
     }
-
+    
     /**
      * @param $name
+     *
      * @return InputText|Tag
      */
     public function inputText($name)
     {
         return $this->silenceElement(InputText::text($name));
     }
-
+    
     /**
      * @param $name
+     *
      * @return InputText|Tag
      */
     public function inputMultiline($name)
     {
         return $this->silenceElement(InputText::multiline($name));
     }
-
+    
     /**
      * @param $name
+     *
      * @return InputNumber
      */
     public function inputDecimal($name)
     {
         return $this->silenceElement(InputNumber::decimal($name));
     }
-
+    
     /**
      * @param $name
+     *
      * @return InputNumber
      */
     public function inputInteger($name)
     {
         return $this->silenceElement(InputNumber::integer($name));
     }
-
+    
     /**
      * @param $name
+     *
      * @return Tag|Upload
      */
     public function uploadImage($name)
     {
         return $this->silenceElement(Upload::image($name));
     }
-
+    
     /**
      * @param $name
+     *
      * @return Tag|Upload
      */
     public function uploadVideo($name)
     {
         return $this->silenceElement(Upload::video($name));
     }
-
+    
     /**
      * @param $name
+     *
      * @return Tag|Upload
      */
     public function uploadAudio($name)
     {
         return $this->silenceElement(Upload::audio($name));
     }
-
+    
     /**
      * @param $name
+     *
      * @return Tag|Upload
      */
     public function uploadFile($name)
     {
         return $this->silenceElement(Upload::file($name));
     }
-
+    
     /**
      * @param $name
+     *
      * @return Tag|Upload
      */
     public function barcode($name)
     {
         return $this->silenceElement(Upload::barcode($name));
     }
-
+    
     /**
-     * @param $name
+     * @param       $name
      * @param array $mimes
+     *
      * @return Tag|Upload
      */
     public function uploadCustom($name, array $mimes)
     {
         return $this->silenceElement(Upload::custom($name, $mimes));
     }
-
+    
     /**
      * @param $name
+     *
      * @return Tag|InputDateTime
      */
     public function dateYearMonth($name)
     {
         return $this->silenceElement(InputDateTime::yearMonth($name));
     }
-
+    
     /**
      * @param $name
+     *
      * @return Tag|InputDateTime
      */
     public function dateYear($name)
     {
         return $this->silenceElement(InputDateTime::year($name));
     }
-
+    
     /**
      * @param $name
+     *
      * @return Tag|InputDateTime
      */
     public function dateFull($name)
     {
         return $this->silenceElement(InputDateTime::fullDate($name));
     }
-
+    
     /**
      * @param $name
+     *
      * @return Tag|InputDateTime
      */
     public function time($name)
     {
         return $this->silenceElement(InputDateTime::time($name));
     }
-
+    
     /**
      * @param $name
+     *
      * @return Tag|Select1
      */
     public function selectOne($name)
     {
         return $this->silenceElement(Select1::create($name));
     }
-
+    
     /**
      * @param $name
+     *
      * @return Tag|Select1
      */
     public function selectOneLikert($name)
     {
         return $this->silenceElement(Select1::likert($name));
     }
-
+    
     /**
      * @param $name
+     *
      * @return Tag|Select1
      */
     public function selectOneQuick($name)
     {
         return $this->silenceElement(Select1::quick($name));
     }
-
+    
     /**
      * @param $name
+     *
      * @return Tag|Select
      */
     public function selectMultiple($name)

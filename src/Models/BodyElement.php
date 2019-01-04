@@ -30,57 +30,57 @@ class BodyElement extends Tag
     protected $bind;
     /** @var Element|null */
     protected $element;
-
-    protected $registered = false;
-
+    
+    protected $registered = FALSE;
+    
     protected function __construct($name, $path)
     {
-        parent::__construct($name, null);
+        parent::__construct($name, NULL);
         $this->path = $this->old_path = Helper::xmlName($path);
-        $this->id = uniqid('elm', true);
+        $this->id   = uniqid('elm', TRUE);
         $this->setPath();
     }
-
+    
     public function isRegistered()
     {
         return $this->registered;
     }
-
+    
     public function register()
     {
-        $this->registered = true;
+        $this->registered = TRUE;
         //if (Binds::get($this->id)) Binds::get($this->id)->setRegistered($this->registered);
     }
-
+    
     private function setBind()
     {
         //if (Config::isOdk() && Binds::get($this->id)) Binds::get($this->id)->nodeset($this->getPath());
         if ($this->bind && Config::isOdk()) $this->bind->nodeset($this->getPath());
     }
-
+    
     /**
      * @return array
      */
     public function getXpath(): array
     {
-        return array_merge($this->xpath, [$this->path]);
+        return !is_a($this, Repeat::class) ? array_merge($this->xpath, [$this->path]) : $this->xpath;
     }
-
+    
     /**
      * @return mixed
      */
     public function getPath()
     {
         $xpath = $this->xpath;
-        $xpath[] = $this->path;
+        if (!is_a($this, Repeat::class)) $xpath[] = $this->path;
         return '/' . implode('/', $xpath);
     }
-
+    
     public function getBasePath()
     {
         return $this->path;
     }
-
+    
     /**
      * @return BodyElement
      */
@@ -89,19 +89,19 @@ class BodyElement extends Tag
         $this->setXpath();
         return $this;
     }
-
+    
     public function parentPath(array $xpath)
     {
         $this->old_path = $this->getPath();
-        $this->xpath = array_filter($xpath, 'trim');
+        $this->xpath    = array_filter($xpath, 'trim');
         $this->setXpath();
         return $this;
     }
-
+    
     private function setXpath()
     {
-        if (Config::isOdk()) Elements::changeName($this->old_path, $this->getPath(), method_exists($this, 'getDefaultValue') ? $this->getDefaultValue() : null);
-        if (!property_exists($this, 'no_ref')) $this->setAttribute('ref', $this->getPath());
+        if (Config::isOdk()) Elements::changeName($this->old_path, $this->getPath(), method_exists($this, 'getDefaultValue') ? $this->getDefaultValue() : NULL);
+        if (!property_exists($this, 'no_ref') || (property_exists($this, 'hold_repeat') && true===$this->hold_repeat)) $this->setAttribute('ref', $this->getPath());
         if (is_a($this, Repeat::class)) $this->setAttribute('nodeset', $this->getPath());
         $this->setBind();
         /** @var BodyElement|Translatable $tag */
