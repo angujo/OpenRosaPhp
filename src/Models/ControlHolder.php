@@ -19,7 +19,6 @@ use Angujo\OpenRosaPhp\Models\Controls\Upload;
 
 class ControlHolder extends BodyElement
 {
-    
     public function addElement(BodyElement $tag)
     {
         return $this->silenceElement($tag);

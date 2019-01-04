@@ -72,7 +72,7 @@ class Tag
     
     public function setGetTag(Tag $tag)
     {
-       return $this->tags[$tag->getName()] ?? $this->setTag($tag);
+        return $this->tags[$tag->getName()] ?? $this->setTag($tag);
     }
     
     /**
@@ -271,6 +271,31 @@ class Tag
     }
     
     /**
+     * @param $name
+     * @param $value
+     *
+     * @return \Angujo\OpenRosaPhp\Libraries\Attribute
+     */
+    public function _addAttribute($name, $value)
+    {
+        $this->addAttribute($name, $value);
+        return $this->attributes[$name];
+    }
+    
+    /**
+     * @param $namespace
+     * @param $name
+     * @param $value
+     *
+     * @return \Angujo\OpenRosaPhp\Libraries\Attribute
+     */
+    public function _addNSAttribute($namespace, $name, $value)
+    {
+        $this->addNSAttribute($namespace, $name, $value);
+        return $this->attributes[$namespace . $name];
+    }
+    
+    /**
      * @return mixed
      */
     public function getValue()
@@ -309,6 +334,7 @@ class Tag
             $writer->startElement($this->name);
         }
         foreach ($this->attributes as $attribute) {
+            if ($attribute->ignore()) continue;
             if ($attribute->getNamespace()) {
                 $writer->writeAttributeNS($attribute->getNamespace(), $attribute->getName(), NULL, $attribute->getValue());
             } else {

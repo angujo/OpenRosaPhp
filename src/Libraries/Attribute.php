@@ -17,33 +17,37 @@ class Attribute
     protected $namespace;
     /** @var string */
     protected $value;
-
-    private function __construct($name, $value, $ns = null)
+    
+    protected $ignored = FALSE;
+    
+    private function __construct($name, $value, $ns = NULL)
     {
         $this->setName($name)->setValue($value)->setNamespace($ns);
     }
-
+    
     /**
      * @param string $namespace
      * @param string $name
      * @param string $value
+     *
      * @return Attribute
      */
     public static function namespaced($namespace, $name, $value)
     {
         return new self($name, $value, $namespace);
     }
-
+    
     /**
      * @param string $name
      * @param string $value
+     *
      * @return Attribute
      */
     public static function create($name, $value)
     {
         return new self($name, $value);
     }
-
+    
     /**
      * @return string
      */
@@ -51,9 +55,10 @@ class Attribute
     {
         return $this->name;
     }
-
+    
     /**
      * @param string $name
+     *
      * @return Attribute
      */
     public function setName($name)
@@ -61,7 +66,14 @@ class Attribute
         $this->name = $name;
         return $this;
     }
-
+    
+    public function ignore($yesno = NULL)
+    {
+        if (NULL === $this->ignored) return $this->ignored;
+        $this->ignored = (bool)$yesno;
+        return $this;
+    }
+    
     /**
      * @return string
      */
@@ -69,9 +81,10 @@ class Attribute
     {
         return $this->namespace;
     }
-
+    
     /**
      * @param string $namespace
+     *
      * @return Attribute
      */
     public function setNamespace($namespace)
@@ -80,7 +93,7 @@ class Attribute
         Ns::collect($this->namespace);
         return $this;
     }
-
+    
     /**
      * @return string
      */
@@ -88,9 +101,10 @@ class Attribute
     {
         return $this->value;
     }
-
+    
     /**
      * @param string $value
+     *
      * @return Attribute
      */
     public function setValue($value)
