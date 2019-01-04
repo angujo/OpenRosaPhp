@@ -63,6 +63,19 @@ class Http extends Authenticate
         self::posted($getData, $file_name);
     }
 
+    public static function transaction(\Closure $closure, $msg = 'Entry successful!')
+    {
+        try {
+            if (is_callable($closure)) $closure();
+            echo Response::success($msg)->asXML();
+        } catch (\Throwable $throwable) {
+            echo Response::error($throwable->getCode() . ': ' . $throwable->getMessage())->asXML();
+            Log::error($throwable->getTraceAsString());
+        } finally {
+            exit;
+        }
+    }
+
     protected static function inHead()
     {
         header('HTTP/1.1 204 No Content');

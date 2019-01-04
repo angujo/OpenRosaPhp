@@ -9,8 +9,8 @@
 namespace Angujo\OpenRosaPhp\Access;
 
 use Angujo\OpenRosaPhp\Libraries\Elmt;
-use Angujo\OpenRosaPhp\Libraries\Tag;
 use Angujo\OpenRosaPhp\Libraries\Ns;
+use Angujo\OpenRosaPhp\Libraries\Tag;
 
 class Response extends Tag
 {
@@ -40,6 +40,19 @@ class Response extends Tag
     protected static function init($msg, $status = true)
     {
         return self::$me = self::$me ?: new self($msg, $status);
+    }
+
+    /**
+     * @param $message
+     * @param int $code
+     * @param string $codeTitle
+     */
+    public static function http($message, $code = 200, $codeTitle = 'OK')
+    {
+        header("HTTP/1.1 $code $codeTitle");
+        if ($code >= 300) echo self::error($message)->asXML();
+        else echo self::success($message)->asXML();
+        exit;
     }
 
     /**

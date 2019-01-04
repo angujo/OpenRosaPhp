@@ -128,6 +128,9 @@ class BodyTest
         $age->label('Age');
         $age->range(18, 45, true, 'Should be a youth!');
 
+        $salary=$form->inputDecimal('salary');
+        $salary->label('Salary');
+
         $cities = $form->selectMultiple('cities');
         $cities->label('Cities');
         $cities->addOption('Nakuru', 'nx');
