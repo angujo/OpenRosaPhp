@@ -101,7 +101,7 @@ class BodyElement extends Tag
     private function setXpath()
     {
         if (Config::isOdk()) Elements::changeName($this->old_path, $this->getPath(), method_exists($this, 'getDefaultValue') ? $this->getDefaultValue() : NULL);
-        $this->_addAttribute('ref', $this->getPath())->ignore(property_exists($this, 'no_ref') || !(property_exists($this, 'hold_repeat') && TRUE === $this->hold_repeat));
+        $this->_addAttribute('ref', $this->getPath())->ignore(property_exists($this, 'no_ref') && (!property_exists($this, 'hold_repeat') || FALSE === $this->hold_repeat));
         if (is_a($this, Repeat::class)) $this->setAttribute('nodeset', $this->getPath());
         $this->setBind();
         /** @var BodyElement|Translatable $tag */
