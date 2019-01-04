@@ -305,7 +305,7 @@ class Tag
             }
         }
         if (!$this->tags) {
-            if ($this->value) {
+            if (strlen($this->value)) {
                 if (is_a($this, Translatable::class) && method_exists($this, 'getIdPath')) {
                     $writer->writeAttribute('ref', 'jr:itext(\'' . $this->getIdPath() . '\')');
                 }
