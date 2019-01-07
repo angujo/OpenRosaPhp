@@ -12,8 +12,8 @@ require 'BodyTest.php';
 
 $btest = new BodyTest();
 //$btest->odkform();
-if (isset($_GET['form'])) {
-  $btest->odkform();
-}else{
+//if (isset($_GET['form'])) {
+  $btest->groupForm();
+/*}else{
   $btest->odkformlist();
-}
+}*/

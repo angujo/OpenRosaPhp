@@ -18,6 +18,8 @@ class BodyTest
         });*/
         header('X-OpenRosa-Version:1.0');
         header('Content-Type:text/xml');
+        
+        //\Angujo\OpenRosaPhp\Http::validateUser(function ($username) { return 'does'; });
     }
     
     public static function byteconvert($input)
@@ -106,12 +108,29 @@ class BodyTest
         fclose($fp);
     }
     
+    public function groupForm()
+    {
+        $form = new ODKForm();
+        $form->setTitle('build_999911');
+        $form->dataElement('data');
+        $form->setId('build_Untitled-Form_154402011');
+        
+        $group = $form->group('basic');
+        $group->setLabel('Basic Details');
+        //\Angujo\OpenRosaPhp\Http::formOutput($form);
+        echo $form->asXML();exit;
+    }
+    
     public function odkform()
     {
         $form = new ODKForm();
         $form->setTitle('build_999911');
         $form->dataElement('data');
         $form->setId('build_Untitled-Form_154402011');
+        
+        $group = $form->group('joined');
+        $group->setLabel('MyTester');
+        $group->inputText('fnamed')->label('F Named');
         
         $gender = $form->selectOne('sex');
         $gender->label('Sex');
@@ -135,7 +154,7 @@ class BodyTest
         $job = $form->addElement(\Angujo\OpenRosaPhp\Models\Controls\InputText::text('job'));
         $job->label('Job');
         
-        $repeat =\Angujo\OpenRosaPhp\Models\Repeat::create('sibler');// $form->repeat('siblings');
+        $repeat = \Angujo\OpenRosaPhp\Models\Repeat::create('sibler');// $form->repeat('siblings');
         $form->addElement($repeat);
         $repeat->inputText('name')->label('Names');
         $repeat->inputText('aged')->label('Age in Years');

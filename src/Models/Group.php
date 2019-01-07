@@ -16,7 +16,7 @@ use Angujo\OpenRosaPhp\Models\Elements\Label;
 class Group extends ControlHolder
 {
     protected $no_ref;
-    public $hold_repeat = FALSE;
+    public    $hold_repeat = FALSE;
     
     protected function __construct($name = NULL)
     {
@@ -38,7 +38,7 @@ class Group extends ControlHolder
     {
         $me              = self::create($name);
         $me->hold_repeat = TRUE;
-       return $me;//->setUniqueTag(Repeat::create($name));
+        return $me;
     }
     
     /**
@@ -48,6 +48,9 @@ class Group extends ControlHolder
      */
     public function setLabel($value)
     {
-        return $this->setUniqueTag(Label::create($value));
+        /** @var Label $label */
+        $label = $this->setUniqueTag(Label::create($value));
+        $label->setIdPath($this->getPath());
+        return $label;
     }
 }
