@@ -45,6 +45,11 @@ class Bind extends Tag
         $this->constraint = &$constraint;
         return $this;
     }
+    
+    public function setRelevance($relevance)
+    {
+        $this->setAttribute('relevant', $relevance);
+    }
 
     /**
      * @return bool

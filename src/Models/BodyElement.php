@@ -12,6 +12,7 @@ namespace Angujo\OpenRosaPhp\Models;
 use Angujo\OpenRosaPhp\Libraries\Element;
 use Angujo\OpenRosaPhp\Libraries\Elements;
 use Angujo\OpenRosaPhp\Libraries\Tag;
+use Angujo\OpenRosaPhp\Libraries\Xpath;
 use Angujo\OpenRosaPhp\Models\Elements\Bind;
 use Angujo\OpenRosaPhp\Models\Elements\Translatable;
 use Angujo\OpenRosaPhp\Utils\Helper;
@@ -109,5 +110,6 @@ class BodyElement extends Tag
             if (is_a($tag, __CLASS__)) $tag->parentPath($this->getXpath());
             if (is_a($tag, Translatable::class)) $tag->setIdPath($this->getPath());
         }
+        Xpath::setPath($this->getPath());
     }
 }
