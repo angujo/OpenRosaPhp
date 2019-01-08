@@ -50,12 +50,10 @@ class BodyElement extends Tag
     public function register()
     {
         $this->registered = TRUE;
-        //if (Binds::get($this->id)) Binds::get($this->id)->setRegistered($this->registered);
     }
     
     private function setBind()
     {
-        //if (Config::isOdk() && Binds::get($this->id)) Binds::get($this->id)->nodeset($this->getPath());
         if ($this->bind && Config::isOdk()) $this->bind->nodeset($this->getPath());
     }
     
