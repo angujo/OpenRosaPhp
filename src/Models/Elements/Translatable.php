@@ -79,7 +79,10 @@ class Translatable extends Tag
      */
     public function language(\Closure $closure)
     {
-        if (\is_callable($closure)) $closure($this->language);
+        if (\is_callable($closure)){
+            $closure($this->language);
+            $this->language->changePaths($this->getIdPath());
+        }
         return $this;
     }
 
