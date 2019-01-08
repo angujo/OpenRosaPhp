@@ -166,7 +166,7 @@ class Language
     
     public function isDefault()
     {
-        return 0 === strcmp(self::DEF_ABBR, $this->iso_abbreviation);
+        return 0 === strcasecmp(self::DEF_ABBR, $this->iso_abbreviation);
     }
     
     /**
