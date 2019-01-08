@@ -158,15 +158,21 @@ class Language
     protected $iso_abbreviation;
     /** @var Language[] */
     private static $langs = [];
-
+    
     private function __construct()
     {
-
+    
     }
-
+    
+    public function isDefault()
+    {
+        return 0 === strcmp(self::DEF_ABBR, $this->iso_abbreviation);
+    }
+    
     /**
      * @param $method
      * @param $args
+     *
      * @return Language|null
      */
     public static function __callStatic($method, $args)
@@ -174,20 +180,22 @@ class Language
         if ($language = Data::languages($method)) self::$langs[$language->getIsoAbbreviation()] = $language;
         return $language;
     }
-
+    
     /**
      * @param $abbreviation
      * @param $name
+     *
      * @return Language
      */
     public static function init($abbreviation, $name)
     {
         return (new self())->setIsoAbbreviation($abbreviation)->setName($name);
     }
-
+    
     /**
      * @param $abbreviation
      * @param $name
+     *
      * @return Language
      */
     public static function create($abbreviation, $name)
@@ -195,32 +203,34 @@ class Language
         if (isset(self::$langs[$abbreviation])) return self::$langs[$abbreviation];
         return self::$langs[$abbreviation] = (new self())->setName($name)->setIsoAbbreviation($abbreviation);
     }
-
+    
     /**
      * @param $abbreviation
      * @param $name
+     *
      * @return Language
      */
     public static function add($abbreviation, $name)
     {
         return self::create($abbreviation, $name);
     }
-
+    
     public static function set(Language $language)
     {
         self::$langs[$language->getIsoAbbreviation()] = $language;
         return $language;
     }
-
+    
     /**
      * @param string $abbreviation
+     *
      * @return Language|null
      */
     public static function get($abbreviation)
     {
-        return self::$langs[$abbreviation] ?? null;
+        return self::$langs[$abbreviation] ?? NULL;
     }
-
+    
     /**
      * @return Language[]
      */
@@ -228,7 +238,7 @@ class Language
     {
         return self::$langs;
     }
-
+    
     /**
      * @return string
      */
@@ -236,9 +246,10 @@ class Language
     {
         return $this->name;
     }
-
+    
     /**
      * @param string $name
+     *
      * @return Language
      */
     public function setName($name)
@@ -246,7 +257,7 @@ class Language
         $this->name = $name;
         return $this;
     }
-
+    
     /**
      * @return string
      */
@@ -254,9 +265,10 @@ class Language
     {
         return $this->iso_abbreviation;
     }
-
+    
     /**
      * @param string $iso_abbreviation
+     *
      * @return Language
      */
     public function setIsoAbbreviation($iso_abbreviation)
