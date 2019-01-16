@@ -26,7 +26,8 @@ class Submission extends Tag
     protected function __construct($url, $encryption = null)
     {
         parent::__construct(Elmt::SUBMISSION, null);
-        $this->addAttribute('action', 'post');
+        $this->addAttribute('action', $url);
+        $this->addAttribute('method', 'post');
         $this->setEncryption($encryption);
     }
 

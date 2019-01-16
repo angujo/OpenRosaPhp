@@ -114,13 +114,15 @@ class BodyTest
         $form->setTitle('build_999911');
         $form->dataElement('data');
         $form->setId('build_Untitled-Form_154402011');
+        $form->submission(self::getBaseUrl('/Submission-here'));
         \Angujo\OpenRosaPhp\Libraries\Language::create('ks', 'Kiswahili');
         $group = $form->group('basic');
-        $group->setLabel('Basic Details')->language(function (\Angujo\OpenRosaPhp\Models\Controls\LanguageTranslator $translator){
+        $group->setLabel('Basic Details')->language(function (\Angujo\OpenRosaPhp\Models\Controls\LanguageTranslator $translator) {
             $translator->custom('ks', 'Kwa Kiswahili');
         });
         //\Angujo\OpenRosaPhp\Http::formOutput($form);
-        echo $form->asXML();exit;
+        echo $form->asXML();
+        exit;
     }
     
     public function odkform()

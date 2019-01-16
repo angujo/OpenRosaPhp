@@ -79,7 +79,13 @@ class Model extends Tag
     {
         return $this->appendTags(Binds::all());
     }
-
+    
+    /**
+     * @param      $url
+     * @param null $encryption
+     *
+     * @return \Angujo\OpenRosaPhp\Libraries\Tag|Submission
+     */
     public function submission($url,$encryption=null)
     {
         return $this->setUniqueTag(Submission::post($url,$encryption));
