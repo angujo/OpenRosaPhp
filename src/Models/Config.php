@@ -11,7 +11,7 @@ namespace Angujo\OpenRosaPhp\Models;
 
 class Config
 {
-    public const DEF = 'odk';
+const DEF = 'odk';
 
     public static function isOdk()
     {

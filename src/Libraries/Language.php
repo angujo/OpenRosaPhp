@@ -150,8 +150,8 @@ namespace Angujo\OpenRosaPhp\Libraries;
  */
 class Language
 {
-    public const DEF_ABBR = 'en';
-    public const DEF_NAME = 'English';
+const DEF_ABBR = 'en';
+const DEF_NAME = 'English';
     /** @var string */
     protected $name;
     /** @var string */

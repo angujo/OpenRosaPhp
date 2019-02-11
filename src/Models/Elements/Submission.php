@@ -13,9 +13,8 @@ use Angujo\OpenRosaPhp\Libraries\Tag;
 
 class Submission extends Tag
 {
-
-    private const POST = 'POST';
-    private const GET = 'GET';
+const POST = 'POST';
+const GET = 'GET';
 
     private $encryption;
     private $url;

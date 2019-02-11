@@ -15,8 +15,8 @@ use Angujo\OpenRosaPhp\Models\ControlElement;
 class InputDateTime extends ControlElement
 {
     use TraitDatetime;
-    protected const YM = 'month-year';
-    protected const Y  = 'year';
+const YM = 'month-year';
+const Y  = 'year';
 
     protected function __construct($name)
     {

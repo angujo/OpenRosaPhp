@@ -11,23 +11,23 @@ namespace Angujo\OpenRosaPhp\Libraries;
 
 class Ns
 {
-    public const XFORMSLIST     = 'http://openrosa.org/xforms/xformsList';
-    public const XFORMSMANIFEST = 'http://openrosa.org/xforms/xformsManifest';
-    public const H              = 'http://www.w3.org/1999/xhtml';
-    public const JR             = 'http://openrosa.org/javarosa';
-    public const XSD            = 'http://www.w3.org/2001/XMLSchema';
-    public const RESPONSE       = 'http://openrosa.org/http/response';
-    public const ORX            = 'http://openrosa.org/xforms';
-    public const ODK            = 'http://www.opendatakit.org/xforms';
-    public const XMLNS          = 'http://www.w3.org/2002/xforms';
-
+    const XFORMSLIST     = 'http://openrosa.org/xforms/xformsList';
+    const XFORMSMANIFEST = 'http://openrosa.org/xforms/xformsManifest';
+    const H              = 'http://www.w3.org/1999/xhtml';
+    const JR             = 'http://openrosa.org/javarosa';
+    const XSD            = 'http://www.w3.org/2001/XMLSchema';
+    const RESPONSE       = 'http://openrosa.org/http/response';
+    const ORX            = 'http://openrosa.org/xforms';
+    const ODK            = 'http://www.opendatakit.org/xforms';
+    const XMLNS          = 'http://www.w3.org/2002/xforms';
+    
     private static $collection = [];
-
+    
     public static function uri($name)
     {
         return \constant(self::class . '::' . strtoupper($name));
     }
-
+    
     /**
      * @return array
      */
@@ -40,15 +40,15 @@ class Ns
         }
         return $mp;
     }
-
+    
     /**
      * @param array $collection
      */
-    public static function setCollection(array $collection): void
+    public static function setCollection(array $collection)
     {
         self::$collection = $collection;
     }
-
+    
     public static function collect($ns)
     {
         self::$collection[] = $ns;

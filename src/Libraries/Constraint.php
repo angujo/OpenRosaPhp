@@ -11,9 +11,9 @@ namespace Angujo\OpenRosaPhp\Libraries;
 
 class Constraint
 {
-    protected const CONTAINS    = 'contains';
-    protected const STARTS_WITH = 'starts-with';
-    protected const END_WITH    = 'ends-with';
+const CONTAINS    = 'contains';
+const STARTS_WITH = 'starts-with';
+const END_WITH    = 'ends-with';
 
     /**
      * Conditions will be in array format

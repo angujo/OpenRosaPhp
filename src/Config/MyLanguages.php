@@ -176,7 +176,7 @@ abstract class MyLanguages
      * @param $search
      * @return Language|null
      */
-    protected function _get_my_language($search): ?Language
+    protected function _get_my_language($search)
     {
         if (null !== $search) {
             $match = array_filter($this->_my_languages, function ($v) use ($search) {
