@@ -33,7 +33,7 @@ class LanguageTranslator extends MyLanguages
         $this->english($default);
     }
 
-    public static function default($translation)
+    public static function defaultLang($translation)
     {
         return new self($translation);
     }

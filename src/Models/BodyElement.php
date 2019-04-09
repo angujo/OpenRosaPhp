@@ -60,7 +60,7 @@ class BodyElement extends Tag
     /**
      * @return array
      */
-    public function getXpath(): array
+    public function getXpath()
     {
         return !is_a($this, Repeat::class) ? array_merge($this->xpath, [$this->path]) : $this->xpath;
     }

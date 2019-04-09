@@ -54,7 +54,7 @@ class Elements
         $new_path = self::dotPath($new_path);
         if (!$new_path) return;
         if ($old_path && self::init()->dot->has($old_path)) {
-            $default = $default ?? self::init()->dot->get($old_path);
+            $default = $default ?: self::init()->dot->get($old_path);
             self::init()->dot->delete($old_path);
         }
         self::create($new_path, $default);
@@ -74,7 +74,7 @@ class Elements
      * @param null|string $root
      * @return Tag[]
      */
-    public static function asTags($root = null): array
+    public static function asTags($root = null)
     {
         if (null !== $root) {
             if (!self::init()->dot->has($root) || !\is_array(self::init()->dot->get($root))) return [];
@@ -92,7 +92,7 @@ class Elements
         /** @var Tag[] $tags */
         $tags = [];
         foreach ($list as $name => $value) {
-            $tag = Tag::empty($name);
+            $tag = Tag::emptyTag($name);
             if (\is_array($value)) $tag->setTags(self::tagMe($value));
             else $tag->setValue($value);
             $tags[] = $tag;

@@ -26,7 +26,7 @@ abstract class InstanceAbstract extends Tag
     /**
      * @return Tag
      */
-    public function getRootTag(): Tag
+    public function getRootTag()
     {
         return $this->getUniqueTag($this->rootTag);
     }
@@ -35,7 +35,7 @@ abstract class InstanceAbstract extends Tag
      * @param string $rootTag
      * @return InstanceAbstract
      */
-    public function setRootTag($rootTag = null): InstanceAbstract
+    public function setRootTag($rootTag = null)
     {
         $this->rootTag = $rootTag ?: 'root';
         $this->addUniqueTag($this->rootTag, null);

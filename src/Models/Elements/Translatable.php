@@ -93,6 +93,6 @@ class Translatable extends Tag
             $this->language->english($this->getValue());
             return;
         }
-        $this->language=LanguageTranslator::default($this->getValue());
+        $this->language=LanguageTranslator::defaultLang($this->getValue());
     }
 }

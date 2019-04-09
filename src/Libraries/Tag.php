@@ -41,7 +41,7 @@ class Tag
     /**
      * @return string
      */
-    public function getNamespace(): string
+    public function getNamespace()
     {
         return $this->namespace;
     }
@@ -51,7 +51,7 @@ class Tag
      *
      * @return Tag
      */
-    protected function setNamespace(string $namespace): Tag
+    protected function setNamespace(string $namespace)
     {
         $this->namespace = $namespace;
         if (Config::isOdk()) Ns::collect($this->namespace);
@@ -63,7 +63,7 @@ class Tag
      *
      * @return Tag[]
      */
-    public function getTags($className = NULL): array
+    public function getTags($className = NULL)
     {
         return $className && \is_string($className) && class_exists($className, FALSE) ? array_filter(
             array_map(function ($tag) use ($className) { return is_a($tag, $className) ? $tag : NULL; }, $this->tags)
@@ -72,7 +72,7 @@ class Tag
     
     public function setGetTag(Tag $tag)
     {
-        return $this->tags[$tag->getName()] ?? $this->setTag($tag);
+        return isset($this->tags[$tag->getName()]) ?$this->tags[$tag->getName()]: $this->setTag($tag);
     }
     
     /**
@@ -80,7 +80,7 @@ class Tag
      *
      * @return Tag
      */
-    public function setTags(array $tags): Tag
+    public function setTags(array $tags)
     {
         $this->tags = [];
         return $this->appendTags($tags);
@@ -135,7 +135,7 @@ class Tag
      */
     public function getUniqueTag($name)
     {
-        return $this->tags[$name] ?? NULL;
+        return isset($this->tags[$name]) ?$this->tags[$name]: NULL;
     }
     
     /**
@@ -171,7 +171,7 @@ class Tag
         return new self($name, $value);
     }
     
-    public static function empty($name)
+    public static function emptyTag($name)
     {
         return new self($name, NULL);
     }

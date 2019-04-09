@@ -29,7 +29,7 @@ const END_WITH    = 'ends-with';
     /**
      * @return array
      */
-    public function getConditions(): array
+    public function getConditions()
     {
         return $this->conditions;
     }
@@ -69,7 +69,7 @@ const END_WITH    = 'ends-with';
     /**
      * @return string
      */
-    public function getConstraint(): string
+    public function getConstraint()
     {
         return $this->constraint;
     }
@@ -77,7 +77,7 @@ const END_WITH    = 'ends-with';
     /**
      * @return string
      */
-    public function getMessage(): string
+    public function getMessage()
     {
         return $this->message;
     }
@@ -86,7 +86,7 @@ const END_WITH    = 'ends-with';
      * @param string $constraint
      * @return Constraint
      */
-    public function setConstraint(string $constraint): Constraint
+    public function setConstraint(string $constraint)
     {
         $this->constraint = $constraint;
         Ns::collect('jr');
@@ -97,7 +97,7 @@ const END_WITH    = 'ends-with';
      * @param string $message
      * @return Constraint
      */
-    public function setMessage(string $message): Constraint
+    public function setMessage(string $message)
     {
         $this->message = $message;
         return $this;

@@ -40,7 +40,7 @@ class Bind extends Tag
      * @param Constraint $constraint
      * @return Bind
      */
-    public function setConstraint(Constraint $constraint): Bind
+    public function setConstraint(Constraint $constraint)
     {
         $this->constraint = &$constraint;
         return $this;
@@ -54,7 +54,7 @@ class Bind extends Tag
     /**
      * @return bool
      */
-    public function isRegistered(): bool
+    public function isRegistered()
     {
         return $this->registered;
     }
@@ -63,7 +63,7 @@ class Bind extends Tag
      * @param bool $registered
      * @return Bind
      */
-    public function setRegistered(bool &$registered): Bind
+    public function setRegistered(bool &$registered)
     {
         $this->registered = &$registered;
         return $this;

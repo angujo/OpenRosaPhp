@@ -228,7 +228,7 @@ const DEF_NAME = 'English';
      */
     public static function get($abbreviation)
     {
-        return self::$langs[$abbreviation] ?? NULL;
+        return isset(self::$langs[$abbreviation]) ?self::$langs[$abbreviation]: NULL;
     }
     
     /**

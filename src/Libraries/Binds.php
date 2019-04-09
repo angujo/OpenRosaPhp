@@ -46,7 +46,7 @@ class Binds
      */
     public static function get($id)
     {
-        return self::init()->binds[$id] ?? null;
+        return isset(self::init()->binds[$id]) ?self::init()->binds[$id]: null;
     }
 
     /**
@@ -64,7 +64,7 @@ class Binds
      */
     private function retrieve($id)
     {
-        return $this->binds[$id] ?? null;
+        return isset($this->binds[$id]) ?$this->binds[$id]: null;
     }
 
     /**

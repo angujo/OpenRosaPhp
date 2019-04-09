@@ -43,7 +43,7 @@ class Translation
     /**
      * @return Language
      */
-    public function getLanguage(): Language
+    public function getLanguage()
     {
         return $this->language;
     }
@@ -52,7 +52,7 @@ class Translation
      * @param Language $language
      * @return Translation
      */
-    public function setLanguage(Language $language): Translation
+    public function setLanguage(Language $language)
     {
         $this->language = $language;
         if (Config::isOdk()) $this->id = Itext::addTranslation($this, $this->id);

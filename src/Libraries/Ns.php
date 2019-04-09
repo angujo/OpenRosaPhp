@@ -31,7 +31,7 @@ class Ns
     /**
      * @return array
      */
-    public static function getCollection(): array
+    public static function getCollection()
     {
         $mp = [];
         foreach (self::$collection as $ns) {

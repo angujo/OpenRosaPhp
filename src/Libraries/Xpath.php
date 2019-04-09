@@ -19,15 +19,15 @@ class Xpath
 {
     /** @var string[] */
     private static $paths = [];
-    
+
     public static function setPath($path)
     {
         self::$paths[basename($path)] = $path;
     }
-    
+
     public static function getPath($basename)
     {
         $basename = basename($basename);
-        return self::$paths[$basename] ?? NULL;
+        return isset(self::$paths[$basename]) ? self::$paths[$basename] : NULL;
     }
 }

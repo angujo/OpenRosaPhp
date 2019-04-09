@@ -23,7 +23,7 @@ abstract class OptionBased extends ControlElement
     /**
      * @return Item[]
      */
-    public function getOptions(): array
+    public function getOptions()
     {
         return $this->getTags(Item::class);
     }
