@@ -11,7 +11,6 @@ namespace Angujo\OpenRosaPhp\Models\Elements;
 
 use Angujo\OpenRosaPhp\Libraries\Elmt;
 use Angujo\OpenRosaPhp\Libraries\Tag;
-use Angujo\OpenRosaPhp\Models\Controls\LanguageTranslator;
 
 class Label extends Translatable
 {

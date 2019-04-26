@@ -10,7 +10,6 @@ namespace Angujo\OpenRosaPhp\Models;
 
 
 use Angujo\OpenRosaPhp\Libraries\Elmt;
-use Angujo\OpenRosaPhp\Models\Elements\Bind;
 
 class Repeat extends ControlHolder
 {

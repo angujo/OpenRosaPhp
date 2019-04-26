@@ -41,6 +41,7 @@ class Element
     /**
      * Set the value of name
      *
+     * @param $name
      * @return  self
      */
     public function setName($name)
@@ -61,6 +62,7 @@ class Element
     /**
      * Set the value of value
      *
+     * @param $value
      * @return  self
      */
     public function setValue($value)
@@ -81,6 +83,7 @@ class Element
     /**
      * Set the value of children
      *
+     * @param $children
      * @return  self
      */
     public function setChildren($children)

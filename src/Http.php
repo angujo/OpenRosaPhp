@@ -70,7 +70,7 @@ class Http extends Authenticate
             echo Response::success($msg)->asXML();
         } catch (\Throwable $throwable) {
             echo Response::error($throwable->getCode() . ': ' . $throwable->getMessage())->asXML();
-            Log::error($throwable->getTraceAsString());
+            Log::error($throwable->getMessage()."\n".$throwable->getTraceAsString());
         } finally {
             exit;
         }
@@ -96,7 +96,7 @@ class Http extends Authenticate
             echo Response::success('Submission successfully received!')->asXML();
         } catch (\Throwable $th) {
             echo Response::error($th->getCode() . ': ' . $th->getMessage())->asXML();
-            Log::error($th->getTraceAsString());
+            Log::error($th->getMessage()."\n".$th->getTraceAsString());
         } finally {
             exit;
         }

@@ -26,9 +26,9 @@ class PrimaryInstance extends InstanceAbstract
         $this->meta = $this->getRootTag()->setUniqueTag(Meta::create($this->rootTag));
     }
 
-    public static function create()
+    public static function create($id = null, $root = null)
     {
-        return self::$me = self::$me ?:new self();
+        return self::$me = self::$me ?: new self($id, $root);
     }
 
     public function setId($id)

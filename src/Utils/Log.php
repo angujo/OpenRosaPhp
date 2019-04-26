@@ -7,8 +7,6 @@
  */
 namespace Angujo\OpenRosaPhp\Utils;
 
-use BodyTest;
-
 class Log  {
     /** @var Log */
     private static $me;

@@ -33,7 +33,7 @@ class Xform extends Tag
     public static function init()
     {
         if (!self::$me) {
-            self::$me = new self(Elmt::HTML, null);
+            self::$me = new self();
             self::$me->setNamespace('h');
         }
         return self::$me;

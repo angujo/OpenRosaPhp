@@ -9,7 +9,6 @@
 namespace Angujo\OpenRosaPhp\Models\Controls;
 
 
-use Angujo\OpenRosaPhp\Libraries\Elmt;
 use Angujo\OpenRosaPhp\Libraries\Tag;
 use Angujo\OpenRosaPhp\Models\ControlElement;
 use Angujo\OpenRosaPhp\Models\Elements\Item;
@@ -21,7 +20,7 @@ abstract class OptionBased extends ControlElement
     protected $options = [];
     
     /**
-     * @return Item[]
+     * @return Item[]|Tag[]
      */
     public function getOptions()
     {
