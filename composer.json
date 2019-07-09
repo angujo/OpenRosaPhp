@@ -1,14 +1,22 @@
 {
-    "name": "angujo/openrosaphp",
-    "description": "Javarosa in php",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "angujo",
-            "email": "angujomondi@gmail.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {}
+  "name": "angujo/openrosaphp",
+  "description": "Javarosa in php",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "angujo",
+      "email": "angujomondi@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Angujo\\OpenRosaPhp\\": "src/"
+    }
+  },
+  "minimum-stability": "dev",
+  "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "8"
+  }
 }
