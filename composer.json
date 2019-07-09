@@ -1,0 +1,14 @@
+{
+    "name": "angujo/openrosaphp",
+    "description": "Javarosa in php",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "angujo",
+            "email": "angujomondi@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
