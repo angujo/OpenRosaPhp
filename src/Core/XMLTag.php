@@ -28,16 +28,6 @@ class XMLTag
         $this->tag = $tag;
     }
 
-    /**
-     * @param $name
-     *
-     * @return XMLTag
-     * @throws OException
-     */
-    protected static function create($name)
-    {
-        return new self($name);
-    }
 
     /**
      * @return array
@@ -118,9 +108,9 @@ class XMLTag
      * @return $this
      * @throws OException
      */
-    protected function addElementUnq($elmt)
+    protected function addElementUnq($elmt, $identifier = true)
     {
-        $this->setElement($elmt, true);
+        $this->setElement($elmt, $identifier);
         return $this;
     }
 
@@ -148,13 +138,13 @@ class XMLTag
     private function setElement(XMLTag $elmt, $unique = false)
     {
         if (is_object($elmt) && is_a($elmt, Attribute::class)) {
-            if (true === $unique) {
-                $this->elements[$elmt->getTag()] = $elmt;
+            if (false !== $unique) {
+                $this->elements[true === $unique ? $elmt->getTag() : $unique] = $elmt;
             } else {
                 $this->elements[] = $elmt;
             }
         } else {
-            $this->setElement(self::create($elmt), $unique);
+            $this->setElement(new self($elmt), $unique);
         }
     }
 
