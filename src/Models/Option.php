@@ -15,7 +15,7 @@ class Option extends XMLTag
 {
     use Labelable;
 
-    public function __construct(){ parent::__construct('item'); }
+    public function __construct(){ parent::__construct(Tag::ITEM); }
 
     /**
      * @param $value

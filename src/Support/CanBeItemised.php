@@ -33,6 +33,24 @@ trait CanBeItemised
     }
 
     /**
+     * @param Option[]|string[] $options
+     *
+     * @return static
+     * @throws OException
+     */
+    public function setOptions(array $options)
+    {
+        foreach ($options as $value => $option) {
+            if (!is_a($option, Option::class)) {
+                $this->addElementUnq($option, $option->getValue());
+            } else {
+                $this->addOption((string)$value, (string)$option);
+            }
+        }
+        return $this;
+    }
+
+    /**
      * @return Option[]
      */
     public function getOptions()
