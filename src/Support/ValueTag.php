@@ -14,6 +14,7 @@ class ValueTag extends XMLTag
     public function __construct($tag, $default)
     {
         parent::__construct($tag);
+        $this->content     = $default;
         $this->translation = new Translation($default);
     }
 
@@ -33,6 +34,7 @@ class ValueTag extends XMLTag
      */
     public function setValue($value)
     {
+        $this->content = $value;
         return $this->translation->setDefault($value);
     }
 

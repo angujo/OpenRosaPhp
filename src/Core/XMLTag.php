@@ -13,6 +13,7 @@ class XMLTag
     protected $attributes = [];
     protected $elements = [];
     protected $tag_space;
+    protected $content;
 
     /**
      * XMLTag constructor.
@@ -200,4 +201,24 @@ class XMLTag
     {
         return NS::url($this->tag_space);
     }
+
+    /**
+     * @return mixed
+     */
+    protected function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param mixed $content
+     *
+     * @return XMLTag
+     */
+    protected function setContent($content)
+    {
+        $this->content = $content;
+        return $this;
+    }
+
 }

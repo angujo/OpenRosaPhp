@@ -4,6 +4,7 @@
 namespace Angujo\OpenRosaPhp\Core;
 
 
+use Angujo\OpenRosaPhp\Support\CanHaveHint;
 use Angujo\OpenRosaPhp\Support\Labelable;
 
 /**
@@ -14,7 +15,7 @@ use Angujo\OpenRosaPhp\Support\Labelable;
  */
 class ControlElement extends XMLTag
 {
-    use Labelable;
+    use CanHaveHint,Labelable;
 
     protected static $elements = ['input', 'select1', 'select', 'upload', 'trigger', 'range', 'odkrank',];
 

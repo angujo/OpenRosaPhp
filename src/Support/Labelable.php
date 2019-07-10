@@ -8,15 +8,12 @@ use Angujo\OpenRosaPhp\Core\OException;
 
 trait Labelable
 {
-    /** @var null|ValueTag */
-    private $_label = null;
-
     /**
-     * @return null
+     * @return null|string|int
      */
     public function getLabel()
     {
-        return $this->_label ? $this->_label->getValue() : null;
+        return $this->hasElement('label') && $this->getElement('label') ? $this->getElement('label')->getValue() : null;
     }
 
     /**
@@ -27,12 +24,12 @@ trait Labelable
      */
     public function setLabel($label)
     {
-        if ($this->_label) {
-            $this->_label->setValue($label);
+        if ($this->hasElement('label')) {
+            $this->getElement('label')->setValue($label);
         } else {
-            $this->_label = new ValueTag('label', $label);
+            $this->addElementUnq(new ValueTag('label', $label));
         }
-        return $this->_label->getTranslation();
+        return $this->getElement('label')->getTranslation();
     }
 
 }
