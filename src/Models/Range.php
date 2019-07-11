@@ -15,6 +15,11 @@ class Range extends ControlElement
         $this->setStart($starts)->setEnd($ends)->setStep($step);
     }
 
+    public static function create($name, $starts, $ends, $step)
+    {
+        return new self($name, $starts, $ends, $step);
+    }
+
     public function setStart($start)
     {
         $this->getAttribute('start') ? $this->getAttribute('start')->setValue($start) : $this->addAttribute('start', $start);

@@ -8,5 +8,5 @@ use Angujo\OpenRosaPhp\Core\ControlElement;
 
 class Trigger extends ControlElement
 {
-    public function __construct(){ parent::__construct('trigger'); }
+    public function __construct($name){ parent::__construct('trigger', $name); }
 }

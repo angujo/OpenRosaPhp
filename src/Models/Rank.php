@@ -11,5 +11,5 @@ class Rank extends ControlElement
 {
     use CanBeItemised;
 
-    public function __construct(){ parent::__construct('odkrank'); }
+    public function __construct($name){ parent::__construct('odkrank', $name); }
 }

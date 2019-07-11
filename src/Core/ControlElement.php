@@ -18,13 +18,13 @@ class ControlElement extends XMLTag
 {
     use CanHaveHint, Labelable, CanBeBound;
 
-    protected static $elements = ['input', 'select1', 'select', 'upload', 'trigger', 'range', 'odkrank',];
+    protected static $elmts = ['input', 'select1', 'select', 'upload', 'trigger', 'range', 'odkrank',];
     protected $name;
 
     public function __construct($tag, $name)
     {
         $tag = strtolower($tag);
-        if (!in_array($tag, self::$elements)) {
+        if (!in_array($tag, self::$elmts)) {
             throw new OException($tag.' is an invalid Body Element!');
         }
         if (0 === strcasecmp('odkrank', $tag)) {

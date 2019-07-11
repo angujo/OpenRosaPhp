@@ -145,7 +145,7 @@ class XMLTag
      */
     private function setElement(XMLTag $elmt, $unique = false)
     {
-        if (is_object($elmt) && is_a($elmt, Attribute::class)) {
+        if (is_object($elmt) && is_a($elmt, XMLTag::class)) {
             if (false !== $unique) {
                 $this->elements[true === $unique ? $elmt->getTag() : $unique] = $elmt;
             } else {
@@ -219,4 +219,8 @@ class XMLTag
         return $this;
     }
 
+    public function toXML(\XMLWriter $writer)
+    {
+        return $writer;
+    }
 }

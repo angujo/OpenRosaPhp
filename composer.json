@@ -15,7 +15,9 @@
     }
   },
   "minimum-stability": "dev",
-  "require": {},
+  "require": {
+    "ext-xmlwriter": "*"
+  },
   "require-dev": {
     "phpunit/phpunit": "8"
   }
