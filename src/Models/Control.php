@@ -12,13 +12,13 @@ use Angujo\OpenRosaPhp\Core\OException;
  *
  * @package Angujo\OpenRosaPhp\Models
  *
- * @method static ControlElement input()
- * @method static ControlElement select1()
- * @method static ControlElement select()
- * @method static ControlElement upload()
- * @method static ControlElement trigger()
- * @method static ControlElement range()
- * @method static ControlElement odkRank()
+ * @method static ControlElement input($name, $type = 'string')
+ * @method static ControlElement select1($name)
+ * @method static ControlElement select($name)
+ * @method static ControlElement upload($name)
+ * @method static ControlElement trigger($name)
+ * @method static ControlElement range($name)
+ * @method static ControlElement odkRank($name)
  */
 class Control extends ControlElement
 {
@@ -32,6 +32,19 @@ class Control extends ControlElement
      */
     public static function __callStatic($name, $args)
     {
-        return new self($name);
+        if (!($nm = array_shift($args))) {
+            throw new OException('Missing name of the element!');
+        }
+        if (0 === strcasecmp('input', $nm)) {
+            if (!($tp = array_shift($args))) {
+                throw new OException('Input should have data type set!');
+            }
+        }
+        /** @var ControlElement $cntr */
+        $cntr = new self($name, $nm);
+        if (!empty($tp)) {
+            $cntr->setType($tp);
+        }
+        return $cntr;
     }
 }

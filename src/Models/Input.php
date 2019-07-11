@@ -8,5 +8,61 @@ use Angujo\OpenRosaPhp\Core\ControlElement;
 
 class Input extends ControlElement
 {
-    public function __construct(){ parent::__construct('input'); }
+    public function __construct($name){ parent::__construct('input', $name); }
+
+    public static function Text($name)
+    {
+        $me = new self($name);
+        $me->setType('string');
+        return $me;
+    }
+
+    public static function NumberInteger($name)
+    {
+        $me = new self($name);
+        $me->setType('int');
+        return $me;
+    }
+
+    public static function NumberDecimal($name)
+    {
+        $me = new self($name);
+        $me->setType('decimal');
+        return $me;
+    }
+
+    public static function BooleanType($name)
+    {
+        $me = new self($name);
+        $me->setType('boolean');
+        return $me;
+    }
+
+    public static function DateType($name)
+    {
+        $me = new self($name);
+        $me->setType('date');
+        return $me;
+    }
+
+    public static function TimeType($name)
+    {
+        $me = new self($name);
+        $me->setType('time');
+        return $me;
+    }
+
+    public static function DateTime($name)
+    {
+        $me = new self($name);
+        $me->setType('dateTime');
+        return $me;
+    }
+
+    public static function Barcode($name)
+    {
+        $me = new self($name);
+        $me->setType('barcode');
+        return $me;
+    }
 }

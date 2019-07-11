@@ -5,6 +5,7 @@ namespace Angujo\OpenRosaPhp\Core;
 
 
 use Angujo\OpenRosaPhp\NS;
+use Angujo\OpenRosaPhp\Support\TranslatedAttribute;
 use Angujo\OpenRosaPhp\Utils\Helper;
 
 class XMLTag
@@ -51,19 +52,26 @@ class XMLTag
     /**
      * @param Attribute|string $attr
      *
-     * @return XMLTag
+     * @param null             $val
+     *
+     * @return $this
      * @throws OException
      */
-    protected function addAttribute($attr)
+    protected function addAttribute($attr, $val = null)
     {
         if (is_object($attr) && is_a($attr, Attribute::class)) {
             $this->attributes[$attr->getFullName()] = $attr;
         } else {
-            return $this->addAttribute(Attribute::create($attr));
+            return $this->addAttribute(Attribute::create($attr, $val));
         }
         return $this;
     }
 
+    /**
+     * @param $name
+     *
+     * @return Attribute|TranslatedAttribute|null
+     */
     protected function getAttribute($name)
     {
         return $this->attributes[$name] ?? null;

@@ -32,9 +32,9 @@ class Attribute
      * @return Attribute
      * @throws OException
      */
-    public static function create($name)
+    public static function create($name, $value = null)
     {
-        return new self($name);
+        return (new self($name))->setValue($value);
     }
 
     /**
@@ -77,7 +77,6 @@ class Attribute
 
     /**
      * @return mixed
-     * @throws OException
      */
     public function getNamespaceUrl()
     {
