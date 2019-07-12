@@ -7,12 +7,13 @@ namespace Angujo\OpenRosaPhp\Models;
 use Angujo\OpenRosaPhp\Core\OException;
 use Angujo\OpenRosaPhp\Core\XMLTag;
 use Angujo\OpenRosaPhp\Support\Labelable;
+use Angujo\OpenRosaPhp\Support\PassessNodeset;
 use Angujo\OpenRosaPhp\Support\ValueTag;
 use Angujo\OpenRosaPhp\Tag;
 
 class Option extends XMLTag
 {
-    use Labelable;
+    use Labelable,PassessNodeset;
 
     public function __construct(){ parent::__construct(Tag::ITEM); }
 

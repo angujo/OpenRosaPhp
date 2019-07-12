@@ -9,7 +9,6 @@ use Angujo\OpenRosaPhp\Models\Option;
 
 trait CanBeItemised
 {
-    use PassessNodeset;
 
     /**
      * @param $value

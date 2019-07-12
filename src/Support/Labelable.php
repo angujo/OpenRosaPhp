@@ -46,7 +46,7 @@ trait Labelable
         if ($this->hasElement(Tag::LABEL)) {
             $this->getElement(Tag::LABEL)->setValue($label);
         } else {
-            $this->addElementUnq(new ValueTag(Tag::LABEL, $label));
+            $this->addElementUnq(new RefValueTag(Tag::LABEL, $label));
         }
         return $this->getElement(Tag::LABEL)->getTranslation();
     }
