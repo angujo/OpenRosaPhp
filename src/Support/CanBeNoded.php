@@ -55,14 +55,6 @@ trait CanBeNoded
         return $this;
     }
 
-    private function trickleDown()
-    {
-        foreach ($this->elements as $element) {
-            if (method_exists($element, 'setNodeset')) {
-                $element->setNodeset($this->fullNodeSet());
-            }
-        }
-    }
 
     public function getFullNodeset()
     {

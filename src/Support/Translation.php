@@ -69,4 +69,9 @@ class Translation
     {
         return $this->addTranslation($lang, $translation);
     }
+
+    public function __toString()
+    {
+        return null === $this->getDefault() ? '' : $this->getDefault();
+    }
 }

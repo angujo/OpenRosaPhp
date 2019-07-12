@@ -5,11 +5,15 @@ namespace Angujo\OpenRosaPhp\Core;
 
 
 use Angujo\OpenRosaPhp\NS;
+use Angujo\OpenRosaPhp\ODKForm;
 use Angujo\OpenRosaPhp\Support\TranslatedAttribute;
+use Angujo\OpenRosaPhp\Support\TricklesNode;
 use Angujo\OpenRosaPhp\Utils\Helper;
 
 class XMLTag
 {
+    use TricklesNode;
+
     private $tag;
     /** @var TranslatedAttribute[]|Attribute[] */
     protected $attributes = [];
@@ -183,6 +187,11 @@ class XMLTag
         return $this->tag_space;
     }
 
+    public function fullTag()
+    {
+        return implode(':', array_filter([$this->tag_space, $this->tag]));
+    }
+
     /**
      * @param mixed $tag_space
      *
@@ -197,7 +206,7 @@ class XMLTag
     /**
      * @return string
      */
-    protected function getNamespaceUrl()
+    protected function getTagSpaceUrl()
     {
         return NS::url($this->tag_space);
     }
@@ -222,43 +231,31 @@ class XMLTag
     }
 
     /**
-     * @param null|\DOMDocument $writer
+     * @param \DOMElement|\DOMDocument $writer
      *
-     * @return string|\DOMDocument
+     * @return \DOMElement
      * @throws OException
      */
-    public function toXML(&$writer = null)
+    public function toXML($writer)
     {
-        $asString = null === $writer || !\is_object($writer) || !is_a($writer, \DOMDocument::class);
-        if ($asString) {
-            $writer = new \DOMDocument('1.0', 'UTF-8');
-        }
         if ($this->tag_space) {
-            $elmt = $writer->createElementNS($this->tag_space, $this->tag);
+            $elmt = ODKForm::get()->createElementNS($this->getTagSpaceUrl(), $this->fullTag(), $this->content ?: null);
         } else {
-            $elmt = $writer->createElement($this->tag);
+            $elmt = ODKForm::get()->createElement($this->tag, $this->content ?: null);
         }
+        $writer->appendChild($elmt);
         foreach ($this->attributes as $attribute) {
-            if (is_a($attribute, TranslatedAttribute::class)) {
-                $elmt->setAttribute($name, $value)
-                $writer->startAttributeNs($attribute->getNamespace(), $attribute->getName(), $attribute->getNamespaceUrl());
+            if ($attribute->getNamespace()) {
+                $elmt->setAttributeNS($attribute->getNamespace(), $attribute, (string)$attribute->getValue());
             } else {
-                $writer->startAttribute($attribute->getName());
+                $elmt->setAttribute($attribute->getName(), (string)$attribute->getValue());
             }
-            $writer->text($attribute->getValue());
-            $writer->endAttribute();
         }
-        foreach ($this->elements as $element) {
-            $element->toXML($writer);
+        if (!$this->content) {
+            foreach ($this->elements as $element) {
+                $element->toXML($elmt);
+            }
         }
-        if ($this->content) {
-            $writer->text($this->content);
-        }
-        $writer->endElement();
-        if ($asString) {
-            $writer->endDocument();
-            return $writer->outputMemory();
-        }
-        return $writer;
+        return $elmt;
     }
 }

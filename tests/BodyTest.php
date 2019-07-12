@@ -2,6 +2,7 @@
 
 
 use Angujo\OpenRosaPhp\Models\Body;
+use Angujo\OpenRosaPhp\ODKForm;
 use PHPUnit\Framework\TestCase;
 
 class BodyTest extends TestCase
@@ -13,15 +14,14 @@ class BodyTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->body  = new Body('data');
+        $this->body  = ODKForm::body();
         $this->faker = Faker\Factory::create();
     }
 
     public function testInputTimeType()
     {
         $this->body->InputText('johndoe');
-        $body = $this->body->toXML();
-        print_r($body);
+        print_r(ODKForm::toXML());
     }
 
     public function testUploadImageNew()
@@ -38,8 +38,7 @@ class BodyTest extends TestCase
         while (count($select->getOptions()) <= 5) {
             $select->addOption($this->faker->countryCode, $this->faker->country);
         }
-        $body = $this->body->toXML();
-        print_r($body);
+        print_r(ODKForm::toXML());
     }
 
     public function testToXML()

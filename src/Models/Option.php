@@ -7,7 +7,6 @@ namespace Angujo\OpenRosaPhp\Models;
 use Angujo\OpenRosaPhp\Core\OException;
 use Angujo\OpenRosaPhp\Core\XMLTag;
 use Angujo\OpenRosaPhp\Support\Labelable;
-use Angujo\OpenRosaPhp\Support\Translation;
 use Angujo\OpenRosaPhp\Support\ValueTag;
 use Angujo\OpenRosaPhp\Tag;
 

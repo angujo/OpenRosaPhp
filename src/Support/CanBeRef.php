@@ -50,15 +50,6 @@ trait CanBeRef
         return $this;
     }
 
-    private function trickleDown()
-    {
-        foreach ($this->elements as $element) {
-            if (method_exists($element, 'setNodeset')) {
-                $element->setNodeset($this->fullRef());
-            }
-        }
-    }
-
     public function getFullRef()
     {
         return implode('/', $this->fullRef());
