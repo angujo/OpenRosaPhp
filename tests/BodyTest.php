@@ -6,28 +6,40 @@ use PHPUnit\Framework\TestCase;
 
 class BodyTest extends TestCase
 {
+    /** @var Body */
     private $body;
+    /** @var \Faker\Generator */
+    private $faker;
 
     protected function setUp(): void
     {
-        $this->body = new Body();
+        $this->body  = new Body('data');
+        $this->faker = Faker\Factory::create();
     }
 
     public function testInputTimeType()
     {
         $this->body->InputText('johndoe');
-
-        $body=$this->body;
+        $body = $this->body->toXML();
+        print_r($body);
     }
 
     public function testUploadImageNew()
     {
-
+        $this->body->UploadImageNew('nimage');
+        $body = $this->body->toXML();
+        print_r($body);
     }
 
     public function testSelect()
     {
-
+        $select = $this->body->Select('countries');
+        // $this->faker->country
+        while (count($select->getOptions()) <= 5) {
+            $select->addOption($this->faker->countryCode, $this->faker->country);
+        }
+        $body = $this->body->toXML();
+        print_r($body);
     }
 
     public function testToXML()
@@ -128,5 +140,10 @@ class BodyTest extends TestCase
     public function testUploadVideoSelfie()
     {
 
+    }
+
+    public function tearDown(): void
+    {
+        $this->body = null;
     }
 }

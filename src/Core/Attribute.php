@@ -88,4 +88,12 @@ class Attribute
         return ($this->namespace ? $this->namespace.':' : '').$this->name;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
 }

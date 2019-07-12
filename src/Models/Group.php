@@ -13,9 +13,11 @@ use Angujo\OpenRosaPhp\Core\InterfaceElement;
  */
 class Group extends InterfaceElement
 {
-    public function __construct($name=null)
+    public function __construct($name = null)
     {
         parent::__construct('group');
-        $this->name = $name;
+        if ($name) {
+            $this->setRef($name);
+        }
     }
 }

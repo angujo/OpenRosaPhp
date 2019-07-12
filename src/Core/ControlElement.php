@@ -5,6 +5,7 @@ namespace Angujo\OpenRosaPhp\Core;
 
 
 use Angujo\OpenRosaPhp\Support\CanBeBound;
+use Angujo\OpenRosaPhp\Support\CanBeRef;
 use Angujo\OpenRosaPhp\Support\CanHaveHint;
 use Angujo\OpenRosaPhp\Support\Labelable;
 
@@ -16,10 +17,9 @@ use Angujo\OpenRosaPhp\Support\Labelable;
  */
 class ControlElement extends XMLTag
 {
-    use CanHaveHint, Labelable, CanBeBound;
+    use CanHaveHint, Labelable, CanBeBound, CanBeRef;
 
     protected static $elmts = ['input', 'select1', 'select', 'upload', 'trigger', 'range', 'odkrank',];
-    protected $name;
 
     public function __construct($tag, $name)
     {
@@ -32,7 +32,6 @@ class ControlElement extends XMLTag
             $tag             = 'rank';
         }
         parent::__construct($tag);
-        $this->name =(string) $name;
+        $this->setRef((string)$name);
     }
-
 }

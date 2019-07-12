@@ -11,7 +11,9 @@ use Angujo\OpenRosaPhp\Utils\Helper;
 class XMLTag
 {
     private $tag;
+    /** @var TranslatedAttribute[]|Attribute[] */
     protected $attributes = [];
+    /** @var XMLTag[] */
     protected $elements = [];
     protected $tag_space;
     protected $content;
@@ -219,8 +221,44 @@ class XMLTag
         return $this;
     }
 
-    public function toXML(\XMLWriter $writer)
+    /**
+     * @param null|\DOMDocument $writer
+     *
+     * @return string|\DOMDocument
+     * @throws OException
+     */
+    public function toXML(&$writer = null)
     {
+        $asString = null === $writer || !\is_object($writer) || !is_a($writer, \DOMDocument::class);
+        if ($asString) {
+            $writer = new \DOMDocument('1.0', 'UTF-8');
+        }
+        if ($this->tag_space) {
+            $elmt = $writer->createElementNS($this->tag_space, $this->tag);
+        } else {
+            $elmt = $writer->createElement($this->tag);
+        }
+        foreach ($this->attributes as $attribute) {
+            if (is_a($attribute, TranslatedAttribute::class)) {
+                $elmt->setAttribute($name, $value)
+                $writer->startAttributeNs($attribute->getNamespace(), $attribute->getName(), $attribute->getNamespaceUrl());
+            } else {
+                $writer->startAttribute($attribute->getName());
+            }
+            $writer->text($attribute->getValue());
+            $writer->endAttribute();
+        }
+        foreach ($this->elements as $element) {
+            $element->toXML($writer);
+        }
+        if ($this->content) {
+            $writer->text($this->content);
+        }
+        $writer->endElement();
+        if ($asString) {
+            $writer->endDocument();
+            return $writer->outputMemory();
+        }
         return $writer;
     }
 }

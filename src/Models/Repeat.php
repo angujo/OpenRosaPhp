@@ -18,8 +18,9 @@ class Repeat extends InterfaceElement
     public function __construct($name = null)
     {
         parent::__construct('repeat');
-        $this->name    = $name;
         $this->overlay = new Group();
+        $this->overlay->addElement($this);
+        $this->overlay->setRef($name);
     }
 
     public function setMaxRepeats($count)

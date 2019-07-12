@@ -15,9 +15,10 @@ use Angujo\OpenRosaPhp\Core\InterfaceElement;
  */
 class Body extends InterfaceElement
 {
-    public function __construct()
+    public function __construct($data_name = null)
     {
         parent::__construct('body');
-        $this->tag_space = 'h';
+        $this->tag_space  = 'h';
+        $this->setRef($data_name);
     }
 }
