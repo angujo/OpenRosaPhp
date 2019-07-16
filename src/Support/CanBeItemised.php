@@ -29,7 +29,15 @@ trait CanBeItemised
      */
     public function addOption($value, $label)
     {
-        $this->addElementUnq(Option::create($value, $label), $value);
+        $ref = null;
+        if (!$this->hasElement($value)) {
+            $ref = ':option'.count($this->getOptions());
+        }
+        $this->addElementUnq($option=Option::create($value, $label), $value);
+        if ($ref){
+            $option->getLabelElement()->setRef(explode('/', implode('/', $this->fullNodeSet()).$ref));
+        }
+        $this->trickleDown();
         return $this;
     }
 

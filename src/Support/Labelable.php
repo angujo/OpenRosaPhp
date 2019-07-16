@@ -18,6 +18,14 @@ trait Labelable
     }
 
     /**
+     * @return RefValueTag
+     */
+    public function getLabelElement()
+    {
+        return $this->getElement(Tag::LABEL);
+    }
+
+    /**
      * @param $lang_iso
      * @param $translation
      *

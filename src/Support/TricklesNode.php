@@ -14,7 +14,8 @@ trait TricklesNode
     protected function trickleDown()
     {
         foreach ($this->elements as $element) {
-            if (method_exists($element, 'setNodeset') && (method_exists($this, 'fullNodeSet') || method_exists($this, 'fullRef'))) {
+            $dig=method_exists($element, 'setNodeset') && (method_exists($this, 'fullNodeSet') || method_exists($this, 'fullRef'));
+            if ($dig) {
                 $element->setNodeset(method_exists($this, 'fullNodeSet') ? $this->fullNodeSet() : $this->fullRef());
             }
         }
