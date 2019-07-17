@@ -7,6 +7,7 @@ namespace Angujo\OpenRosaPhp\Models;
 use Angujo\OpenRosaPhp\Core\Bind;
 use Angujo\OpenRosaPhp\Core\XMLTag;
 use Angujo\OpenRosaPhp\Support\ValueTag;
+use Angujo\OpenRosaPhp\Utils\Helper;
 
 /**
  * Class Head
@@ -18,14 +19,15 @@ class Head extends XMLTag
     private $_model;
     private $_pinstance;
     private $_data_name;
-    private $_binds = [];
+    private $_variables = [];
 
-    public function __construct($data_name, $title)
+    public function __construct(&$data_name, &$title)
     {
         parent::__construct('head');
         $this->tag_space = 'h';
         $this->setTitle($title);
-        $this->_data_name = $data_name;
+        $this->_data_name =& $data_name;
+        $this->primaryInstance();
     }
 
     /**
@@ -40,7 +42,13 @@ class Head extends XMLTag
         return $this->getElement('h:title');
     }
 
-    public function setTitle($title)
+    public function setVariable($index, $value, $def_value = null)
+    {
+        $this->_variables[$index] = [$value, $def_value];
+        return $this;
+    }
+
+    public function setTitle(&$title)
     {
         $this->titleElement()->setContent((string)$title);
         return $this;
@@ -51,7 +59,9 @@ class Head extends XMLTag
         if ($this->_model) {
             return $this->_model;
         }
-        return $this->_model = new XMLTag('model');
+        $this->_model = new HeadModel('model');
+        $this->addElementUnq($this->_model);
+        return $this->_model;
     }
 
     public function primaryInstance()
@@ -66,9 +76,24 @@ class Head extends XMLTag
         return $this->_pinstance;
     }
 
-    public function addBind(Bind $bind)
+    public function setPrimaryInstance()
     {
-        $this->_binds[] = $bind;
-        return $this;
+        $arr = [];
+        foreach ($this->_variables as $ns) {
+            Helper::array_dot($arr, $ns[0], $ns[1], '/');
+        }
+        $arr=array_shift($arr);
+        $this->loopInstance($this->primaryInstance(), $arr);
+    }
+
+    private function loopInstance(XMLTag $parent,$arr)
+    {
+        foreach ($arr as $index => $item) {
+            if (!preg_match('/^[a-z][\w-]+$/i', $index))continue;
+            $elmt=new XMLTag($index);
+            $parent->addElementUnq($elmt);
+            if (!is_array($item)) $elmt->setContent($item);
+            else $this->loopInstance($elmt, $item);
+        }
     }
 }
