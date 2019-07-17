@@ -5,6 +5,7 @@ namespace Angujo\OpenRosaPhp\Models;
 
 
 use Angujo\OpenRosaPhp\Core\InterfaceElement;
+use Angujo\OpenRosaPhp\Support\CanBeNoded;
 
 /**
  * Class Group
@@ -13,6 +14,7 @@ use Angujo\OpenRosaPhp\Core\InterfaceElement;
  */
 class Group extends InterfaceElement
 {
+    use CanBeNoded;
     public function __construct($name = null)
     {
         parent::__construct('group');

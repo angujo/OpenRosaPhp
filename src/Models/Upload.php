@@ -8,7 +8,11 @@ use Angujo\OpenRosaPhp\Core\ControlElement;
 
 class Upload extends ControlElement
 {
-    public function __construct($name){ parent::__construct('upload', $name); }
+    public function __construct($name)
+    {
+        parent::__construct('upload', $name);
+        self::setType('binary');
+    }
 
     public static function Image($name)
     {

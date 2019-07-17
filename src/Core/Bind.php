@@ -99,4 +99,9 @@ class Bind extends XMLTag
     {
         return $this->getAttribute('calculate');
     }
+
+    public function setNodeSet(string $nodeset)
+    {
+        return $this->addAttribute('nodeset', $nodeset);
+    }
 }

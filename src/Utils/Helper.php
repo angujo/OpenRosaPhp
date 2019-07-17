@@ -14,4 +14,14 @@ class Helper
             throw new OException($name.' is Invalid attribute/tag name!');
         }
     }
+
+   public static function array_dot(&$arr, $path, $value, $separator = '.')
+    {
+        $keys = explode($separator, $path);
+
+        foreach ($keys as $key) {
+            $arr = &$arr[$key];
+        }
+        $arr = $value;
+    }
 }

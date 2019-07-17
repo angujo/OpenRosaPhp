@@ -5,6 +5,7 @@ namespace Angujo\OpenRosaPhp\Models;
 
 
 use Angujo\OpenRosaPhp\Core\InterfaceElement;
+use Angujo\OpenRosaPhp\Support\CanBeNoded;
 
 /**
  * Class Repeat
@@ -13,6 +14,7 @@ use Angujo\OpenRosaPhp\Core\InterfaceElement;
  */
 class Repeat extends InterfaceElement
 {
+    use CanBeNoded;
     protected $overlay;
 
     public function __construct($name = null)

@@ -11,5 +11,9 @@ class Select1 extends ControlElement
 {
     use CanBeItemised;
 
-    public function __construct($name){ parent::__construct('select1',$name); }
+    public function __construct($name)
+    {
+        parent::__construct('select1', $name);
+        self::setType('select1');
+    }
 }

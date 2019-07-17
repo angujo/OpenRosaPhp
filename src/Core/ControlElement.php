@@ -20,6 +20,7 @@ class ControlElement extends XMLTag
     use CanHaveHint, Labelable, CanBeBound, CanBeRef;
 
     protected static $elmts = ['input', 'select1', 'select', 'upload', 'trigger', 'range', 'odkrank',];
+    protected $ref_id;
 
     public function __construct($tag, $name)
     {
@@ -33,5 +34,6 @@ class ControlElement extends XMLTag
         }
         parent::__construct($tag);
         $this->setRef((string)$name);
+        $this->ref_id = uniqid('ce', true);
     }
 }

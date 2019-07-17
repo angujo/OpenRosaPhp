@@ -6,6 +6,7 @@ namespace Angujo\OpenRosaPhp\Support;
 
 use Angujo\OpenRosaPhp\Core\Bind;
 use Angujo\OpenRosaPhp\Core\OException;
+use Angujo\OpenRosaPhp\ODKForm;
 
 /**
  * Trait CanBeBound
@@ -36,7 +37,11 @@ trait CanBeBound
      */
     public function getBind()
     {
-        return $this->_bind = $this->_bind ?: new Bind();
+        if (!$this->_bind) {
+            $this->_bind = new Bind();
+            ODKForm::head()->getModel()->addBind($this->_bind);
+        }
+        return $this->_bind;
     }
 
     public function __call($name, $args)

@@ -4,6 +4,8 @@
 namespace Angujo\OpenRosaPhp\Support;
 
 
+use Angujo\OpenRosaPhp\ODKForm;
+
 /**
  * Trait CanBeRef
  *
@@ -55,12 +57,24 @@ trait CanBeRef
         if (property_exists($this, 'merge_ref') && $this->merge_ref) {
             return implode('/', $this->_nodeset).$this->_ref;
         }
-        return implode('/', $this->fullRef());
+        return strtolower(implode('/', $this->fullRef()));
+    }
+
+    private function relativeRef()
+    {
+        return '/'.$this->getFullRef();
     }
 
     private function ref()
     {
         $this->trickleDown();
-        $this->addAttribute('ref', strtolower($this->getFullRef()));
+        $this->addAttribute('ref', $this->relativeRef());
+        if (property_exists($this, 'ref_id') && $this->ref_id) {
+            ODKForm::head()->setVariable($this->ref_id, $this->getFullRef(), $this->content);
+            //Not picked
+        }
+        if (method_exists($this, 'getBind')) {
+            $this->getBind()->setNodeSet($this->relativeRef());
+        }
     }
 }

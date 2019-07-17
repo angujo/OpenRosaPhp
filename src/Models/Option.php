@@ -41,7 +41,7 @@ class Option extends XMLTag
         if (!$ref) {
             return $this;
         }
-        $ref = implode('/', $this->fullNodeSet()).':'.preg_replace(['/[^\w]+/i', '/(^_|_$)/i'], ['_', ''], $ref);
+        $ref = implode('/', $this->fullNodeSet()).':'.preg_replace(['/[^\w]+/i', '/(^_|_$)/i'], ['_', ''], strtolower($ref));
         $this->getLabelElement()->setRef($ref);
         return $this;
     }

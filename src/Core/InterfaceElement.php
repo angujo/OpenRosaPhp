@@ -45,7 +45,6 @@ use ReflectionException;
  */
 class InterfaceElement extends XMLTag
 {
-    use CanBeNoded;
 
     /**
      * @param $name
@@ -59,7 +58,7 @@ class InterfaceElement extends XMLTag
     {
         $fp = '/^([A-Z]([a-z]+))/';
         if (!preg_match($fp, $name, $output_array)) {
-            throw new OException('Invalid body element::'.$name);
+            throw new OException('Invalid body element::'.$name.' on '.get_class($this));
         }
         $className = 'Angujo\OpenRosaPhp\Models\\'.$output_array[0];
         $method    = preg_replace($fp, '', $name);
