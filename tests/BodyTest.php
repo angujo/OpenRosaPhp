@@ -21,14 +21,11 @@ class BodyTest extends TestCase
     public function testInputTimeType()
     {
         $this->body->InputText('johndoe');
-        print_r(ODKForm::toXML());
     }
 
     public function testUploadImageNew()
     {
         $this->body->UploadImageNew('nimage');
-        $body = $this->body->toXML();
-        print_r($body);
     }
 
     public function testSelect()
@@ -38,7 +35,6 @@ class BodyTest extends TestCase
         while (count($select->getOptions()) <= 5) {
             $select->addOption($this->faker->countryCode, $this->faker->country, $this->faker->countryCode);
         }
-        print_r(ODKForm::toXML());
     }
 
     public function testToXML()
@@ -144,5 +140,10 @@ class BodyTest extends TestCase
     public function tearDown(): void
     {
         $this->body = null;
+    }
+
+    public static function tearDownAfterClass():void
+    {
+        print_r(ODKForm::toXML());
     }
 }

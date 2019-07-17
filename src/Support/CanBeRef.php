@@ -52,7 +52,7 @@ trait CanBeRef
 
     public function getFullRef()
     {
-        if (property_exists($this, 'merge_ref')) {
+        if (property_exists($this, 'merge_ref') && $this->merge_ref) {
             return implode('/', $this->_nodeset).$this->_ref;
         }
         return implode('/', $this->fullRef());
