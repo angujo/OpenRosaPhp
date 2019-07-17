@@ -41,6 +41,9 @@ trait CanBeBound
 
     public function __call($name, $args)
     {
-        return call_user_func_array([method_exists($this->getBind(), $name) ? $this->getBind() : $this, $name], $args);
+        if (method_exists($this->getBind(), $name)) {
+            return call_user_func_array([$this->getBind(), $name], $args);
+        }
+        return null;
     }
 }

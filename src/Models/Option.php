@@ -13,21 +13,37 @@ use Angujo\OpenRosaPhp\Tag;
 
 class Option extends XMLTag
 {
-    use Labelable,PassessNodeset;
+    use Labelable, PassessNodeset;
 
     public function __construct(){ parent::__construct(Tag::ITEM); }
 
     /**
-     * @param $value
-     * @param $label
+     * @param      $value
+     * @param      $label
+     *
+     * @param null $index_ref
      *
      * @return Option
      * @throws OException
      */
-    public static function create($value, $label)
+    public static function create($value, $label, $index_ref = null)
     {
-        ($me = new self())->setValue($value)->setLabel($label);
+        ($me = new self())->setLabel($label);
+        $me->setValue($value);
+        if ($index_ref) {
+            $me->setRef($index_ref);
+        }
         return $me;
+    }
+
+    public function setRef($ref)
+    {
+        if (!$ref) {
+            return $this;
+        }
+        $ref = implode('/', $this->fullNodeSet()).':'.preg_replace(['/[^\w]+/i', '/(^_|_$)/i'], ['_', ''], $ref);
+        $this->getLabelElement()->setRef($ref);
+        return $this;
     }
 
     /**

@@ -12,4 +12,6 @@ namespace Angujo\OpenRosaPhp\Support;
 class RefValueTag extends ValueTag
 {
     use CanBeRef;
+
+    public $merge_ref = true;
 }

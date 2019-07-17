@@ -36,7 +36,7 @@ class BodyTest extends TestCase
         $select = $this->body->Select('countries');
         // $this->faker->country
         while (count($select->getOptions()) <= 5) {
-            $select->addOption($this->faker->countryCode, $this->faker->country);
+            $select->addOption($this->faker->countryCode, $this->faker->country, $this->faker->countryCode);
         }
         print_r(ODKForm::toXML());
     }

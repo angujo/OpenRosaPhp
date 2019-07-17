@@ -22,7 +22,7 @@ trait CanBeRef
         return $this->_ref;
     }
 
-    private function fullRef()
+    protected function fullRef()
     {
         $fn = $this->_nodeset;
         if ($this->_ref) {
@@ -52,12 +52,15 @@ trait CanBeRef
 
     public function getFullRef()
     {
+        if (property_exists($this, 'merge_ref')) {
+            return implode('/', $this->_nodeset).$this->_ref;
+        }
         return implode('/', $this->fullRef());
     }
 
     private function ref()
     {
         $this->trickleDown();
-        $this->addAttribute('ref', $this->getFullRef());
+        $this->addAttribute('ref', strtolower($this->getFullRef()));
     }
 }

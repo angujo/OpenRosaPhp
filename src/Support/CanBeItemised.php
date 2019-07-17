@@ -27,17 +27,16 @@ trait CanBeItemised
      * @return $this
      * @throws OException
      */
-    public function addOption($value, $label)
+    public function addOption($value, $label, $index = null)
     {
-        $ref = null;
-        if (!$this->hasElement($value)) {
-            $ref = ':option'.count($this->getOptions());
+        $this->addElementUnq($option = Option::create($value, $label, $index), $value);
+        if (!$index) {//->setRef(explode('/', implode('/', $this->fullNodeSet()).$ref));
+            $ref = ':option'.count($this->getOptions()) - 1;
+            $option->setRef($ref);
         }
-        $this->addElementUnq($option=Option::create($value, $label), $value);
-        if ($ref){
-            $option->getLabelElement()->setRef(explode('/', implode('/', $this->fullNodeSet()).$ref));
+        if ($this->fullRef()) {
+            $option->setNodeset($this->fullRef());
         }
-        $this->trickleDown();
         return $this;
     }
 
