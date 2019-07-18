@@ -22,7 +22,7 @@ trait CanBeNoded
         return $this->_nodeset;
     }
 
-    private function fullNodeSet()
+    protected function fullNodeSet()
     {
         $fn = $this->_nodeset;
         if ($this->_ref) {
@@ -36,7 +36,7 @@ trait CanBeNoded
      *
      * @return CanBeNoded
      */
-    public function setNodeset(array $nodeset): CanBeNoded
+    public function setNodeset(array $nodeset)
     {
         $this->_nodeset = $nodeset;
         $this->nodeset();
@@ -61,9 +61,14 @@ trait CanBeNoded
         return implode('/', $this->fullNodeSet());
     }
 
+    protected function relativeNodeset()
+    {
+        return '/'.$this->getFullNodeset();
+    }
+
     private function nodeset()
     {
         $this->trickleDown();
-        $this->addAttribute('nodeset', $this->getFullNodeset());
+        $this->addAttribute('nodeset', $this->relativeNodeset());
     }
 }

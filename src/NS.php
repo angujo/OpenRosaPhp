@@ -3,8 +3,6 @@
 
 namespace Angujo\OpenRosaPhp;
 
-use Angujo\OpenRosaPhp\Core\OException;
-
 /**
  * Class NS
  *To hold namespaces

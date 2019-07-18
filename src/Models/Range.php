@@ -4,7 +4,6 @@
 namespace Angujo\OpenRosaPhp\Models;
 
 
-use Angujo\OpenRosaPhp\Core\Attribute;
 use Angujo\OpenRosaPhp\Core\ControlElement;
 
 class Range extends ControlElement

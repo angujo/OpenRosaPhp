@@ -44,27 +44,29 @@ class BodyTest extends TestCase
 
     public function testUploadAudio()
     {
-
+        $audio = $this->body->UploadAudio('voicerecording');
+        $audio->getBind()->setRequired(true);
     }
 
     public function testUploadImageSelfie()
     {
-
+        $this->body->UploadImageSelfie('selfie-pic');
     }
 
     public function testUploadSignature()
     {
-
+        $this->body->UploadSignature('signature');
     }
 
     public function testRepeat()
     {
-
+        $repeats = $this->body->Repeat('performance');
+        $repeats->InputNumberDecimal('maize')->getBind()->setReadOnly(true);
     }
 
     public function testInputBooleanType()
     {
-
+        $this->body->InputBooleanType('yes-no');
     }
 
     public function testUploadImage()
@@ -142,7 +144,7 @@ class BodyTest extends TestCase
         $this->body = null;
     }
 
-    public static function tearDownAfterClass():void
+    public static function tearDownAfterClass(): void
     {
         print_r(ODKForm::toXML());
     }

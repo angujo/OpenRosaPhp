@@ -4,31 +4,37 @@
 namespace Angujo\OpenRosaPhp\Models;
 
 
-use Angujo\OpenRosaPhp\Core\InterfaceElement;
-use Angujo\OpenRosaPhp\Support\CanBeNoded;
+use Angujo\OpenRosaPhp\Core\OverlayInterface;
+use Angujo\OpenRosaPhp\Support\PassessNodeset;
 
 /**
  * Class Repeat
  *
  * @package Angujo\OpenRosaPhp\Models
  */
-class Repeat extends InterfaceElement
+class Repeat extends OverlayInterface
 {
-    use CanBeNoded;
+    use PassessNodeset;
     protected $overlay;
 
     public function __construct($name = null)
     {
-        parent::__construct('repeat');
-        $this->overlay = new Group();
+        parent::__construct('group');
+        $this->overlay = new OverlayInterface('repeat');
         $this->overlay->addElement($this);
         $this->overlay->setRef($name);
+        $this->addAttribute('appearance', 'field-list');
     }
 
     public function setMaxRepeats($count)
     {
-        $this->addAttribute('count', (int)$count);
-        $this->getAttribute('count')->setNamespace('jr');
+        $this->overlay->addAttribute('count', (int)$count);
+        $this->overlay->getAttribute('count')->setNamespace('jr');
         return $this;
+    }
+
+    public function getOverlay()
+    {
+        return $this->overlay;
     }
 }

@@ -11,8 +11,6 @@ use Angujo\OpenRosaPhp\Models\Repeat;
 use Angujo\OpenRosaPhp\Models\Select;
 use Angujo\OpenRosaPhp\Models\Select1;
 use Angujo\OpenRosaPhp\Models\Upload;
-use Angujo\OpenRosaPhp\Support\CanBeNoded;
-use Angujo\OpenRosaPhp\Support\CanBeRef;
 use ReflectionException;
 
 /**
@@ -78,10 +76,14 @@ class InterfaceElement extends XMLTag
         if (!is_a($element, XMLTag::class)) {
             throw new OException('Invalid element!');
         }
-        if (method_exists($element, 'setNodeset')){
+        if (method_exists($element, 'setNodeset')) {
             $element->setNodeset($this->fullNodeSet());
         }
-        $this->addElement($element);
+        if (method_exists($element, 'getOverlay')) {
+            $this->addElement($element->getOverlay());
+        } else {
+            $this->addElement($element);
+        }
         return $element;
     }
 }

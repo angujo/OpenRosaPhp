@@ -4,7 +4,6 @@
 namespace Angujo\OpenRosaPhp\Models;
 
 
-use Angujo\OpenRosaPhp\Core\Bind;
 use Angujo\OpenRosaPhp\Core\XMLTag;
 use Angujo\OpenRosaPhp\Support\ValueTag;
 use Angujo\OpenRosaPhp\Utils\Helper;
