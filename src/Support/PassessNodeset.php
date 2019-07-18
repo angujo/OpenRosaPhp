@@ -29,6 +29,10 @@ trait PassessNodeset
     public function setNodeset(array $nodeset)
     {
         $this->t_nodeset = $nodeset;
+        if (method_exists($this, 'getOverlay')) {
+            $this->getOverlay()->setNodeSet($this->fullNodeSet());
+            return $this;
+        }
         $this->trickleDown();
         return $this;
     }

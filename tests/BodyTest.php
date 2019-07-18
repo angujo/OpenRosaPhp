@@ -31,15 +31,11 @@ class BodyTest extends TestCase
     public function testSelect()
     {
         $select = $this->body->Select('countries');
+        $select->setLabel('Countries as we know them');
         // $this->faker->country
         while (count($select->getOptions()) <= 5) {
-            $select->addOption($this->faker->countryCode, $this->faker->country, $this->faker->countryCode);
+            $select->addOption($this->faker->email, $this->faker->firstNameFemale, $this->faker->countryCode);
         }
-    }
-
-    public function testToXML()
-    {
-
     }
 
     public function testUploadAudio()
@@ -58,10 +54,12 @@ class BodyTest extends TestCase
         $this->body->UploadSignature('signature');
     }
 
+
     public function testRepeat()
     {
         $repeats = $this->body->Repeat('performance');
         $repeats->InputNumberDecimal('maize')->getBind()->setReadOnly(true);
+        $repeats->InputDateTime('dob');
     }
 
     public function testInputBooleanType()
@@ -71,7 +69,8 @@ class BodyTest extends TestCase
 
     public function testUploadImage()
     {
-
+        $img = $this->body->UploadImage('uimg');
+        $img->getBind()->setRequired(true);
     }
 
     public function testSelect1()
@@ -81,7 +80,8 @@ class BodyTest extends TestCase
 
     public function testGroup()
     {
-
+        $gr = $this->body->Group('grp101');
+        $gr->InputNumberDecimal('amount');
     }
 
     public function testInputText()
@@ -111,7 +111,15 @@ class BodyTest extends TestCase
 
     public function testRange()
     {
+        $range = $this->body->Range('ranger', 0, 12, 1);
+    }
 
+    public function testRank()
+    {
+       $rank = $this->body->Rank('ranks');
+         while (count($rank->getOptions()) <= 5) {
+            $rank->addOption($this->faker->countryCode, $this->faker->country, $this->faker->countryCode);
+        }
     }
 
     public function testInputNumberDecimal()

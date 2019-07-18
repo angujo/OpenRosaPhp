@@ -70,8 +70,8 @@ trait CanBeRef
         $this->trickleDown();
         $this->addAttribute('ref', $this->relativeRef());
         if (property_exists($this, 'ref_id') && $this->ref_id) {
-            ODKForm::head()->setVariable($this->ref_id, $this->getFullRef(), $this->content);
-            //Not picked
+            $fref= $this->getFullRef();
+            ODKForm::head()->setVariable($this->ref_id,$fref, $this->content);
         }
         if (method_exists($this, 'getBind')) {
             $this->getBind()->setNodeSet($this->relativeRef());

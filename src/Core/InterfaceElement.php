@@ -7,6 +7,7 @@ namespace Angujo\OpenRosaPhp\Core;
 use Angujo\OpenRosaPhp\Models\Group;
 use Angujo\OpenRosaPhp\Models\Input;
 use Angujo\OpenRosaPhp\Models\Range;
+use Angujo\OpenRosaPhp\Models\Rank;
 use Angujo\OpenRosaPhp\Models\Repeat;
 use Angujo\OpenRosaPhp\Models\Select;
 use Angujo\OpenRosaPhp\Models\Select1;
@@ -35,6 +36,7 @@ use ReflectionException;
  * @method Upload UploadAudio($name)
  * @method Upload UploadVideo($name)
  * @method Upload UploadVideoSelfie($name)
+ * @method Rank Rank($name)
  * @method Range Range($name, int $starts, float $ends, float $step)
  * @method Group Group($name = null)
  * @method Repeat Repeat($name = null)
@@ -79,8 +81,8 @@ class InterfaceElement extends XMLTag
         if (method_exists($element, 'setNodeset')) {
             $element->setNodeset($this->fullNodeSet());
         }
-        if (method_exists($element, 'getOverlay')) {
-            $this->addElement($element->getOverlay());
+        if (method_exists($this, 'getOverlayered')) {
+            $this->getOverlayered()->addElement($element);
         } else {
             $this->addElement($element);
         }
