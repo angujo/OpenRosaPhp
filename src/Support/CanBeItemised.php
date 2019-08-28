@@ -26,7 +26,7 @@ trait CanBeItemised
      *
      * @param null $index
      *
-     * @return $this
+     * @return Option
      * @throws OException
      */
     public function addOption($value, $label, $index = null)
@@ -40,7 +40,7 @@ trait CanBeItemised
         if ($this->fullRef()) {
             $option->setNodeset($this->fullRef());
         }
-        return $this;
+        return $option;
     }
 
     /**

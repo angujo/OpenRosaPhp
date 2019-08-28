@@ -21,12 +21,12 @@ class BodyTest extends TestCase
 
     public function testInputTimeType()
     {
-        $this->body->InputText('johndoe');
+        $this->body->InputText('johndoe')->setLabel('First Name');
     }
 
     public function testUploadImageNew()
     {
-        $this->body->UploadImageNew('nimage');
+        $this->body->UploadImageNew('nimage')->setLabel('No Image Upload');
     }
 
     public function testSelect()
@@ -43,16 +43,17 @@ class BodyTest extends TestCase
     {
         $audio = $this->body->UploadAudio('voicerecording');
         $audio->getBind()->setRequired(true);
+        $audio->setLabel('Voice Record');
     }
 
     public function testUploadImageSelfie()
     {
-        $this->body->UploadImageSelfie('selfie-pic');
+        $this->body->UploadImageSelfie('selfie-pic')->setLabel('Take a selfie');
     }
 
     public function testUploadSignature()
     {
-        $this->body->UploadSignature('signature');
+        $this->body->UploadSignature('signature')->setLabel('Append your signature');
     }
 
 
@@ -60,18 +61,19 @@ class BodyTest extends TestCase
     {
         $repeats = $this->body->Repeat('performance');
         $repeats->InputNumberDecimal('maize')->getBind()->setReadOnly(true);
-        $repeats->InputDateTime('dob');
+        $repeats->InputDateTime('dob')->setLabel('Date of Birth');
     }
 
     public function testInputBooleanType()
     {
-        $this->body->InputBooleanType('yes-no');
+        $this->body->InputBooleanType('yes-no')->setLabel('Do you agree?');
     }
 
     public function testUploadImage()
     {
         $img = $this->body->UploadImage('uimg');
         $img->getBind()->setRequired(true);
+        $img->setLabel('Simple Image upload!');
     }
 
     public function testSelect1()
@@ -80,8 +82,8 @@ class BodyTest extends TestCase
 
     public function testGroup()
     {
-        $gr = $this->body->Group('grp101');
-        $gr2=$gr->Group('grp3');
+        $gr  = $this->body->Group('grp101');
+        $gr2 = $gr->Group('grp3');
         $gr2->InputNumberDecimal('amount');
     }
 
@@ -112,14 +114,16 @@ class BodyTest extends TestCase
 
     public function testRange()
     {
-        $range = $this->body->Range('ranger', 0, 12, 1);
+        $range = $this->body->Range('ranger', 0, 12, 1)->setLabel('Range or something!');
     }
 
     public function testRank()
     {
-       $rank = $this->body->Rank('ranks');
-         while (count($rank->getOptions()) <= 5) {
-            $rank->addOption($this->faker->countryCode, $this->faker->country);
+        $rank = $this->body->Rank('ranks');
+        $rank->setLabel('The ranks as we see!');
+        while (count($rank->getOptions()) <= 5) {
+            $option = $rank->addOption($this->faker->countryCode, $this->faker->country);
+            $option->translateLabel('kis', $this->faker->companyEmail);
         }
     }
 
