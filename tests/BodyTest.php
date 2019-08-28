@@ -16,6 +16,7 @@ class BodyTest extends TestCase
     {
         $this->body  = ODKForm::body();
         $this->faker = Faker\Factory::create();
+        self::assertTrue(true);
     }
 
     public function testInputTimeType()
@@ -75,13 +76,13 @@ class BodyTest extends TestCase
 
     public function testSelect1()
     {
-
     }
 
     public function testGroup()
     {
         $gr = $this->body->Group('grp101');
-        $gr->InputNumberDecimal('amount');
+        $gr2=$gr->Group('grp3');
+        $gr2->InputNumberDecimal('amount');
     }
 
     public function testInputText()
@@ -118,7 +119,7 @@ class BodyTest extends TestCase
     {
        $rank = $this->body->Rank('ranks');
          while (count($rank->getOptions()) <= 5) {
-            $rank->addOption($this->faker->countryCode, $this->faker->country, $this->faker->countryCode);
+            $rank->addOption($this->faker->countryCode, $this->faker->country);
         }
     }
 

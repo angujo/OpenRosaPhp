@@ -4,12 +4,17 @@
 namespace Angujo\OpenRosaPhp\Support;
 
 
+use Angujo\OpenRosaPhp\Config;
 use Angujo\OpenRosaPhp\Core\OException;
+use Angujo\OpenRosaPhp\Models\Head;
+use Angujo\OpenRosaPhp\ODKForm;
 
 class Translation
 {
     private $translations = [];
     private $def = 'en';
+    private $node;
+    private $id;
 
     /**
      * Translation constructor.
@@ -20,6 +25,10 @@ class Translation
      */
     public function __construct($value)
     {
+        $this->id = uniqid('ti');
+        if (Config::isODK()) {
+            Head::globalLang($this);
+        }
         $this->addTranslation($this->def, $value);
     }
 
@@ -74,4 +83,41 @@ class Translation
     {
         return null === $this->getDefault() ? '' : $this->getDefault();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getNode()
+    {
+        return $this->node;
+    }
+
+    /**
+     * @param mixed $node
+     *
+     * @return Translation
+     */
+    public function setNode($node)
+    {
+        $this->node = $node;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDef(): string
+    {
+        return $this->def;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTranslations(): array
+    {
+        return $this->translations;
+    }
+
+
 }

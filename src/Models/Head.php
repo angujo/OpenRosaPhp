@@ -5,6 +5,7 @@ namespace Angujo\OpenRosaPhp\Models;
 
 
 use Angujo\OpenRosaPhp\Core\XMLTag;
+use Angujo\OpenRosaPhp\Support\Translation;
 use Angujo\OpenRosaPhp\Support\ValueTag;
 use Angujo\OpenRosaPhp\Utils\Helper;
 
@@ -17,8 +18,11 @@ class Head extends XMLTag
 {
     private $_model;
     private $_pinstance;
+    private $_itext;
     private $_data_name;
     private $_variables = [];
+    /** @var Translation[] */
+    private static $_languages = [];
 
     public function __construct(&$data_name, &$title)
     {
@@ -44,6 +48,22 @@ class Head extends XMLTag
     public function setVariable($index, $value, $def_value = null)
     {
         $this->_variables[$index] = [$value, $def_value];
+        return $this;
+    }
+
+    public static function globalLang(Translation $translation)
+    {
+        self::$_languages[] =& $translation;
+    }
+
+    /**
+     * @param Translation $translation
+     *
+     * @return $this
+     */
+    public function setLanguage(Translation $translation)
+    {
+        self::$_languages[] =& $translation;
         return $this;
     }
 
@@ -81,18 +101,69 @@ class Head extends XMLTag
         foreach ($this->_variables as $ns) {
             Helper::array_dot($arr, $ns[0], $ns[1], '/');
         }
-        $arr=array_shift($arr);
+        $arr = array_shift($arr);
         $this->loopInstance($this->primaryInstance(), $arr);
     }
 
-    private function loopInstance(XMLTag $parent,$arr)
+    private function loopInstance(XMLTag $parent, $arr)
     {
         foreach ($arr as $index => $item) {
-            if (!preg_match('/^[a-z][\w-]+$/i', $index))continue;
-            $elmt=new XMLTag($index);
+            if (!preg_match('/^[a-z][\w-]+$/i', $index)) {
+                continue;
+            }
+            $elmt = new XMLTag($index);
             $parent->addElementUnq($elmt);
-            if (!is_array($item)) $elmt->setContent($item);
-            else $this->loopInstance($elmt, $item);
+            if (!is_array($item)) {
+                $elmt->setContent($item);
+            } else {
+                $this->loopInstance($elmt, $item);
+            }
         }
+    }
+
+    private function loopedLanguages()
+    {
+        $langs = [];
+        foreach (self::$_languages as $language) {
+            if (!isset($langs[$language->getDef()]) && trim($language->getDefault())) {
+                $langs[$language->getDef()][$language->getNode()] = $language->getDefault();
+            }
+            foreach ($language->getTranslations() as $liso => $translation) {
+                if (0 === strcasecmp($liso, $language->getDefault()) || 0 === strcasecmp($liso, $language->getDef())) {
+                    // continue;
+                }
+                $langs[$liso][$language->getNode()] = $translation;
+            }
+        }
+        return $langs;
+    }
+
+    public function iText()
+    {
+        if ($this->_itext) {
+            return $this->_itext;
+        }
+        $this->_itext = new XMLTag('itext');
+        $this->getModel()->addElement($this->_itext);
+        return $this->_itext;
+    }
+
+    public function setItext()
+    {
+        $arr = $this->loopedLanguages();
+        $i   = true;
+        foreach ($arr as $lname => $txts) {
+            $tr = new XMLTag('translation');
+            if ($i) {
+                $tr->addAttribute('default', 'true()');
+            }
+            $tr->addAttribute('lang', $lname);
+            foreach ($txts as $cd => $txt) {
+                $tr->addElement(LangText::create('/'.$cd, $txt));
+            }
+            $i = false;
+            $this->iText()->addElement($tr);
+        }
+        self::$_languages = [];
     }
 }

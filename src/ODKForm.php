@@ -75,6 +75,7 @@ class ODKForm
     public static function toXML()
     {
         self::head()->setPrimaryInstance();
+        self::head()->setItext();
         self::head()->toXML(self::getHTMLDom());
         self::body()->toXML(self::getHTMLDom());
         return self::getDomDocument()->saveXML();

@@ -21,8 +21,10 @@ trait CanBeItemised
     }
 
     /**
-     * @param $value
-     * @param $label
+     * @param      $value
+     * @param      $label
+     *
+     * @param null $index
      *
      * @return $this
      * @throws OException
@@ -31,7 +33,8 @@ trait CanBeItemised
     {
         $this->addElementUnq($option = Option::create($value, $label, $index), $value);
         if (!$index) {//->setRef(explode('/', implode('/', $this->fullNodeSet()).$ref));
-            $ref = ':option'.count($this->getOptions()) - 1;
+            $v   = (count($this->getOptions()) - 1);
+            $ref = ':option'.$v;
             $option->setRef($ref);
         }
         if ($this->fullRef()) {

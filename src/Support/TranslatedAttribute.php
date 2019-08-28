@@ -4,8 +4,10 @@
 namespace Angujo\OpenRosaPhp\Support;
 
 
+use Angujo\OpenRosaPhp\Config;
 use Angujo\OpenRosaPhp\Core\Attribute;
 use Angujo\OpenRosaPhp\Core\OException;
+use Angujo\OpenRosaPhp\ODKForm;
 
 /**
  * Class TranslatedAttribute
@@ -25,7 +27,8 @@ class TranslatedAttribute extends Attribute
      */
     public function getTranslation()
     {
-        return $this->translation = $this->translation ?: new Translation(null);
+        $this->translation = $this->translation ?: new Translation(null);
+        return $this->translation;
     }
 
     /**

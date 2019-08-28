@@ -4,8 +4,10 @@
 namespace Angujo\OpenRosaPhp\Support;
 
 
+use Angujo\OpenRosaPhp\Config;
 use Angujo\OpenRosaPhp\Core\OException;
 use Angujo\OpenRosaPhp\Core\XMLTag;
+use Angujo\OpenRosaPhp\ODKForm;
 
 class ValueTag extends XMLTag
 {
