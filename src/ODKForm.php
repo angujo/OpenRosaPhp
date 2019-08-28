@@ -59,6 +59,11 @@ class ODKForm
         return self::$_body;
     }
 
+    public static function setTitle($title)
+    {
+        self::$_title = $title;
+    }
+
     public static function head()
     {
         if (!self::$_head) {

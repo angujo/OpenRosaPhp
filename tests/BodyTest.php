@@ -15,6 +15,7 @@ class BodyTest extends TestCase
     protected function setUp(): void
     {
         $this->body  = ODKForm::body();
+        ODKForm::setTitle('Form 101');
         $this->faker = Faker\Factory::create();
         self::assertTrue(true);
     }
