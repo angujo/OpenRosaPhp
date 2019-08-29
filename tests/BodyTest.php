@@ -16,6 +16,7 @@ class BodyTest extends TestCase
     {
         $this->body  = ODKForm::body();
         ODKForm::setTitle('Form 101');
+        ODKForm::submissionURL('http://google.com');
         $this->faker = Faker\Factory::create();
         self::assertTrue(true);
     }
@@ -60,7 +61,7 @@ class BodyTest extends TestCase
 
     public function testRepeat()
     {
-        $repeats = $this->body->Repeat('performance');
+        $repeats = $this->body->Repeat('performance')->setMaxRepeats(20);
         $repeats->InputNumberDecimal('maize')->getBind()->setReadOnly(true);
         $repeats->InputDateTime('dob')->setLabel('Date of Birth');
     }

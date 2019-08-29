@@ -21,6 +21,7 @@ class Head extends XMLTag
     private $_itext;
     private $_data_name;
     private $_variables = [];
+    private $_submission_url;
     /** @var Translation[] */
     private static $_languages = [];
 
@@ -54,6 +55,18 @@ class Head extends XMLTag
     public static function globalLang(Translation $translation)
     {
         self::$_languages[] =& $translation;
+    }
+
+    public function setSubmissionUrl(&$url)
+    {
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+            throw new \Exception('Invalid URL for submission!');
+        }
+        if (0 !== stripos($url, 'http')) {
+            throw new \Exception('Submission url is missing protocol!');
+        }
+        $this->_submission_url = $url;
+        return $this;
     }
 
     /**
@@ -165,5 +178,23 @@ class Head extends XMLTag
             $this->iText()->addElement($tr);
         }
         self::$_languages = [];
+    }
+
+    private function setUrl()
+    {
+        if (!$this->_submission_url) {
+            return;
+        }
+        $url = new XMLTag('submission');
+        $this->getModel()->addElement($url);
+        $url->addAttribute('method', 'post');
+        $url->addAttribute('action', $this->_submission_url);
+    }
+
+    public function setHeader()
+    {
+        $this->setPrimaryInstance();
+        $this->setUrl();
+        $this->setItext();
     }
 }
