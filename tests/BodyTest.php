@@ -14,10 +14,11 @@ class BodyTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->body = ODKForm::body();
+        ODKForm::setId(uniqid());
         ODKForm::setTitle('Form 101');
         ODKForm::submissionURL('http://google.com');
         ODKForm::setVersion('0.0.1');
+        $this->body = ODKForm::body();
         $this->faker = Faker\Factory::create();
         self::assertTrue(true);
     }

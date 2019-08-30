@@ -97,6 +97,9 @@ class InterfaceElement extends XMLTag
      */
     public function addControl(XMLTag $tag)
     {
+        if (method_exists($tag, 'setNodeset') && method_exists($this, 'fullNodeSet')) {
+            $tag->setNodeset($this->fullNodeSet());
+        }
         $this->addElement($tag);
         return $this;
     }
