@@ -60,6 +60,16 @@ class ODKForm extends DOMLayer
         self::$_title = $title;
     }
 
+    public static function setVersion($version)
+    {
+        self::head()->setVersion($version);
+    }
+
+    public static function setId($id)
+    {
+        self::head()->setId($id);
+    }
+
     /**
      * @param $url
      *
@@ -78,7 +88,8 @@ class ODKForm extends DOMLayer
     public static function head()
     {
         if (!self::$_head) {
-            self::$_head = new Head(self::$_data, self::$_title);
+            self::$_head = new Head(self::$_data);
+            self::$_head->setTitle(self::$_title);
             self::setInstanceName();
         }
         return self::$_head;

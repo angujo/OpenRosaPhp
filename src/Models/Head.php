@@ -18,6 +18,9 @@ class Head extends XMLTag
 {
     private $_model;
     private $_pinstance;
+    private $_title = 'Untitled Form';
+    private $_version;
+    private $_id;
     private $_itext;
     private $_data_name;
     private $_variables = [];
@@ -25,13 +28,36 @@ class Head extends XMLTag
     /** @var Translation[] */
     private static $_languages = [];
 
-    public function __construct(&$data_name, &$title)
+    public function __construct(&$data_name)
     {
         parent::__construct('head');
+        $this->_id       = sha1(uniqid());
         $this->tag_space = 'h';
-        $this->setTitle($title);
+        $this->setTitle($this->_title);
         $this->_data_name =& $data_name;
         $this->primaryInstance();
+    }
+
+    /**
+     * @param mixed $version
+     *
+     * @return Head
+     */
+    public function setVersion(&$version)
+    {
+        $this->_version =& $version;
+        return $this;
+    }
+
+    /**
+     * @param mixed $id
+     *
+     * @return Head
+     */
+    public function setId(&$id)
+    {
+        $this->_id = &$id;
+        return $this;
     }
 
     /**
@@ -41,7 +67,7 @@ class Head extends XMLTag
     private function titleElement()
     {
         if (!$this->hasElement('h:title')) {
-            $this->addElementUnq($h = (new ValueTag('title', null))->setTagspace('h'), 'h:title');
+            $this->addElementUnq((new ValueTag('title', null))->setTagspace('h'), 'h:title');
         }
         return $this->getElement('h:title');
     }
@@ -82,6 +108,7 @@ class Head extends XMLTag
 
     public function setTitle(&$title)
     {
+        $this->_title =& $title;
         $this->titleElement()->setContent((string)$title);
         return $this;
     }
@@ -110,6 +137,13 @@ class Head extends XMLTag
 
     public function setPrimaryInstance()
     {
+        $this->titleElement()->setContent((string)$this->_title);
+        if ($this->_id) {
+            $this->primaryInstance()->addAttribute('id', $this->_id);
+        }
+        if ($this->_version) {
+            $this->primaryInstance()->addAttribute('version', $this->_version)->getAttribute('version')->setNamespace('orx');
+        }
         $arr = [];
         foreach ($this->_variables as $ns) {
             Helper::array_dot($arr, $ns[0], $ns[1], '/');

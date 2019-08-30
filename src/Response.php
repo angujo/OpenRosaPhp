@@ -51,14 +51,14 @@ class Response extends DOMLayer
 
     public static function formList()
     {
-         self::headers();
+        self::headers();
         echo FormsList::toXML();
         die;
     }
 
     public static function manifest()
     {
-         self::headers();
+        self::headers();
         echo Manifest::toXML();
         die;
     }
