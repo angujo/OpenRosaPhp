@@ -5,6 +5,7 @@ namespace Angujo\OpenRosaPhp\Core;
 
 
 use Angujo\OpenRosaPhp\Support\CanBeNoded;
+use Angujo\OpenRosaPhp\Support\Labelable;
 use Angujo\OpenRosaPhp\Support\PassessNodeset;
 
 /**
@@ -14,5 +15,5 @@ use Angujo\OpenRosaPhp\Support\PassessNodeset;
  */
 class OverlayInterface extends InterfaceElement
 {
-    use PassessNodeset;
+    use PassessNodeset,Labelable;
 }
