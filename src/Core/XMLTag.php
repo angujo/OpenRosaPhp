@@ -144,12 +144,12 @@ class XMLTag
     }
 
     /**
-     * @param XMLTag $elmt
-     * @param bool   $unique
+     * @param XMLTag|string $elmt
+     * @param bool          $unique
      *
      * @throws OException
      */
-    private function setElement(XMLTag $elmt, $unique = false)
+    private function setElement($elmt, $unique = false)
     {
         if (is_object($elmt) && is_a($elmt, XMLTag::class)) {
             if (false !== $unique) {
@@ -219,6 +219,18 @@ class XMLTag
         return $this->content;
     }
 
+    protected function setGetElement($name, $content = null)
+    {
+        if (!$this->hasElement($name)) {
+            $this->addElementUnq($name);
+        }
+        $lmt = $this->getElement($name);
+        if ($content) {
+            $lmt->setContent($content);
+        }
+        return $lmt;
+    }
+
     /**
      * @param mixed $content
      *
@@ -232,16 +244,18 @@ class XMLTag
 
     /**
      * @param \DOMElement|\DOMDocument $writer
+     * @param null|\DOMDocument        $root
      *
      * @return \DOMElement
      * @throws OException
      */
-    public function toXML($writer)
+    public function toXML($writer, $root = null)
     {
+        $root = $root && is_object($root) && is_a($root, \DOMDocument::class) ? $root : ODKForm::get();
         if ($this->tag_space) {
-            $elmt = ODKForm::get()->createElementNS($this->getTagSpaceUrl(), $this->fullTag(), $this->content ?: null);
+            $elmt = $root->createElementNS($this->getTagSpaceUrl(), $this->fullTag(), $this->content ?: null);
         } else {
-            $elmt = ODKForm::get()->createElement($this->tag, $this->content ?: null);
+            $elmt = $root->createElement($this->tag, $this->content ?: null);
         }
         $writer->appendChild($elmt);
         foreach ($this->attributes as $attribute) {
