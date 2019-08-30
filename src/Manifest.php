@@ -50,7 +50,7 @@ class Manifest extends DOMLayer
      * @return string
      * @throws Core\OException
      */
-    public function toXML()
+    public static function toXML()
     {
         foreach (self::$mediafiles as $xform) {
             $xform->toXML(self::mediaDOM(), self::getDomDocument());

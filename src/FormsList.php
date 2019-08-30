@@ -62,7 +62,7 @@ class FormsList extends DOMLayer
      * @return string
      * @throws Core\OException
      */
-    public function toXML()
+    public static function toXML()
     {
         foreach (self::$xforms as $xform) {
             $xform->toXML(self::xFormsDOM(), self::getDomDocument());

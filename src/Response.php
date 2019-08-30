@@ -49,24 +49,24 @@ class Response extends DOMLayer
         return XmlToArray::convert($content);
     }
 
-    public static function formList(FormsList $formsList)
+    public static function formList()
     {
-        self::headers();
-        echo $formsList->toXML();
+        // self::headers();
+        echo FormsList::toXML();
         die;
     }
 
-    public static function manifest(Manifest $manifest)
+    public static function manifest()
     {
-        self::headers();
-        echo $manifest->toXML();
+        // self::headers();
+        echo Manifest::toXML();
         die;
     }
 
-    public static function ODKForm(ODKForm $form)
+    public static function ODKForm()
     {
         self::headers();
-        echo $form->toXML();
+        echo ODKForm::toXML();
         die;
     }
 
