@@ -4,6 +4,7 @@
 namespace Angujo\OpenRosaPhp;
 
 
+use Angujo\OpenRosaPhp\Core\DOMLayer;
 use Angujo\OpenRosaPhp\Core\XMLTag;
 use Angujo\OpenRosaPhp\Models\MediaFile;
 use Angujo\OpenRosaPhp\Models\XForm;
@@ -14,10 +15,8 @@ use Angujo\OpenRosaPhp\Models\XFormsGroup;
  *
  * @package Angujo\OpenRosaPhp
  */
-class Manifest
+class Manifest extends DOMLayer
 {
-    /** @var \DOMDocument|\DOMElement */
-    private static $_dom_document;
     /** @var \DOMDocument|\DOMElement */
     private static $_dom_media_files;
     /** @var XMLTag[] */
@@ -32,14 +31,6 @@ class Manifest
         self::$_dom_media_files->setAttribute('xmlns', 'http://openrosa.org/xforms/xformsManifest');
         self::getDomDocument()->appendChild(self::$_dom_media_files);
         return self::$_dom_media_files;
-    }
-
-    public static function getDomDocument()
-    {
-        if (!self::$_dom_document) {
-            self::$_dom_document = new \DOMDocument('1.0', 'utf-8');
-        }
-        return self::$_dom_document;
     }
 
     /**

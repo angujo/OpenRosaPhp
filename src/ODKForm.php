@@ -4,6 +4,7 @@
 namespace Angujo\OpenRosaPhp;
 
 
+use Angujo\OpenRosaPhp\Core\DOMLayer;
 use Angujo\OpenRosaPhp\Models\Body;
 use Angujo\OpenRosaPhp\Models\Head;
 
@@ -12,9 +13,8 @@ use Angujo\OpenRosaPhp\Models\Head;
  *
  * @package Angujo\OpenRosaPhp
  */
-class ODKForm
+class ODKForm extends DOMLayer
 {
-    private static $_dom_document;
     private static $_html_document;
     /** @var Body */
     private static $_body;
@@ -23,10 +23,6 @@ class ODKForm
     private static $_title = 'Untitled Form';
     private static $_data = 'data';
 
-    protected static function getDomDocument()
-    {
-        return self::$_dom_document = self::$_dom_document ?: new \DOMDocument('1.0', 'UTF-8');
-    }
 
     private static function getHTMLDom()
     {

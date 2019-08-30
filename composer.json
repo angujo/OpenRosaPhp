@@ -18,7 +18,10 @@
   "require": {
     "ext-xmlwriter": "*",
     "ext-dom": "*",
-    "angujo/httpauth": "dev-master"
+    "angujo/httpauth": "dev-master",
+    "ext-libxml": "*",
+    "ext-simplexml": "*",
+    "vyuldashev/xml-to-array": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "8",
