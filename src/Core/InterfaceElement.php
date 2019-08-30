@@ -88,4 +88,16 @@ class InterfaceElement extends XMLTag
         }
         return $element;
     }
+
+    /**
+     * @param XMLTag $tag
+     *
+     * @return $this
+     * @throws OException
+     */
+    public function addControl(XMLTag $tag)
+    {
+        $this->addElement($tag);
+        return $this;
+    }
 }
