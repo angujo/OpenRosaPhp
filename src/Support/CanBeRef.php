@@ -76,7 +76,6 @@ trait CanBeRef
         if (property_exists($this, 'ref_id') && $this->ref_id) {
             if (Config::isODK()) {
                 ODKForm::head()->setVariable($this->ref_id, $fref, $this->content);
-                /*$this->checkOnTranslation($this, $fref);*/
             }
         }
         if (Config::isODK()) {

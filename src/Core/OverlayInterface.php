@@ -15,5 +15,5 @@ use Angujo\OpenRosaPhp\Support\PassessNodeset;
  */
 class OverlayInterface extends InterfaceElement
 {
-    use PassessNodeset,Labelable;
+    use PassessNodeset;
 }

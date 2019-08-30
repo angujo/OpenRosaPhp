@@ -63,6 +63,7 @@ class BodyTest extends TestCase
     public function testRepeat()
     {
         $repeats = $this->body->Repeat('performance')->setMaxRepeats(20);
+        $repeats->setLabel('My Repeat Label!');
         $repeats->InputNumberDecimal('maize')->getBind()->setReadOnly(true);
         $repeats->InputDateTime('dob')->setLabel('Date of Birth');
     }
@@ -85,7 +86,8 @@ class BodyTest extends TestCase
 
     public function testGroup()
     {
-        $gr  = $this->body->Group('grp101');
+        $gr = $this->body->Group('grp101');
+        $gr->setLabel('My Label 101');
         $gr2 = $gr->Group('grp3');
         $gr2->InputNumberDecimal('amount');
     }

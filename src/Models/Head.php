@@ -176,10 +176,11 @@ class Head extends XMLTag
                 $langs[$language->getDef()][$language->getNode()] = $language->getDefault();
             }
             foreach ($language->getTranslations() as $liso => $translation) {
-                if (0 === strcasecmp($liso, $language->getDefault()) || 0 === strcasecmp($liso, $language->getDef())) {
-                    // continue;
+                $n=$language->getNode();
+                if (!$n) {
+                    continue;
                 }
-                $langs[$liso][$language->getNode()] = $translation;
+                $langs[$liso][$n] = $translation;
             }
         }
         return $langs;

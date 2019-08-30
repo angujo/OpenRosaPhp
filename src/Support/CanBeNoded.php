@@ -4,6 +4,8 @@
 namespace Angujo\OpenRosaPhp\Support;
 
 
+use Angujo\OpenRosaPhp\Config;
+
 /**
  * Trait CanBeNoded
  *
@@ -70,5 +72,18 @@ trait CanBeNoded
     {
         $this->trickleDown();
         $this->addAttribute('nodeset', $this->relativeNodeset());
+        if (Config::isODK()) {
+            $this->checkOnTranslation($this, $this->fullNodeSet());
+        }
+    }
+
+    private function checkOnTranslation($element, $fref)
+    {
+        if (method_exists($element, 'getLabelElement')) {
+            /** @var Translation $trans */
+            $this->getLabelElement()->getTranslation()->setNode($fref);
+        } elseif (method_exists($element, 'getTranslation')) {
+            $this->getTranslation()->setNode($fref);
+        }
     }
 }

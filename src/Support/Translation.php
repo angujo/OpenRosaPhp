@@ -89,7 +89,7 @@ class Translation
      */
     public function getNode()
     {
-        return $this->node;
+        return is_array($this->node) ? implode('/', $this->node) : $this->node;
     }
 
     /**
