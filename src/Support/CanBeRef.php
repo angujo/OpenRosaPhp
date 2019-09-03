@@ -71,7 +71,7 @@ trait CanBeRef
     private function ref()
     {
         $this->trickleDown();
-        $this->addAttribute('ref', $this->relativeRef());
+        $this->addAttribute('ref', 'jr:itext('.$this->relativeRef().')');
         $fref = $this->getFullRef();
         if (property_exists($this, 'ref_id') && $this->ref_id) {
             if (Config::isODK()) {

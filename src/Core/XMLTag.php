@@ -255,7 +255,7 @@ class XMLTag
         if ($this->tag_space) {
             $elmt = $root->createElementNS($this->getTagSpaceUrl(), $this->fullTag(), $this->content ?: null);
         } else {
-            $elmt = $root->createElement($this->tag, $this->content ?: null);
+            $elmt = $root->createElement($this->tag, trim($this->content.'') ?: null);
         }
         $writer->appendChild($elmt);
         foreach ($this->attributes as $attribute) {
