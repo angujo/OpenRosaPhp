@@ -176,7 +176,7 @@ class Head extends XMLTag
                 $langs[$language->getDef()][$language->getNode()] = $language->getDefault();
             }
             foreach ($language->getTranslations() as $liso => $translation) {
-                $n=$language->getNode();
+                $n = $language->getNode();
                 if (!$n) {
                     continue;
                 }
@@ -207,6 +207,9 @@ class Head extends XMLTag
             }
             $tr->addAttribute('lang', $lname);
             foreach ($txts as $cd => $txt) {
+                if (strlen(trim($txt.'')) <= 0 || is_numeric($txt)) {
+                    continue;
+                }
                 $tr->addElement(LangText::create($cd, $txt));
             }
             $i = false;

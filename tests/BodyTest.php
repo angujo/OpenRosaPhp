@@ -85,10 +85,10 @@ class BodyTest extends TestCase
     {
         $sel1 = $this->body->Select1('yn');
         $sel1->setLabel('Do you agree?');
-       // $sel1->addOption('', '');
+        $sel1->addOption('', '');
         $sel1->addOption(0, 'No');
-       // $sel1->addOption(1, 'Yes');
-       // $sel1->addOption('99', '99');
+        $sel1->addOption(1, 'Yes');
+        $sel1->addOption('99', '99');
     }
 
     public function testGroup()

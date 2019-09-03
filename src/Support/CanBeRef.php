@@ -76,7 +76,9 @@ trait CanBeRef
 
     private function relativeRef()
     {
-        if (0===stripos($this->getFullRef(), ':'))return $this->_ref;
+        if (0 === stripos($this->getFullRef(), ':')) {
+            return $this->_ref;
+        }
         return $this->setLabelRef('/'.trim($this->getFullRef(), '/ '));
     }
 
@@ -84,9 +86,11 @@ trait CanBeRef
     {
         $this->trickleDown();
         $this->full_ref        = $this->relativeRef();
-        $this->translation_ref = $this->setLabelRef($this->full_ref,true);
+        $this->translation_ref = $this->setLabelRef($this->full_ref, true);
         if (0 === strcasecmp(Tag::LABEL, $this->getTag())) {
-            $this->addAttribute('ref', 'jr:itext('.$this->relativeRef().')');
+            if (strlen(trim($this->content.'')) > 0 && !is_numeric(trim($this->content.''))) {
+                $this->addAttribute('ref', 'jr:itext('.$this->relativeRef().')');
+            }
         } else {
             $this->addAttribute('ref', $this->relativeRef());
         }
