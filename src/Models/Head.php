@@ -207,7 +207,7 @@ class Head extends XMLTag
             }
             $tr->addAttribute('lang', $lname);
             foreach ($txts as $cd => $txt) {
-                $tr->addElement(LangText::create('/'.$cd, $txt));
+                $tr->addElement(LangText::create($cd, $txt));
             }
             $i = false;
             $this->iText()->addElement($tr);

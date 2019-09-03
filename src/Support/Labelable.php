@@ -18,7 +18,7 @@ trait Labelable
     }
 
     /**
-     * @return RefValueTag
+     * @return ValueTag
      * @throws OException
      */
     public function getLabelElement()
@@ -27,6 +27,15 @@ trait Labelable
             $this->addElementUnq(new RefValueTag(Tag::LABEL, null));
         }
         return $this->getElement(Tag::LABEL);
+    }
+
+    /**
+     * @return Translation
+     * @throws OException
+     */
+    public function getLabelTranslation()
+    {
+        return $this->getLabelElement()->getTranslation();
     }
 
     /**
@@ -55,8 +64,7 @@ trait Labelable
      */
     public function setLabel($label)
     {
-        $this->getLabelElement()->setValue($label);
-        return $this->getElement(Tag::LABEL)->getTranslation();
+        return $this->getLabelElement()->setValue($label);
     }
 
 }

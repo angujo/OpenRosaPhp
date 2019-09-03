@@ -18,7 +18,7 @@ class BodyTest extends TestCase
         ODKForm::setTitle('Form 101');
         ODKForm::submissionURL('http://google.com');
         ODKForm::setVersion('0.0.1');
-        $this->body = ODKForm::body();
+        $this->body  = ODKForm::body();
         $this->faker = Faker\Factory::create();
         self::assertTrue(true);
     }
@@ -83,6 +83,12 @@ class BodyTest extends TestCase
 
     public function testSelect1()
     {
+        $sel1 = $this->body->Select1('yn');
+        $sel1->setLabel('Do you agree?');
+       // $sel1->addOption('', '');
+        $sel1->addOption(0, 'No');
+       // $sel1->addOption(1, 'Yes');
+       // $sel1->addOption('99', '99');
     }
 
     public function testGroup()

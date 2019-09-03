@@ -30,6 +30,7 @@ use Angujo\OpenRosaPhp\ODKForm;
  */
 trait CanBeBound
 {
+    /** @var Bind */
     private $_bind;
 
     /**

@@ -56,7 +56,7 @@ class InterfaceElement extends XMLTag
      */
     public function __call($name, $args)
     {
-        $fp = '/^([A-Z]([a-z]+))/';
+        $fp = '/^([A-Z]([a-z]+(1)?))/';
         if (!preg_match($fp, $name, $output_array)) {
             throw new OException('Invalid body element::'.$name.' on '.get_class($this));
         }

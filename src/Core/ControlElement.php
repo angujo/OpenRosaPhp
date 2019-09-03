@@ -33,7 +33,9 @@ class ControlElement extends XMLTag
             $tag             = 'rank';
         }
         parent::__construct($tag);
-        $this->setRef((string)preg_replace('/[^a-z0-9]/i','-',$name));
+        $this->setRef((string)preg_replace('/[^a-z0-9]/i', '-', $name));
+        $this->getLabelTranslation()->setNode($this->translation_ref);
         $this->ref_id = uniqid('ce', true);
+        // $this->getLabelElement()->getTranslation()->setNode($this->full_ref);
     }
 }
