@@ -81,11 +81,7 @@ class InterfaceElement extends XMLTag
         if (method_exists($element, 'setNodeset')) {
             $element->setNodeset($this->fullNodeSet());
         }
-        if (method_exists($this, 'getOverlayered')) {
-            $this->getOverlayered()->addElement($element);
-        } else {
-            $this->addElement($element);
-        }
+        $this->addInterfaceElement($element);
         return $element;
     }
 
@@ -100,7 +96,16 @@ class InterfaceElement extends XMLTag
         if (method_exists($tag, 'setNodeset') && method_exists($this, 'fullNodeSet')) {
             $tag->setNodeset($this->fullNodeSet());
         }
-        $this->addElement($tag);
+        $this->addInterfaceElement($tag);
         return $this;
+    }
+
+    private function addInterfaceElement($element)
+    {
+        if (method_exists($this, 'getOverlayered')) {
+            $this->getOverlayered()->addElement($element);
+        } else {
+            $this->addElement($element);
+        }
     }
 }
