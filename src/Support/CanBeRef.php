@@ -76,6 +76,7 @@ trait CanBeRef
 
     private function relativeRef()
     {
+        if (0===stripos($this->getFullRef(), ':'))return $this->_ref;
         return $this->setLabelRef('/'.trim($this->getFullRef(), '/ '));
     }
 

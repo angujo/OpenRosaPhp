@@ -19,7 +19,7 @@ class Option extends XMLTag
     public function __construct()
     {
         parent::__construct(Tag::ITEM);
-      //  $this->getLabelTranslation()->setNode($this->_myref);
+        //  $this->getLabelTranslation()->setNode($this->_myref);
     }
 
     /**
@@ -46,12 +46,13 @@ class Option extends XMLTag
         if (!$ref) {
             return $this;
         }
-        if (true === $node) {
-            $this->_myref = '/'.implode('/', $ref).'/'.$this->_myref;
-        } else {
-            $this->_myref = implode('/', $this->fullNodeSet()).':'.preg_replace(['/[^\w]+/i', '/(^_|_$)/i'], ['_', ''], strtolower($ref));
+        if (true === $node || is_array($ref)) {
+            $ref = '/'.implode('/', $ref).(0 === stripos($this->_myref, ':') ? '' : '/').$this->_myref;
+        }else{
+            $this->_myref=preg_replace(['/[^\w]+/i', '/(^_|_$)/i'], ['_', ''], strtolower($ref));
         }
-        $this->getLabelElement()->setRef($this->_myref);
+        $ref = implode('/', $this->fullNodeSet()).':'.$this->_myref;
+        $this->getLabelElement()->setRef($ref);
         return $this;
     }
 
