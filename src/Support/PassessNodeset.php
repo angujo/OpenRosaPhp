@@ -33,6 +33,10 @@ trait PassessNodeset
             $this->getOverlay()->setNodeSet($this->fullNodeSet());
             return $this;
         }
+        if (method_exists($this, 'setRef')) {
+            $this->setRef($this->fullNodeSet(),true);
+            return $this;
+        }
         $this->trickleDown();
         return $this;
     }

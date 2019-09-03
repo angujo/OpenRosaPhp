@@ -89,6 +89,7 @@ trait CanBeRef
         } else {
             $this->addAttribute('ref', $this->relativeRef());
         }
+        $this->checkOnTranslation($this, $this->translation_ref);
         if (property_exists($this, 'ref_id') && $this->ref_id) {
             ODKForm::head()->setVariable($this->ref_id, $this->getFullRef(), $this->content);
         }
@@ -104,10 +105,6 @@ trait CanBeRef
         $trans = null;
         if (method_exists($element, 'getTranslation')) {
             $trans = $this->getTranslation();
-        } elseif (method_exists($element, 'getLabelElement')) {
-            /** @var ValueTag $label */
-            $label = $this->getLabelElement();
-            $trans = $label->getTranslation();
         }
         if ($trans) {
             $trans->setNode($fref);

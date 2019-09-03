@@ -13,11 +13,13 @@ class ValueTag extends XMLTag
 {
     private $translation;
 
-    public function __construct($tag, $default)
+    public function __construct($tag, $default, $no_trans = false)
     {
         parent::__construct($tag);
-        $this->content     = $default;
-        $this->translation = new Translation($default);
+        $this->content = $default;
+        if (false === $no_trans) {
+            $this->translation = new Translation($default);
+        }
     }
 
     /**
@@ -25,7 +27,7 @@ class ValueTag extends XMLTag
      */
     public function getValue()
     {
-        return $this->translation->getDefault();
+        return $this->translation ? $this->translation->getDefault() : $this->content;
     }
 
     /**
@@ -37,11 +39,11 @@ class ValueTag extends XMLTag
     public function setValue($value)
     {
         $this->content = $value;
-        return $this->translation->setDefault($value);
+        return $this->translation ? $this->translation->setDefault($value) : null;
     }
 
     /**
-     * @return Translation
+     * @return Translation|null
      */
     public function getTranslation(): Translation
     {
