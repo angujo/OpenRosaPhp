@@ -63,9 +63,4 @@ class Upload extends ControlElement
     {
         return $this->addAttribute('mediatype', $type);
     }
-
-    private function setAppearance($appear)
-    {
-        return $this->addAttribute('appearance', $appear);
-    }
 }

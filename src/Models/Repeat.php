@@ -23,8 +23,8 @@ class Repeat extends Group
 
     public function __construct($name = null)
     {
-        parent::__construct($name);
         $this->root = new OverlayInterface('repeat');
+        parent::__construct($name);
         $this->addElement($this->root);
         $this->overlayered = new OverlayInterface('group');
         $this->root->addElement($this->overlayered);

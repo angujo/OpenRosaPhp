@@ -17,6 +17,14 @@ class Input extends ControlElement
         return $me;
     }
 
+    public static function TextArea($name)
+    {
+        $me = new self($name);
+        $me->setType('string');
+        $me->setAppearance('multiline');
+        return $me;
+    }
+
     public static function NumberInteger($name)
     {
         $me = new self($name);
@@ -45,6 +53,20 @@ class Input extends ControlElement
         return $me;
     }
 
+    public static function DateMonthYear($name)
+    {
+        $me = new self($name);
+        $me->setType('month-year');
+        return $me;
+    }
+
+    public static function DateYear($name)
+    {
+        $me = new self($name);
+        $me->setType('year');
+        return $me;
+    }
+
     public static function TimeType($name)
     {
         $me = new self($name);
@@ -63,6 +85,13 @@ class Input extends ControlElement
     {
         $me = new self($name);
         $me->setType('barcode');
+        return $me;
+    }
+
+    public static function Url($name)
+    {
+        $me = new self($name);
+        $me->setType('url');
         return $me;
     }
 }

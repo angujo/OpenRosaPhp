@@ -38,4 +38,9 @@ class ControlElement extends XMLTag
         $this->ref_id = uniqid('ce', true);
         // $this->getLabelElement()->getTranslation()->setNode($this->full_ref);
     }
+
+    protected function setAppearance($appear)
+    {
+        return $this->addAttribute('appearance', $appear);
+    }
 }

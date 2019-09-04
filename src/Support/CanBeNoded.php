@@ -5,6 +5,7 @@ namespace Angujo\OpenRosaPhp\Support;
 
 
 use Angujo\OpenRosaPhp\Config;
+use Angujo\OpenRosaPhp\Core\XMLTag;
 
 /**
  * Trait CanBeNoded
@@ -72,6 +73,9 @@ trait CanBeNoded
     {
         $this->trickleDown();
         $this->addAttribute('nodeset', $this->relativeNodeset());
+        if (property_exists($this, 'root') && is_a($this, XMLTag::class)) {
+            $this->root->addAttribute('nodeset', $this->relativeNodeset());
+        }
         if (Config::isODK()) {
             $this->checkOnTranslation($this, $this->fullNodeSet());
         }
