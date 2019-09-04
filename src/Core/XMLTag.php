@@ -8,6 +8,7 @@ use Angujo\OpenRosaPhp\NS;
 use Angujo\OpenRosaPhp\ODKForm;
 use Angujo\OpenRosaPhp\Support\TranslatedAttribute;
 use Angujo\OpenRosaPhp\Support\TricklesNode;
+use Angujo\OpenRosaPhp\Tag;
 use Angujo\OpenRosaPhp\Utils\Helper;
 
 class XMLTag
@@ -21,6 +22,11 @@ class XMLTag
     protected $elements = [];
     protected $tag_space;
     protected $content;
+
+    protected function isLabel()
+    {
+        return 0 === strcasecmp(Tag::LABEL, $this->tag);
+    }
 
     /**
      * XMLTag constructor.
@@ -217,7 +223,7 @@ class XMLTag
      */
     protected function getContent()
     {
-        return $this->content;
+        return trim($this->content);
     }
 
     protected function setGetElement($name, $content = null)
@@ -253,6 +259,9 @@ class XMLTag
     public function toXML($writer, $root = null)
     {
         $root = $root && is_object($root) && is_a($root, \DOMDocument::class) ? $root : ODKForm::get();
+        if ($this->isLabel() && strlen($this->getContent()) <= 0) {
+            $this->setContent('---');
+        }
         if ($this->tag_space) {
             $elmt = $root->createElement($this->fullTag(), $this->content ?: null);
             //$elmt = $root->createElementNS($this->getTagSpaceUrl(), $this->fullTag(), $this->content ?: null);
