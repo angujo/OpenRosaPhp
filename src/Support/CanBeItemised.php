@@ -31,6 +31,9 @@ trait CanBeItemised
      */
     public function addOption($value, $label, $index = null)
     {
+        if (strlen(trim($value)) <= 0) {
+            return null;
+        }
         $this->addElementUnq($option = Option::create($value, $label, $index), $value);
         if (!$index) {//->setRef(explode('/', implode('/', $this->fullNodeSet()).$ref));
             $v   = (count($this->getOptions()) - 1);
@@ -52,8 +55,8 @@ trait CanBeItemised
     public function setOptions(array $options)
     {
         foreach ($options as $value => $option) {
-            if (!is_a($option, Option::class)) {
-                $this->addElementUnq($option, $option->getValue());
+            if (is_a($option, Option::class)) {
+                $this->addOption($option->getValue(), $option->getLabel());
             } else {
                 $this->addOption((string)$value, (string)$option);
             }
