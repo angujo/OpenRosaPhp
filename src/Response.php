@@ -5,6 +5,7 @@ namespace Angujo\OpenRosaPhp;
 
 
 use Angujo\OpenRosaPhp\Core\DOMLayer;
+use Angujo\OpenRosaPhp\Core\FileSubmission;
 use Angujo\OpenRosaPhp\Utils\Helper;
 use Vyuldashev\XmlToArray\XmlToArray;
 
@@ -36,7 +37,7 @@ class Response extends DOMLayer
         return $msgDOM;
     }
 
-    public static function formSubmittedData($file_name = 'xml_submission_file')
+    public static function formODKSubmission($file_name = 'xml_submission_file')
     {
         self::submissionHeaders();
         if (self::isHeadRequest()) {
@@ -45,8 +46,13 @@ class Response extends DOMLayer
         if (!self::isPostRequest()) {
             self::badRequest('Only post requests permitted!');
         }
-        $content = Helper::fileContent($file_name);
-        return XmlToArray::convert($content);
+        // $content = Helper::fileContent($file_name);
+        try {
+            $file = FileSubmission::fromFILE($file_name);
+        } catch (\Exception $e) {
+            self::badRequest($e->getMessage());
+        }
+        return $file;
     }
 
     public static function formList()
