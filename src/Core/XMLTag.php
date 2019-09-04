@@ -260,7 +260,7 @@ class XMLTag
     {
         $root = $root && is_object($root) && is_a($root, \DOMDocument::class) ? $root : ODKForm::get();
         if ($this->isLabel() && strlen($this->getContent()) <= 0) {
-            $this->setContent('---');
+            return null;
         }
         if ($this->tag_space) {
             $elmt = $root->createElement($this->fullTag(), $this->content ?: null);
