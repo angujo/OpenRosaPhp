@@ -35,4 +35,11 @@ class FormsListTest extends TestCase
         }
         \Angujo\OpenRosaPhp\Response::manifest();
     }
+
+    public function testSubmission()
+    {
+        $file=dirname(__FILE__).'/filesubmission.xml';
+        $data=\Vyuldashev\XmlToArray\XmlToArray::convert(file_get_contents($file));
+        echo $file;
+    }
 }
