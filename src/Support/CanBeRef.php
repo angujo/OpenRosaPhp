@@ -89,7 +89,7 @@ trait CanBeRef
         $this->translation_ref = $this->setLabelRef($this->full_ref, true);
         if (0 === strcasecmp(Tag::LABEL, $this->getTag())) {
             if (strlen(trim($this->content.'')) > 0 && !is_numeric(trim($this->content.''))) {
-                $this->addAttribute('ref', "'jr:itext('{$this->relativeRef()}')'");
+                $this->addAttribute('ref', "jr:itext('{$this->relativeRef()}')");
             }
         } else {
             $this->addAttribute('ref', $this->relativeRef());
