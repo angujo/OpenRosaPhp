@@ -200,6 +200,7 @@ class XMLTag
     protected function setTagspace($tag_space)
     {
         $this->tag_space = $tag_space;
+        Attribute::addElementNamespace($tag_space);
         return $this;
     }
 
@@ -253,17 +254,21 @@ class XMLTag
     {
         $root = $root && is_object($root) && is_a($root, \DOMDocument::class) ? $root : ODKForm::get();
         if ($this->tag_space) {
-            $elmt = $root->createElementNS($this->getTagSpaceUrl(), $this->fullTag(), $this->content ?: null);
+            $elmt = $root->createElement($this->fullTag(), $this->content ?: null);
+            //$elmt = $root->createElementNS($this->getTagSpaceUrl(), $this->fullTag(), $this->content ?: null);
         } else {
             $elmt = $root->createElement($this->tag, strlen(trim($this->content.'')) > 0 ? trim($this->content.'') : null);
         }
         $writer->appendChild($elmt);
         foreach ($this->attributes as $attribute) {
-            if ($attribute->getNamespace()) {
+            if (!$attribute->getNamespace()) {
+                $elmt->setAttribute($attribute->getName(), (string)$attribute->getValue());
+            }
+            /*if ($attribute->getNamespace()) {
                 $elmt->setAttributeNS($attribute->getNamespaceUrl(), $attribute->getFullName(), (string)$attribute->getValue());
             } else {
                 $elmt->setAttribute($attribute->getName(), (string)$attribute->getValue());
-            }
+            }*/
         }
         if (!$this->content) {
             foreach ($this->elements as $element) {

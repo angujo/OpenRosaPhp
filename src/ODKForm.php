@@ -4,6 +4,7 @@
 namespace Angujo\OpenRosaPhp;
 
 
+use Angujo\OpenRosaPhp\Core\Attribute;
 use Angujo\OpenRosaPhp\Core\DOMLayer;
 use Angujo\OpenRosaPhp\Models\Body;
 use Angujo\OpenRosaPhp\Models\Head;
@@ -33,6 +34,14 @@ class ODKForm extends DOMLayer
         self::$_html_document->setAttribute('xmlns', NS::XMLNS);
         self::getDomDocument()->appendChild(self::$_html_document);
         return self::$_html_document;
+    }
+
+    private static function setNamespaces()
+    {
+        $spaces = Attribute::getNamespaces();
+        foreach ($spaces as $name => $url) {
+            self::getHTMLDom()->setAttribute("xmlns:$name", $url);
+        }
     }
 
     public static function get()
@@ -104,6 +113,7 @@ class ODKForm extends DOMLayer
         self::head()->setHeader();
         self::head()->toXML(self::getHTMLDom());
         self::body()->toXML(self::getHTMLDom());
+        self::setNamespaces();
         return self::getDomDocument()->saveXML();
     }
 }

@@ -29,7 +29,7 @@ class ControlElement extends XMLTag
             throw new OException($tag.' is an invalid Body Element!');
         }
         if (0 === strcasecmp('odkrank', $tag)) {
-            $this->tag_space = 'odk';
+            $this->setTagspace('odk');
             $tag             = 'rank';
         }
         parent::__construct($tag);

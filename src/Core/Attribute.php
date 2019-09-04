@@ -12,6 +12,7 @@ class Attribute
     private $name;
     private $value;
     private $namespace;
+    private static $namespaces = [];
 
     /**
      * Attribute constructor.
@@ -71,7 +72,8 @@ class Attribute
      */
     public function setNamespace($namespace)
     {
-        $this->namespace = $namespace;
+        $this->namespace              = $namespace;
+        self::$namespaces[$namespace] = $this->getNamespaceUrl();
         return $this;
     }
 
@@ -96,4 +98,19 @@ class Attribute
         return $this->name;
     }
 
+    /**
+     * @return array
+     */
+    public static function getNamespaces(): array
+    {
+        return self::$namespaces;
+    }
+
+    public static function addElementNamespace($name)
+    {
+        if (!($url = NS::url($name))) {
+            return;
+        }
+        self::$namespaces[$name] = $url;
+    }
 }
