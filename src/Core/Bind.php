@@ -80,6 +80,7 @@ class Bind extends XMLTag
     {
         /** @var TranslatedAttribute $mattr */
         $mattr = $this->getAttribute('constraintMsg') ?: (new TranslatedAttribute('constraintMsg'))->setNamespace('jr');
+        $this->addAttribute($mattr);
         return $mattr->setValue($msg);
     }
 
@@ -87,6 +88,7 @@ class Bind extends XMLTag
     {
         /** @var TranslatedAttribute $mattr */
         $mattr = $this->getAttribute('requiredMsg') ?: (new TranslatedAttribute('requiredMsg'))->setNamespace('jr');
+        $this->addAttribute($mattr);
         return $mattr->setValue($msg);
     }
 
