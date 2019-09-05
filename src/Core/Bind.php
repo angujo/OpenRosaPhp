@@ -78,18 +78,20 @@ class Bind extends XMLTag
 
     public function setConstraintMessage($msg)
     {
+        return $this->addAttribute('constraintMsg', $msg);
         /** @var TranslatedAttribute $mattr */
-        $mattr = $this->getAttribute('constraintMsg') ?: (new TranslatedAttribute('constraintMsg'))->setNamespace('jr');
-        $this->addAttribute($mattr);
-        return $mattr->setValue($msg);
+        // $mattr = $this->getAttribute('constraintMsg') ?: (new TranslatedAttribute('constraintMsg'))->setNamespace('jr');
+        // $this->addAttribute($mattr);
+        // return $mattr->setValue($msg);
     }
 
     public function setRequiredMessage($msg)
     {
+        return $this->addAttribute('requiredMsg', $msg);
         /** @var TranslatedAttribute $mattr */
-        $mattr = $this->getAttribute('requiredMsg') ?: (new TranslatedAttribute('requiredMsg'))->setNamespace('jr');
-        $this->addAttribute($mattr);
-        return $mattr->setValue($msg);
+        // $mattr = $this->getAttribute('requiredMsg') ?: (new TranslatedAttribute('requiredMsg'))->setNamespace('jr');
+        // $this->addAttribute($mattr);
+        // return $mattr->setValue($msg);
     }
 
     public function setCalculation($calculation)
