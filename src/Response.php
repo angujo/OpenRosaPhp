@@ -48,6 +48,7 @@ class Response extends DOMLayer
         }
         // $content = Helper::fileContent($file_name);
         try {
+            self::headers();
             $file = FileSubmission::fromFILE($file_name);
         } catch (\Exception $e) {
             self::badRequest($e->getMessage());
@@ -57,6 +58,7 @@ class Response extends DOMLayer
 
     public static function formList()
     {
+        header('HTTP/1.1 201 FormList Accessed');
         self::headers();
         echo FormsList::toXML();
         die;
@@ -64,6 +66,7 @@ class Response extends DOMLayer
 
     public static function manifest()
     {
+        header('HTTP/1.1 201 Manifest Accessed');
         self::headers();
         echo Manifest::toXML();
         die;
@@ -71,6 +74,7 @@ class Response extends DOMLayer
 
     public static function ODKForm()
     {
+        header('HTTP/1.1 201 Form Accessed');
         self::headers();
         echo ODKForm::toXML();
         die;
@@ -86,7 +90,7 @@ class Response extends DOMLayer
 
     public static function accepted($msg = 'We got and saved your data, but may not have fully processed it. You should not try to resubmit.')
     {
-        header('HTTP/1.1 201 Form Received');
+        header('HTTP/1.1 201 Input Accepted');
         self::messageDOM($msg);
         echo self::getDomDocument()->saveXML();
         die;
