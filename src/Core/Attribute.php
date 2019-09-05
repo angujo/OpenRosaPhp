@@ -5,7 +5,7 @@ namespace Angujo\OpenRosaPhp\Core;
 
 
 use Angujo\OpenRosaPhp\NS;
-use Angujo\OpenRosaPhp\Util\Helper;
+use Angujo\OpenRosaPhp\Utils\Helper;
 
 class Attribute
 {
