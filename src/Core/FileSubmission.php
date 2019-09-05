@@ -77,4 +77,22 @@ class FileSubmission
     {
         return new self($content);
     }
+
+    /**
+     * @return string
+     */
+    public function getFileContent()
+    {
+        return $this->file_content;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFileData()
+    {
+        return $this->file_data;
+    }
+
+
 }
