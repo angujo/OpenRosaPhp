@@ -21,6 +21,11 @@ class Helper
         }
     }
 
+    public static function toVariableName($name)
+    {
+        return (string)preg_replace('/[^a-z0-9]/i', '-', $name);
+    }
+
     public static function array_dot(&$arr, $path, $value, $separator = '.')
     {
         $keys = explode($separator, $path);

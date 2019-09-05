@@ -8,6 +8,7 @@ use Angujo\OpenRosaPhp\Support\CanBeBound;
 use Angujo\OpenRosaPhp\Support\CanBeRef;
 use Angujo\OpenRosaPhp\Support\CanHaveHint;
 use Angujo\OpenRosaPhp\Support\Labelable;
+use Angujo\OpenRosaPhp\Utils\Helper;
 
 /**
  * Class ControlElement
@@ -30,10 +31,10 @@ class ControlElement extends XMLTag
         }
         if (0 === strcasecmp('odkrank', $tag)) {
             $this->setTagspace('odk');
-            $tag             = 'rank';
+            $tag = 'rank';
         }
         parent::__construct($tag);
-        $this->setRef((string)preg_replace('/[^a-z0-9]/i', '-', $name));
+        $this->setRef(Helper::toVariableName($name));
         $this->getLabelTranslation()->setNode($this->translation_ref);
         $this->ref_id = uniqid('ce', true);
         // $this->getLabelElement()->getTranslation()->setNode($this->full_ref);
