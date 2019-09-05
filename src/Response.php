@@ -86,6 +86,7 @@ class Response extends DOMLayer
 
     public static function accepted($msg = 'We got and saved your data, but may not have fully processed it. You should not try to resubmit.')
     {
+        header('HTTP/1.1 201 Form Received');
         self::messageDOM($msg);
         echo self::getDomDocument()->saveXML();
         die;
