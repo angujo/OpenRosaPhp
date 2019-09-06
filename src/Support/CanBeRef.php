@@ -9,6 +9,7 @@ use Angujo\OpenRosaPhp\Models\Head;
 use Angujo\OpenRosaPhp\Models\Option;
 use Angujo\OpenRosaPhp\ODKForm;
 use Angujo\OpenRosaPhp\Tag;
+use Angujo\OpenRosaPhp\Utils\XPath;
 
 /**
  * Trait CanBeRef
@@ -87,6 +88,7 @@ trait CanBeRef
         $this->trickleDown();
         $this->full_ref        = $this->relativeRef();
         $this->translation_ref = $this->setLabelRef($this->full_ref, true);
+        XPath::setAbsolutePath($this->relativeRef());
         if (0 === strcasecmp(Tag::LABEL, $this->getTag())) {
             if (strlen(trim($this->content.'')) > 0 && !is_numeric(trim($this->content.''))) {
                 $this->addAttribute('ref', "jr:itext('{$this->relativeRef()}')");

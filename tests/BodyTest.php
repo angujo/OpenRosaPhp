@@ -171,6 +171,7 @@ class BodyTest extends TestCase
 
     public static function tearDownAfterClass(): void
     {
+        $paths=\Angujo\OpenRosaPhp\Utils\XPath::getPath();
         print_r(ODKForm::toXML());
     }
 }
