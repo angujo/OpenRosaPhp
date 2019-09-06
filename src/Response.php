@@ -58,7 +58,7 @@ class Response extends DOMLayer
 
     public static function formList()
     {
-        header('HTTP/1.1 201 FormList Accessed');
+        header('HTTP/1.1 200 FormList Accessed');
         self::headers();
         echo FormsList::toXML();
         die;
@@ -66,7 +66,7 @@ class Response extends DOMLayer
 
     public static function manifest()
     {
-        header('HTTP/1.1 201 Manifest Accessed');
+        header('HTTP/1.1 200 Manifest Accessed');
         self::headers();
         echo Manifest::toXML();
         die;
@@ -74,7 +74,7 @@ class Response extends DOMLayer
 
     public static function ODKForm()
     {
-        header('HTTP/1.1 201 Form Accessed');
+        header('HTTP/1.1 200 Form Accessed');
         self::headers();
         echo ODKForm::toXML();
         die;
