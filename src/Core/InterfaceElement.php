@@ -20,6 +20,7 @@ use ReflectionException;
  * @package Angujo\OpenRosaPhp\Core
  *
  * @method Input InputText($name)
+ * @method Input InputTextArea($name)
  * @method Input InputNumberInteger($name)
  * @method Input InputNumberDecimal($name)
  * @method Input InputBooleanType($name)
