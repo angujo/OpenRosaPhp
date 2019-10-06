@@ -6,6 +6,7 @@ namespace Angujo\OpenRosaPhp\Core;
 
 use Angujo\OpenRosaPhp\Models\Group;
 use Angujo\OpenRosaPhp\Models\Input;
+use Angujo\OpenRosaPhp\Models\Note;
 use Angujo\OpenRosaPhp\Models\Range;
 use Angujo\OpenRosaPhp\Models\Rank;
 use Angujo\OpenRosaPhp\Models\Repeat;
@@ -48,6 +49,7 @@ use ReflectionException;
  * @method Repeat Repeat($name = null)
  * @method Select Select($name)
  * @method Select1 Select1($name)
+ * @method Note Note($name)
  */
 class InterfaceElement extends XMLTag
 {
