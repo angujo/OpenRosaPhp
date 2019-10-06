@@ -8,7 +8,7 @@ use Angujo\OpenRosaPhp\Core\ControlElement;
 
 class Input extends ControlElement
 {
-    public function __construct($name){ parent::__construct('input', $name); }
+    public function __construct($name) { parent::__construct('input', $name); }
 
     public static function Text($name)
     {
@@ -92,6 +92,27 @@ class Input extends ControlElement
     {
         $me = new self($name);
         $me->setType('url');
+        return $me;
+    }
+
+    public static function Geopoint($name)
+    {
+        $me = new self($name);
+        $me->setType('geopoint');
+        return $me;
+    }
+    public static function GeopointMap($name)
+    {
+        $me = new self($name);
+        $me->setType('geopoint');
+        $me->setAppearance('maps');
+        return $me;
+    }
+    public static function GeopointManual($name)
+    {
+        $me = new self($name);
+        $me->setType('geopoint');
+        $me->setAppearance('placement-map');
         return $me;
     }
 }
