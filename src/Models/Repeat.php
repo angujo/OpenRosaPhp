@@ -4,11 +4,8 @@
 namespace Angujo\OpenRosaPhp\Models;
 
 
-use Angujo\OpenRosaPhp\Core\InterfaceElement;
 use Angujo\OpenRosaPhp\Core\OverlayInterface;
-use Angujo\OpenRosaPhp\Core\XMLTag;
 use Angujo\OpenRosaPhp\Support\CanBeNoded;
-use Angujo\OpenRosaPhp\Support\PassessNodeset;
 
 /**
  * Class Repeat
@@ -29,7 +26,19 @@ class Repeat extends Group
         $this->overlayered = new OverlayInterface('group');
         $this->root->addElement($this->overlayered);
         $this->overlayered->setNodeset($this->getNodeset()); /**/
-        $this->overlayered->addAttribute('appearance', 'field-list');
+        //  $this->overlayered->addAttribute('appearance', 'field-list');
+    }
+
+    public static function create($name = null)
+    {
+        return new self($name);
+    }
+
+    public static function OneScreen($name = null)
+    {
+        $me = self::create($name);
+        $me->overlayered->addAttribute('appearance', 'field-list');
+        return $me;
     }
 
     public function setMaxRepeats($count)
