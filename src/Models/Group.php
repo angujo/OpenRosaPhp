@@ -8,6 +8,7 @@ use Angujo\OpenRosaPhp\Core\InterfaceElement;
 use Angujo\OpenRosaPhp\Core\OException;
 use Angujo\OpenRosaPhp\Support\CanBeNoded;
 use Angujo\OpenRosaPhp\Support\Labelable;
+use Angujo\OpenRosaPhp\Utils\Helper;
 
 /**
  * Class Group
@@ -22,7 +23,7 @@ class Group extends InterfaceElement
     {
         parent::__construct('group');
         if ($name) {
-            $this->setRef($name);
+            $this->setRef(Helper::toVariableName($name));
         }
     }
 

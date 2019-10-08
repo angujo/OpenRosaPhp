@@ -93,10 +93,15 @@ class BodyTest extends TestCase
 
     public function testGroup()
     {
-        $gr = $this->body->Group('grp101');
+        $gr = \Angujo\OpenRosaPhp\Models\Group::create('grp102');
+        $this->body->addControl($gr);
+       // $gr = $this->body->Group('grp101');
         $gr->setLabel('My Label 101');
-        $gr2 = $gr->Group('grp3');
+        $gr2 = \Angujo\OpenRosaPhp\Models\Group::create('pr_p4');
+        $gr->addControl($gr2);
+       // $gr2 = $gr->Group('gr_p3');
         $gr2->InputNumberDecimal('amount');
+        $gr2->setLabel('Internal Label');
     }
 
     public function testInputText()

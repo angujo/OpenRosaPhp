@@ -7,7 +7,6 @@ namespace Angujo\OpenRosaPhp\Support;
 use Angujo\OpenRosaPhp\Config;
 use Angujo\OpenRosaPhp\Core\OException;
 use Angujo\OpenRosaPhp\Models\Head;
-use Angujo\OpenRosaPhp\ODKForm;
 
 class Translation
 {
@@ -97,9 +96,9 @@ class Translation
      *
      * @return Translation
      */
-    public function setNode(&$node)
+    public function setNode($node)
     {
-        $this->node =& $node;
+        $this->node = $node;
         return $this;
     }
 
