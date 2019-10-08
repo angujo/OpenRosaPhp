@@ -40,6 +40,11 @@ class ControlElement extends XMLTag
         // $this->getLabelElement()->getTranslation()->setNode($this->full_ref);
     }
 
+    /**
+     * @param $appear
+     * @return ControlElement
+     * @throws OException
+     */
     protected function setAppearance($appear)
     {
         return $this->addAttribute('appearance', $appear);

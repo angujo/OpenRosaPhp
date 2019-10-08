@@ -19,6 +19,21 @@ class Range extends ControlElement
         return new self($name, $starts, $ends, $step);
     }
 
+    public static function Vertical($name, $starts, $ends, $step)
+    {
+        return (new self($name, $starts, $ends, $step))->setAppearance('vertical');
+    }
+
+    public static function Picker($name, $starts, $ends, $step)
+    {
+        return (new self($name, $starts, $ends, $step))->setAppearance('picker');
+    }
+
+    public static function Rating($name, $starts, $ends, $step)
+    {
+        return (new self($name, $starts, $ends, $step))->setAppearance('rating');
+    }
+
     public function setStart($start)
     {
         $this->getAttribute('start') ? $this->getAttribute('start')->setValue($start) : $this->addAttribute('start', $start);
