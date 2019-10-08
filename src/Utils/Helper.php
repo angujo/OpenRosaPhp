@@ -23,7 +23,7 @@ class Helper
 
     public static function toVariableName($name)
     {
-        return (string)preg_replace('/[^a-z0-9]/i', '-', $name);
+        return (string)preg_replace('/[^a-z0-9]/i', '-', strtolower($name));
     }
 
     public static function array_dot(&$arr, $path, $value, $separator = '.')
@@ -35,6 +35,7 @@ class Helper
         }
         $arr = $value;
     }
+
     /**
      * @param string $name
      *
@@ -96,13 +97,13 @@ class Helper
     {
         $defaults       = [
             'namespaceSeparator' => ':',//you may want this to be something other than a colon
-            'attributePrefix'    => '@',   //to distinguish between attributes and nodes with the same name
-            'alwaysArray'        => [],   //array of xml tag names which should always become arrays
-            'autoArray'          => true,        //only create arrays for tags which appear more than once
-            'textContent'        => '$',       //key used for the text content of elements
-            'autoText'           => true,         //skip textContent key if node has no attributes or child nodes
-            'keySearch'          => false,       //optional search and replace on tag and attribute names
-            'keyReplace'         => false       //replace values for above search values (as passed to str_replace())
+            'attributePrefix' => '@',   //to distinguish between attributes and nodes with the same name
+            'alwaysArray' => [],   //array of xml tag names which should always become arrays
+            'autoArray' => true,        //only create arrays for tags which appear more than once
+            'textContent' => '$',       //key used for the text content of elements
+            'autoText' => true,         //skip textContent key if node has no attributes or child nodes
+            'keySearch' => false,       //optional search and replace on tag and attribute names
+            'keyReplace' => false       //replace values for above search values (as passed to str_replace())
         ];
         $options        = array_merge($defaults, $options);
         $namespaces     = $xml->getDocNamespaces();
