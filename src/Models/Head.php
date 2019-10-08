@@ -154,6 +154,7 @@ class Head extends XMLTag
 
     private function loopInstance(XMLTag $parent, $arr)
     {
+        if (!is_array($arr)) return;
         foreach ($arr as $index => $item) {
             if (!preg_match('/^[a-z][\w-]+$/i', $index)) {
                 continue;

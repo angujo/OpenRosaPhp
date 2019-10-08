@@ -64,7 +64,11 @@ trait Labelable
      */
     public function setLabel($label)
     {
-        return $this->getLabelElement()->setValue($label);
+        $trans = $this->getLabelElement()->setValue($label);
+        if (!$this->getLabelElement()->getRef() && method_exists($this, 'fullNodeSet')) {
+            $this->getLabelElement()->setNodeset($this->fullNodeSet());
+        }
+        return $trans;
     }
 
 }

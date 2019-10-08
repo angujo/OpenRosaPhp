@@ -70,7 +70,7 @@ trait CanBeNoded
         return '/'.$this->getFullNodeset();
     }
 
-    private function nodeset()
+    protected function nodeset()
     {
         $this->trickleDown();
         $this->addAttribute('nodeset', $this->relativeNodeset());
