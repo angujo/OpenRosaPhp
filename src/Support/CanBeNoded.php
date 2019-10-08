@@ -87,7 +87,7 @@ trait CanBeNoded
     {
         if (method_exists($element, 'getLabelElement')) {
             /** @var Translation $trans */
-            $this->getLabelElement()->getTranslation()->setNode($fref);
+            $this->getLabelElement()->setNodeset($fref);
         } elseif (method_exists($element, 'getTranslation')) {
             $this->getTranslation()->setNode($fref);
         }
