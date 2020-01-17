@@ -128,15 +128,17 @@ class BodyTest
     public function odkform()
     {
         $form = new ODKForm();
+        $form->submission('http://google.com');
         $form->setTitle('build_999911');
         $form->dataElement('data');
         $form->setId('build_Untitled-Form_154402011');
+
         
         $group = $form->group('joined');
         $group->setLabel('MyTester');
         $group->inputText('fnamed')->label('F Named');
         
-        $gender = $form->selectOne('sex');
+        /*$gender = $form->selectOne('sex');
         $gender->label('Sex');
         $gender->addOption('Male', 'm');
         $gender->addOption('Female', 'f');
@@ -152,27 +154,29 @@ class BodyTest
         $age->range(18, 45, TRUE, 'Should be a youth!');
         
         $salary = $form->inputDecimal('salary');
-        $salary->label('Salary');
+        $salary->label('Salary');*/
         
         /** @var \Angujo\OpenRosaPhp\Models\Controls\InputText $job */
-        $job = $form->addElement(\Angujo\OpenRosaPhp\Models\Controls\InputText::text('job'));
+        /*$job = $form->addElement(\Angujo\OpenRosaPhp\Models\Controls\InputText::text('job'));
         $job->label('Job');
         
         $repeat = \Angujo\OpenRosaPhp\Models\Repeat::create('sibler');// $form->repeat('siblings');
         $form->addElement($repeat);
         $repeat->inputText('name')->label('Names');
-        $repeat->inputText('aged')->label('Age in Years');
+        $repeat->inputText('aged')->label('Age in Years');*/
         
-        $cities = $form->selectMultiple('cities');
+        /*$cities = $form->selectMultiple('cities');
         $cities->label('Cities');
         $cities->addOption('Nakuru', 'nx');
         $cities->addOption('Kisumu', 'ks');
         $cities->addOption('Nairobi', 'nr');
         $cities->addOption('Mombasa', 'mb');
         $cities->addOption('Malindi', 'ml');
-        $cities->selectionRange(1, 3)->required()->readOnly();
+        $cities->selectionRange(1, 3)->required()->readOnly();*/
         
-        echo $form->asXML();
+        $out= $form->asXML();
+       if (!is_dir(dirname(__FILE__).'/output')) mkdir(dirname(__FILE__).'/output');
+        file_put_contents(dirname(__FILE__).'/output/test.xml', $out);
     }
     
     public function testXForm()
