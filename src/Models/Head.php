@@ -16,6 +16,7 @@ use Angujo\OpenRosaPhp\Utils\Helper;
  */
 class Head extends XMLTag
 {
+    private $_meta;
     private $_model;
     private $_pinstance;
     private $_title = 'Untitled Form';
@@ -113,6 +114,16 @@ class Head extends XMLTag
         return $this;
     }
 
+    public function getMeta()
+    {
+        if ($this->_meta) {
+            return $this->_meta;
+        }
+        $this->_meta = new Meta($this->_data_name);
+        $this->primaryInstance()->addElementUnq($this->_meta);
+        return $this->_meta;
+    }
+
     public function getModel()
     {
         if ($this->_model) {
@@ -154,7 +165,9 @@ class Head extends XMLTag
 
     private function loopInstance(XMLTag $parent, $arr)
     {
-        if (!is_array($arr)) return;
+        if (!is_array($arr)) {
+            return;
+        }
         foreach ($arr as $index => $item) {
             if (!preg_match('/^[a-z][\w-]+$/i', $index)) {
                 continue;

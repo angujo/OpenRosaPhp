@@ -23,6 +23,19 @@ class BodyTest extends TestCase
         self::assertTrue(true);
     }
 
+    public function testMeta()
+    {
+        ODKForm::head()->getMeta()
+               ->subscriberID()
+               ->deviceID()
+               ->phoneNumber()
+               ->simSerial()
+               ->instanceID()
+               ->timeEnd()
+               ->timeStart()
+               ->email();
+    }
+
     public function testInputTimeType()
     {
         $this->body->InputText('johndoe')->setLabel('First Name');
@@ -95,11 +108,11 @@ class BodyTest extends TestCase
     {
         $gr = \Angujo\OpenRosaPhp\Models\Group::create('grp102');
         $this->body->addControl($gr);
-       // $gr = $this->body->Group('grp101');
+        // $gr = $this->body->Group('grp101');
         $gr->setLabel('My Label 101');
         $gr2 = \Angujo\OpenRosaPhp\Models\Group::create('pr_p4');
         $gr->addControl($gr2);
-       // $gr2 = $gr->Group('gr_p3');
+        // $gr2 = $gr->Group('gr_p3');
         $gr2->InputNumberDecimal('amount');
         $gr2->setLabel('Internal Label');
     }
@@ -176,7 +189,9 @@ class BodyTest extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        $paths=\Angujo\OpenRosaPhp\Utils\XPath::getPath();
-        print_r(ODKForm::toXML());
+        $paths = \Angujo\OpenRosaPhp\Utils\XPath::getPath();
+        $path  = dirname(__FILE__).DIRECTORY_SEPARATOR.'output'.DIRECTORY_SEPARATOR.'test.xml';
+        file_put_contents($path, ODKForm::toXML());
+        // print_r(ODKForm::toXML());
     }
 }

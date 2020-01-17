@@ -270,9 +270,7 @@ class XMLTag
         }
         $writer->appendChild($elmt);
         foreach ($this->attributes as $attribute) {
-            if (!$attribute->getNamespace()) {
-                $elmt->setAttribute($attribute->getName(), (string)$attribute->getValue());
-            }
+            $elmt->setAttribute(!$attribute->getNamespace() ? $attribute->getName() : $attribute->getFullName(), (string)$attribute->getValue());
             /*if ($attribute->getNamespace()) {
                 $elmt->setAttributeNS($attribute->getNamespaceUrl(), $attribute->getFullName(), (string)$attribute->getValue());
             } else {

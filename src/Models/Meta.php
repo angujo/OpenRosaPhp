@@ -17,47 +17,53 @@ use Angujo\OpenRosaPhp\Support\CanBeBound;
 
 class Meta extends XMLTag
 {
-    use CanBeBound;
+    private $_data_path;
 
-    public function __construct()
+    public function __construct(&$path)
     {
         parent::__construct('meta');
+        $this->_data_path = $path;
     }
 
     public function instanceID()
     {
-        $this->addElementUnq('instanceID');
+        $name = ('instanceID');
+        $this->addElementUnq($name);
         if (Config::isODK()) {
-            ODKForm::head()->getModel()->addBind((new Bind())->setCalculation("concat('uuid:', uuid())")->setReadOnly()->setType('string'));
+            ODKForm::head()->getModel()->addBind((new Bind())->setNodeSet("/{$this->_data_path}/meta/{$name}")->setCalculation("concat('uuid:', uuid())")->setReadOnly()->setType('string'));
         }
         return $this;
     }
 
     public function timeStart()
     {
-        $this->addElementUnq('timestart');
-        $this->setBind('timestamp', 'start', 'dateTime');
+        $name = ('timestart');
+        $this->addElementUnq($name);
+        $this->setBind($name, 'timestamp', 'start', 'dateTime');
         return $this;
     }
 
     public function timeEnd()
     {
-        $this->addElementUnq('timeend');
-        $this->setBind('timestamp', 'end', 'dateTime');
+        $name = ('timeend');
+        $this->addElementUnq($name);
+        $this->setBind($name, 'timestamp', 'end', 'dateTime');
         return $this;
     }
 
     public function userID()
     {
-        $this->addElementUnq('userid');
-        $this->setBind('property', 'username', 'string');
+        $name = ('userid');
+        $this->addElementUnq($name);
+        $this->setBind($name, 'property', 'username', 'string');
         return $this;
     }
 
     public function deviceID()
     {
-        $this->addElementUnq('deviceid');
-        $this->setBind('property', 'deviceid', 'string');
+        $name = ('deviceid');
+        $this->addElementUnq($name);
+        $this->setBind($name, 'property', 'deviceid', 'string');
         return $this;
     }
 
@@ -71,22 +77,32 @@ class Meta extends XMLTag
 
     public function phoneNumber()
     {
-        $this->addElementUnq('phonenumber');
-        $this->setBind('property', 'phonenumber', 'string');
+        $name = ('phonenumber');
+        $this->addElementUnq($name);
+        $this->setBind($name, 'property', 'phonenumber', 'string');
         return $this;
     }
 
     public function simSerial()
     {
-        $this->addElementUnq('simserial');
-        $this->setBind('property', 'simserial', 'string');
+        $name = ('simserial');
+        $this->addElementUnq($name);
+        $this->setBind($name, 'property', 'simserial', 'string');
         return $this;
     }
 
     public function subscriberID()
     {
-        $this->addElementUnq('subscriberid');
-        $this->setBind('property', 'subscriberid', 'string');
+        $name = ('subscriberid');
+        $this->addElementUnq($name);
+        $this->setBind($name, 'property', 'subscriberid', 'string');
+        return $this;
+    }
+    public function email()
+    {
+        $name = ('email');
+        $this->addElementUnq($name);
+        $this->setBind($name, 'property', 'email', 'string');
         return $this;
     }
 
@@ -94,10 +110,10 @@ class Meta extends XMLTag
         $this->setBind('timestamp', 'start', 'dateTime');
         return $this; }*/
 
-    private function setBind($preload, $preload_params, $type)
+    private function setBind($name, $preload, $preload_params, $type)
     {
         if (Config::isODK()) {
-            ODKForm::head()->getModel()->addBind((new Bind())->setPreload($preload)->setPreloadParams($preload_params)->setType($type));
+            ODKForm::head()->getModel()->addBind((new Bind())->setNodeSet("/{$this->_data_path}/meta/{$name}")->setPreload($preload)->setPreloadParams($preload_params)->setType($type));
         }
     }
 }
