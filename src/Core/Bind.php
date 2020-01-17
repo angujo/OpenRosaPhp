@@ -108,4 +108,14 @@ class Bind extends XMLTag
     {
         return $this->addAttribute('nodeset', $nodeset);
     }
+
+    public function setPreload(string $preload)
+    {
+        return $this->addAttribute((new Attribute('preload'))->setNamespace('jr')->setValue($preload));
+    }
+
+    public function setPreloadParams(string $params)
+    {
+        return $this->addAttribute((new Attribute('preloadParams'))->setNamespace('jr')->setValue($params));
+    }
 }
