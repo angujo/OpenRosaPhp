@@ -12,7 +12,7 @@ class Bind extends XMLTag
     private $min_value;
     private $max_value;
 
-    public function __construct(){ parent::__construct(Tag::BIND); }
+    public function __construct() { parent::__construct(Tag::BIND); }
 
     /**
      * @param bool $require
@@ -78,7 +78,7 @@ class Bind extends XMLTag
 
     public function setConstraintMessage($msg)
     {
-        return $this->addAttribute('constraintMsg', $msg);
+        return $this->addAttribute((new Attribute('constraintMsg'))->setNamespace('jr')->setValue($msg));
         /** @var TranslatedAttribute $mattr */
         // $mattr = $this->getAttribute('constraintMsg') ?: (new TranslatedAttribute('constraintMsg'))->setNamespace('jr');
         // $this->addAttribute($mattr);
