@@ -4,10 +4,8 @@
 namespace Angujo\OpenRosaPhp\Support;
 
 
-use Angujo\OpenRosaPhp\Config;
 use Angujo\OpenRosaPhp\Core\OException;
 use Angujo\OpenRosaPhp\Core\XMLTag;
-use Angujo\OpenRosaPhp\ODKForm;
 
 class ValueTag extends XMLTag
 {
@@ -16,7 +14,7 @@ class ValueTag extends XMLTag
     public function __construct($tag, $default, $no_trans = false)
     {
         parent::__construct($tag);
-        $this->content = $default;
+        $this->setContent($default);
         if (false === $no_trans) {
             $this->translation = new Translation($default);
         }
@@ -38,7 +36,7 @@ class ValueTag extends XMLTag
      */
     public function setValue($value)
     {
-        $this->content = $value;
+        $this->setContent($value);
         return $this->translation ? $this->translation->setDefault($value) : null;
     }
 

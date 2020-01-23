@@ -249,6 +249,11 @@ class XMLTag
         return $this;
     }
 
+    public function getCleanedContent()
+    {
+        return htmlspecialchars($this->content);
+    }
+
     /**
      * @param \DOMElement|\DOMDocument $writer
      * @param null|\DOMDocument        $root
@@ -263,10 +268,10 @@ class XMLTag
             return null;
         }
         if ($this->tag_space) {
-            $elmt = $root->createElement($this->fullTag(), $this->content ?: null);
+            $elmt = $root->createElement($this->fullTag(), $this->getCleanedContent() ?: null);
             //$elmt = $root->createElementNS($this->getTagSpaceUrl(), $this->fullTag(), $this->content ?: null);
         } else {
-            $elmt = $root->createElement($this->tag, strlen(trim($this->content.'')) > 0 ? trim($this->content.'') : null);
+            $elmt = $root->createElement($this->tag, strlen(trim($this->getCleanedContent().'')) > 0 ? trim($this->getCleanedContent().'') : null);
         }
         $writer->appendChild($elmt);
         foreach ($this->attributes as $attribute) {
