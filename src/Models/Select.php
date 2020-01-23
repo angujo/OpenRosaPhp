@@ -36,4 +36,11 @@ class Select extends ControlElement
         $me->setAppearance('minimal');
         return $me;
     }
+
+    public static function Autocomplete($name)
+    {
+        $me = new self($name);
+        $me->setAppearance('autocomplete');
+        return $me;
+    }
 }
