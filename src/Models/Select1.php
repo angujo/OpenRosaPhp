@@ -37,6 +37,13 @@ class Select1 extends ControlElement
         return $me;
     }
 
+    public static function Autocomplete($name)
+    {
+        $me = new self($name);
+        $me->setAppearance('autocomplete');
+        return $me;
+    }
+
     public static function Likert($name)
     {
         $me = new self($name);

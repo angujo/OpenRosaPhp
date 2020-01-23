@@ -31,6 +31,8 @@ use ReflectionException;
  * @method Input InputTimeType($name)
  * @method Input InputDateTime($name)
  * @method Input InputBarcode($name)
+ * @method Input InputGeoTrace($name)
+ * @method Input InputGeoShape($name)
  * @method Input InputGeopoint($name)
  * @method Input InputGeopointMap($name)
  * @method Input InputGeopointManual($name)
